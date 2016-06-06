@@ -5,7 +5,8 @@ module.exports = function (db) {
 
     db.define('orderItem', {
         quantity: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: false
         }
     });
 
