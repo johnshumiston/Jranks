@@ -6,6 +6,22 @@ var Sequelize = require('sequelize');
 module.exports = function (db) {
 
     db.define('user', {
+        is_admin: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
+        first_name: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        last_name: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        birth: {
+            type: Sequelize.DATE,
+            allowNull: false
+        },
         email: {
             type: Sequelize.STRING
         },
@@ -53,8 +69,5 @@ module.exports = function (db) {
             }
         }
     });
-
-
-
+    return db.user;
 };
-
