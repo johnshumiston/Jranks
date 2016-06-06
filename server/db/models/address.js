@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('address', {
+    return db.define('address', {
         instructions: {
             type: Sequelize.TEXT
         },
@@ -32,7 +32,4 @@ module.exports = function (db) {
         }
     });
 
-    return db.address;
-
 };
-

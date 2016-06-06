@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('billingInfo', {
+    return db.define('billingInfo', {
         card_number: {
             type: Sequelize.STRING,
             allowNull: false
@@ -36,8 +36,6 @@ module.exports = function (db) {
             allowNull: false
         }
     });
-
-    return db.billingInfo;
 
 };
 
