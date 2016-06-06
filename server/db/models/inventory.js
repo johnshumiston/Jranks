@@ -31,6 +31,9 @@ module.exports = function (db) {
         description: {
             type: Sequelize.TEXT,
             allowNull: false
+        },
+        image_url: {
+            type: Sequelize.STRING
         }
     });
 
