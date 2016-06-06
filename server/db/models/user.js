@@ -5,7 +5,7 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('user', {
+    return db.define('user', {
         is_admin: {
             type: Sequelize.BOOLEAN,
             defaultValue: false
@@ -69,5 +69,4 @@ module.exports = function (db) {
             }
         }
     });
-    return db.user;
 };

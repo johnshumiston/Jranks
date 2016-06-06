@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('inventory', {
+    return db.define('inventory', {
         item: {
             type: Sequelize.STRING,
             allowNull: false
@@ -34,5 +34,4 @@ module.exports = function (db) {
         }
     });
 
-    return db.inventory;
 };

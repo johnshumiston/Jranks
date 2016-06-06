@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('order', {
+    return db.define('order', {
         date: {
             type: Sequelize.DATE,
             allowNull: false
@@ -13,7 +13,5 @@ module.exports = function (db) {
             allowNull: false
         }
     });
-
-    return db.order;
 
 };
