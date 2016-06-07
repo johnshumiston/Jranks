@@ -14,10 +14,10 @@ module.exports = function (db) {
         },
         type: {
             type: Sequelize.ENUM,
-            values: ['side','food', 'drink', 'alcoholic_drink']
+            values: ['side', 'food', 'drink', 'alcoholic_drink']
         },
         price: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.FLOAT,
             allowNull: false
         },
         description: {
