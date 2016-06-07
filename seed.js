@@ -138,7 +138,7 @@ var seedInventory = function() {
     quantity: 100,
     type: 'drink',
     price: 7.00,
-    description: "Fresh magoes and pineapple come together in a single delicious beverage!",
+    description: "Fresh mangoes and pineapple come together in a single delicious beverage!",
     image_url: "http://i.imgur.com/bQ8Ip5W.jpg"
   }, {
     item: 'The Cherry Apple Cobbler',

@@ -1,7 +1,15 @@
 'use strict';
 var router = require('express').Router();
+var db = require('../../../db/_db');
+var User = require('../../../db/models/user')(db);
 module.exports = router;
 var _ = require('lodash');
+
+router.get('/', function (req, res, next) {
+  User.findAll({})
+  .then(items => res.json(items))
+  .catch(next);
+});
 
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
