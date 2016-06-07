@@ -8,6 +8,7 @@ var Order = require('./models/order')(db);
 var Address = require('./models/address')(db);
 var BillingInfo = require('./models/billingInfo')(db);
 var OrderItem = require('./models/orderItem')(db);
+var Review = require('./models/review')(db);
 
 //Billing Info relationships
 BillingInfo.belongsTo(User, {as: 'cardholder'});
@@ -22,3 +23,6 @@ Order.belongsTo(Address);
 
 //Address relationships
 Address.belongsTo(User);
+
+//Review relationships
+Review.belongsTo(Inventory);
