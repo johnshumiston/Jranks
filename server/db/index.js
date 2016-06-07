@@ -26,3 +26,5 @@ Address.belongsTo(User);
 
 //Review relationships
 Review.belongsTo(Inventory);
+
+db.sync();
