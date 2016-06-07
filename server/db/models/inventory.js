@@ -12,17 +12,9 @@ module.exports = function (db) {
             type: Sequelize.INTEGER,
             allowNull: false
         },
-        food: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
-        },
-        drink: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
-        },
-        alcoholic_drink: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
+        type: {
+            type: Sequelize.ENUM,
+            values: ['side','food', 'drink', 'alcoholic_drink']
         },
         price: {
             type: Sequelize.INTEGER,
