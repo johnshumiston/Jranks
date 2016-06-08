@@ -30,6 +30,16 @@ module.exports = function (db) {
             type: Sequelize.INTEGER,
             allowNull: false
         }
-    });
-
+    }
+    // , {
+    //     hooks: {
+    //         beforeUpdate: function (address) {
+    //             if (address.changed('is_primary')) {
+    //                 user.salt = user.Model.generateSalt();
+    //                 user.password = user.Model.encryptPassword(user.password, user.salt);
+    //             }
+    //         }
+    //     }
+    // }
+    );
 };
