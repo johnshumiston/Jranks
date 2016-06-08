@@ -28,5 +28,4 @@ Order.belongsTo(Address);
 //Address relationships
 Address.belongsTo(User);
 
-
 db.sync();
