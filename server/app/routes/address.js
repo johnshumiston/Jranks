@@ -9,3 +9,4 @@ router.get('/', function (req, res, next) {
   .then(addresses => res.json(addresses))
   .catch(next);
 });
+
