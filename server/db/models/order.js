@@ -6,7 +6,8 @@ module.exports = function (db) {
     return db.define('order', {
         date: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: false,
+            defaultValue: new Date()
         },
         is_complete: {
             type: Sequelize.BOOLEAN,

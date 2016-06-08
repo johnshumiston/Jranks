@@ -17,11 +17,38 @@ name in the environment files.
 
 */
 
-var chalk = require('chalk');
-var db = require('./server/db');
-var User = db.model('user');
-var Inventory = db.model('inventory');
-var Promise = require('sequelize').Promise;
+const chalk = require('chalk');
+const db = require('./server/db');
+const User = db.model('user');
+const Inventory = db.model('inventory');
+const Address = db.model('address');
+const Promise = require('sequelize').Promise;
+
+var seedAddress = function() {
+
+  var addresses = [{
+    instructions: "Take the x Road",
+    is_primary: true,
+    street_1: "First North",
+    state: "NY",
+    city: "NYC",
+    zip: 11211
+  }, {
+    instructions: "Take the y Road",
+    is_primary: false,
+    street_1: "Second North",
+    state: "UT",
+    city: "Provo",
+    zip: 32435
+  }];
+
+  var creatingAddresses = addresses.map(function(address) {
+    return Address.create(address);
+  });
+
+  return Promise.all(creatingAddresses);
+
+};
 
 var seedUsers = function() {
 
@@ -219,6 +246,9 @@ db.sync({ force: true })
   })
   .then(function() {
     return seedInventory();
+  })
+  .then(function(){
+    return seedAddress();
   })
   .then(function() {
     console.log(chalk.green('Seed successful!'));
