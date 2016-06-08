@@ -10,6 +10,12 @@ router.get('/', function (req, res, next) {
   .catch(next);
 });
 
+router.get('/:id', function (req, res, next) {
+  OrderItem.findById(req.params.id)
+  .then(orderItems => res.json(orderItems))
+  .catch(next);
+});
+
 router.post('/:orderId/:inventoryId', function (req, res, next){
   return OrderItem.create(req.body)
   .then(function(item){

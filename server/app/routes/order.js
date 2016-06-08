@@ -11,6 +11,12 @@ router.get('/', function (req, res, next) {
   .catch(next);
 });
 
+router.get('/:id', function (req, res, next) {
+  Order.findById(req.params.id)
+  .then(orders => res.json(orders))
+  .catch(next);
+});
+
 router.post('/:userId/:addressId', function (req, res, next){
   return Order.create(req.body)
   .then(function(order){
