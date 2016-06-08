@@ -12,7 +12,8 @@ module.exports = function (db) {
         },
         date: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: false,
+            defaultValue: new Date()
         },
         stars: {
             type: Sequelize.INTEGER,
