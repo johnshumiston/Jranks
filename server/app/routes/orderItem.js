@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/_db');
-const OrderItem = require('../../db/models/orderItem')(db);
+const OrderItem = db.model("orderItem");
 module.exports = router;
 
 router.get('/', function (req, res, next) {

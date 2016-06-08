@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/_db');
-const Review = require('../../db/models/review')(db);
+const Review = db.model('review');
+const Inventory = db.model('inventory');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
@@ -10,16 +11,12 @@ router.get('/', function(req, res, next) {
     .catch(next);
 });
 
-router.post('/:inventoryId', function(req, res, next) {
-  Review.create(
-    req.body
-    // name: req.body.name,
-    // review_body: req.body.review_body,
-    // date: new Date(),
-    // stars: req.body.stars,
-    // inventoryId: req.params.inventoryId
-  )
-  .then(function(review) {return review.setInventory(req.params.inventoryId)})
+router.post('/:inventoryId', function(req, res, next) {   
+  return Review.create(req.body)
+  .then(function(review) {
+    review.inventoryId = req.params.inventoryId;
+    return review.save();
+  })
   .then(review => res.status(201).send(review))
   .catch(next);
-})
+});

@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/_db');
-const Inventory = require('../../db/models/inventory')(db);
+const Inventory = db.model("inventory");
+const Review = db.model("review");
 module.exports = router;
 
 router.get('/', function (req, res, next) {
@@ -20,6 +21,16 @@ router.get('/:type', function (req, res, next) {
       } 
     })
   .then(items => res.json(items))
+  .catch(next);
+});
+
+router.post('/:inventoryId/reviews', function(req, res, next) {   
+  return Review.create(req.body)
+  .then(function(review) {
+    review.inventoryId = req.params.inventoryId;
+    return review.save();
+  })
+  .then(review => res.status(201).send(review))
   .catch(next);
 });
 
