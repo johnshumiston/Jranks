@@ -3,6 +3,7 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
+
     return db.define('inventory', {
         item: {
             type: Sequelize.STRING,

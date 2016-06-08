@@ -10,8 +10,6 @@ var BillingInfo = require('./models/billingInfo')(db);
 var OrderItem = require('./models/orderItem')(db);
 var Review = require('./models/review')(db);
 
-
-console.log("Helloooooooooooooo");
 //Review relationships
 Review.belongsTo(Inventory);
 //Billing Info relationships

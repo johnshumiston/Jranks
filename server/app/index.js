@@ -9,6 +9,11 @@ module.exports = function (db) {
     // function located at server/app/configure/index.js
     require('./configure')(app, db);
 
+    app.use('/', function(req, res, next) {
+        if (req.user) console.log(req.user.dataValues);
+        next();
+    })
+
     // Routes that will be accessed via AJAX should be prepended with
     // /api so they are isolated from our GET /* wildcard.
     app.use('/api', require('./routes'));

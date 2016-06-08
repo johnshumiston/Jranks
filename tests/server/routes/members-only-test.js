@@ -1,18 +1,12 @@
 // Instantiate all models
 var expect = require('chai').expect;
-
 var Sequelize = require('sequelize');
-var dbURI = 'postgres://localhost:5432/testing-fsg';
-var db = new Sequelize(dbURI, {
-    logging: false
-});
-require('../../../server/db/models/user')(db);
-
+var db = require('../../../server/db');
 var supertest = require('supertest');
 
 describe('Members Route', function () {
 
-    var app, User;
+    var app, User, Inventory;
 
     beforeEach('Sync DB', function () {
         return db.sync({ force: true });
@@ -21,6 +15,7 @@ describe('Members Route', function () {
     beforeEach('Create app', function () {
         app = require('../../../server/app')(db);
         User = db.model('user');
+        Inventory = db.model('inventory');
     });
 
 	describe('Unauthenticated request', function () {
@@ -44,9 +39,12 @@ describe('Members Route', function () {
 		var loggedInAgent;
 
 		var userInfo = {
-			email: 'joe@gmail.com',
-			password: 'shoopdawoop'
-		};
+    first_name: 'John',
+    last_name: 'Humiston',
+    birth: 10 / 15 / 1988,
+    email: 'testing@fsa.com',
+    password: 'password'
+  };
 
 		beforeEach('Create a user', function (done) {
 			return User.create(userInfo).then(function (user) {

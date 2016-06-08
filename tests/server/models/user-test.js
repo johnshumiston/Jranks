@@ -2,12 +2,13 @@ var sinon = require('sinon');
 var expect = require('chai').expect;
 
 var Sequelize = require('sequelize');
-var dbURI = 'postgres://localhost:5432/testing-fsg';
-var db = new Sequelize(dbURI, {
-    logging: false
-});
+var dbURI = 'postgres://localhost:5432/fsg';
+var db = require('../../../server/db');
+// var db = new Sequelize(dbURI, {
+//     logging: false
+// });
 
-require('../../../server/db/models/user')(db);
+// require('../../../server/db/models/user')(db);
 
 var User = db.model('user');
 
@@ -95,7 +96,13 @@ describe('User model', function () {
             var saltSpy;
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({
+    first_name: 'John',
+    last_name: 'Humiston',
+    birth: 10 / 15 / 1988,
+    email: 'testing@fsa.com',
+    password: 'potus'
+  });
             };
 
             beforeEach(function () {
@@ -137,7 +144,13 @@ describe('User model', function () {
         describe('sanitize method', function () {
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({
+    first_name: 'John',
+    last_name: 'Humiston',
+    birth: 10 / 15 / 1988,
+    email: 'testing@fsa.com',
+    password: 'potus'
+  });
             };
 
             it('should remove sensitive information from a user object', function () {
