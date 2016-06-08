@@ -10,13 +10,3 @@ router.get('/', function(req, res, next) {
     .then(reviews => res.json(reviews))
     .catch(next);
 });
-
-router.post('/:inventoryId', function(req, res, next) {   
-  return Review.create(req.body)
-  .then(function(review) {
-    review.inventoryId = req.params.inventoryId;
-    return review.save();
-  })
-  .then(review => res.status(201).send(review))
-  .catch(next);
-});
