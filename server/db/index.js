@@ -11,9 +11,10 @@ var OrderItem = require('./models/orderItem')(db);
 var Review = require('./models/review')(db);
 
 
-console.log("Helloooooooooooooo");
+console.log("Helloooooooooooooo"); //dead code, shouldn't really be making it to master branch, prune prior to merging CdV/OB
 //Review relationships
-Review.belongsTo(Inventory);
+Review.belongsTo(Inventory);  //shouldn't a review belong to the user too? CdV/OB
+
 //Billing Info relationships
 BillingInfo.belongsTo(User, {as: 'cardholder'});
 
@@ -27,5 +28,7 @@ Order.belongsTo(Address);
 
 //Address relationships
 Address.belongsTo(User);
+
+//address/user relationship/primary address/address list
 
 db.sync();

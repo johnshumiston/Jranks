@@ -4,6 +4,8 @@ const db = require('../../db/_db');
 const Address = db.model("address");
 module.exports = router;
 
+//use case for getting all addresses independent of user? CdV/OB
+
 router.get('/', function (req, res, next) {
   Address.findAll()
   .then(addresses => res.json(addresses))
@@ -43,7 +45,7 @@ router.post('/:userId', function (req, res, next) {
 	.then(function(createdAddress){
 		var addressId = createdAddress.id;
 		var userId = req.params.userId;
-		if (createdAddress.is_primary === true) {
+		if (createdAddress.is_primary === true) { //instance method for adding an address and if it is primary set as primary CdV/OB
 			Address.update(
 				{
 					is_primary: false
@@ -93,7 +95,7 @@ router.put('/:userId/:addressId', function (req, res, next) {
 					}
 				}
 			})
-			.then(function(){
+			.then(function(){ //avoid nested thens CdV/OB
 				return "yes";
 			});
 		}
@@ -120,8 +122,9 @@ router.put('/:userId/:addressId', function (req, res, next) {
 // 	.catch(next);
 // });
 
+
 router.delete('/:userId/:addressId', function (req, res, next) {
-	Address.destroy({
+	Address.destroy({ //don't destroy, just remove its reference to user CdV/OB
 		where: {
 			addressId: req.params.addressId
 		}

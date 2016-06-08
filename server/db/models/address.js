@@ -27,8 +27,8 @@ module.exports = function (db) {
             allowNull: false
         },
         zip: {
-            type: Sequelize.INTEGER,
-            allowNull: false
+            type: Sequelize.INTEGER, //should use string here because int will cut off leading zeroes (00012) CdV/OB
+            allowNull: false    //min length 5 (for US codes) CdV/OB
         }
     }
     // , {

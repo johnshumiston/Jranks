@@ -4,7 +4,7 @@ const db = require('../../db/_db');
 const OrderItem = db.model("orderItem");
 module.exports = router;
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res, next) { //get all not really necessary, most of these should be part of order routes CdV/OB
   OrderItem.findAll()
   .then(orderItems => res.json(orderItems))
   .catch(next);

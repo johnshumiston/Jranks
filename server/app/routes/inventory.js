@@ -14,12 +14,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  return Inventory.create(req.body)
+  return Inventory.create(req.body) //returns unecessary CdV/OB
   .then(item => res.sendStatus(201))
   .catch(next);
 });
 
-router.get('/:inventoryId', function (req, res, next) {
+router.get('/:inventoryId', function (req, res, next) { //consider using router.param
   return Inventory.findById(req.params.inventoryId)
   .then(item => res.send(item))
   .catch(next);
@@ -54,7 +54,7 @@ router.post('/:inventoryId/reviews', function(req, res, next) {
   .catch(next);
 });
 
-router.get('/type/:type', function (req, res, next) {
+router.get('/type/:type', function (req, res, next) { //consider using req query here CdV/OB
   var type = req.params.type;
   Inventory.findAll({ 
     where: {

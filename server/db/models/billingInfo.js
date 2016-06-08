@@ -1,7 +1,7 @@
 'use strict';
 var Sequelize = require('sequelize');
 
-module.exports = function (db) {
+module.exports = function (db) {    //security issue storing this data on your side, CC processor should store (securely) CdV/OB
 
     return db.define('billingInfo', {
         card_number: {
