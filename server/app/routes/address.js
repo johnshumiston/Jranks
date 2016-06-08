@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/:userId', function (req, res, next) {
-	Address.findAll({
+	 return Address.findAll({
 		where: {
 			userId: req.params.userId
 		}
@@ -75,7 +75,7 @@ router.put('/:userId/:addressId', function (req, res, next) {
 		}
 	})
 	.then(function(userAddress){
-		userAddress.update(req.body);
+		return userAddress.update(req.body);
 	})
 	.then(function(updatedAddress){
 		var addressId = updatedAddress.id;
@@ -126,7 +126,7 @@ router.delete('/:userId/:addressId', function (req, res, next) {
 			addressId: req.params.addressId
 		}
 	})
-	.then(function(deletedAddress){
+	.then(function(){
 		res.sendStatus(204);
 	})
 	.catch(next);

@@ -53,7 +53,7 @@ router.put('/:userId/:billingInfoId', function (req, res, next) {
 		}
 	})
 	.then(function(userBillingInfo){
-		userBillingInfo.update(req.body);
+		return userBillingInfo.update(req.body);
 	})
 	.then(function(updatedBillingInfo){
 		res.status(200).send(updatedBillingInfo);
