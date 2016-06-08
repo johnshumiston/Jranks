@@ -29,31 +29,15 @@ router.post('/:userId/:addressId', function (req, res, next){
 });
 
 router.delete('/:id', function (req, res, next){
-  Order.findById(req.params.id)
-  .then(function(order){
-    if(order){
-      Order.destroy({where: {id: req.params.id}})
-      return res.status(204).send(order);
-    }
-    else {
-      return res.status(404).send('not found');
-    }
-  })
-  .catch(next);
+  return Order.destroy({where: {id: req.params.id}})
+  .then(response => res.sendStatus(204));
 });
 
 router.put('/:id', function(req, res, next){
   Order.findById(req.params.id)
   .then(function(order){
-    if (order){
-      order.update(req.body)
-      .then (function(order){
-        return res.status(200).send(order);
-      })
-    }
-    else {
-      return res.status(404).send('not found');
-    }
+    return order.update(req.body)
   })
+  .then (updatedOrder => res.sendStatus(200))
   .catch(next);
 })
