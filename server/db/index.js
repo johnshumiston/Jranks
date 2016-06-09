@@ -20,6 +20,7 @@ OrderItem.belongsTo(Inventory, {as: 'item'});
 //Order relationships
 Order.belongsTo(User);
 Order.belongsTo(Address);
+Order.hasMany(OrderItem);
 
 //Address relationships
 Address.belongsTo(User);

@@ -36,13 +36,13 @@ module.exports = function (db) {
         }
     },
     {
-        instanceMethods: { //#JP
+        instanceMethods: {
             reconcilePrimary: function(){
                 if (this.is_primary){
-                    Address.findAll({where: {id: {$ne: this.id}, userId: this.userId}})
+                    db.model('address').findAll({where: {id: {$ne: this.id}, userId: this.userId}})
                     .then(function(addresses){
-                        addresses.forEach(function(address){
-                            address.update({is_primary: false});
+                        addresses.forEach(function(singleAddress){
+                            singleAddress.update({is_primary: false});
                         });
                     })
                 }

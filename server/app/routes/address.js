@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../db/_db');
 const Address = db.model("address");
+
 module.exports = router;
 
 router.get('/', function (req, res, next) {
@@ -10,11 +11,9 @@ router.get('/', function (req, res, next) {
   .catch(next);
 });
 
-router.get('/:userId', function (req, res, next) {
-	 return Address.findAll({
-		where: {
-			userId: req.params.userId
-		}
+router.get('/:userId/all', function (req, res, next) {
+	Address.findAll({
+		where: {userId: req.params.userId}
 	})
 	.then(function(userAddresses){
 		res.json(userAddresses);
@@ -22,10 +21,11 @@ router.get('/:userId', function (req, res, next) {
 	.catch(next);
 });
 
-router.get('/:userId/:addressId/', function (req, res, next) {
+router.get('/:userId/primary', function (req, res, next) {
 	Address.findOne({
 		where: {
-			addressId: req.params.addressId
+			userId: req.params.userId,
+			is_primary: true
 		}
 	})
 	.then(function(userAddress){
@@ -34,12 +34,8 @@ router.get('/:userId/:addressId/', function (req, res, next) {
 	.catch(next);
 });
 
-router.post('/:userId', function (req, res, next) {
+router.post('/', function (req, res, next) {
 	Address.create(req.body)
-	.then(function(address){
-		address.userId = req.params.userId;
-		return address.save();
-	})
 	.then(function(createdAddress){
 		return createdAddress.reconcilePrimary();
 	})
@@ -49,12 +45,8 @@ router.post('/:userId', function (req, res, next) {
 	.catch(next);
 });
 
-router.put('/:userId/:addressId', function (req, res, next) {
-	Address.findOne({
-		where: {
-			addressId: req.params.addressId
-		}
-	})
+router.put('/:addressId', function (req, res, next) {
+	Address.findById(req.params.addressId)
 	.then(function(userAddress){
 		return userAddress.update(req.body);
 	})
@@ -67,8 +59,8 @@ router.put('/:userId/:addressId', function (req, res, next) {
 	.catch(next);
 });
 
-router.delete('/', function (req, res, next) { //check if agree #JP
-	Address.findById(req.body)
+router.delete('/', function (req, res, next) {
+	Address.findById(req.body.id)
 	.then(function(address){
 		address.userId = null;
 		address.save();

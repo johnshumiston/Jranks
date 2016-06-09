@@ -22,7 +22,10 @@ const db = require('./server/db');
 const User = db.model('user');
 const Inventory = db.model('inventory');
 const Address = db.model('address');
+const Review = db.model('review');
+const Order = db.model('order');
 const Promise = require('sequelize').Promise;
+
 
 var seedAddress = function() {
 
@@ -32,14 +35,16 @@ var seedAddress = function() {
     street_1: "First North",
     state: "NY",
     city: "NYC",
-    zip: "11211"
+    zip: "11211",
+    userId: 1
   }, {
     instructions: "Take the y Road",
     is_primary: false,
     street_1: "Second North",
     state: "UT",
     city: "Provo",
-    zip: "2435" //testing if min length is working #JP
+    zip: "2435", //testing if min length is working #JP
+    userId: 2
   }];
 
   var creatingAddresses = addresses.map(function(address) {
@@ -238,6 +243,70 @@ var seedInventory = function() {
 
 };
 
+var seedReviews = function(){
+  var reviews = [
+  {
+    inventoryId: 1,
+    title: "I wish I could give 0 stars",
+    review_body: "this product sucks",
+    stars: 5
+  },
+  {
+    inventoryId: 2,
+    title: "I cancelled my cart",
+    review_body: "best decision ever",
+    stars: 5
+  },
+  {
+    inventoryId: 3,
+    title: "I love it",
+    review_body: "Just kidding",
+    stars: 5
+  },
+  {
+    inventoryId: 4,
+    title: "Coffee with shit tastes better",
+    review_body: "This sucks",
+    stars: 3
+  },
+  {
+    inventoryId: 5,
+    title: "Yabadabadoo",
+    review_body: "I hate the owners",
+    stars: 2
+  }]
+  var creatingReviews = reviews.map(function(review) {
+    return Review.create(review);
+  });
+
+  return Promise.all(creatingReviews);
+}
+
+var seedOrders = function(){
+  var orders = [
+  {
+    status: "complete",
+    userId: 1,
+    addressId: 2
+  },
+  {
+    status: "cancelled",
+    userId: 2,
+    addressId: 2
+  },
+  {
+    status: "complete",
+    userId: 1,
+    addressId: 1
+  }]
+
+  var creatingOrders = orders.map(function(order) {
+    return Order.create(order);
+  });
+
+  return Promise.all(creatingOrders);
+}
+
 db.sync({ force: true })
   .then(function() {
     return seedUsers();
@@ -245,8 +314,14 @@ db.sync({ force: true })
   .then(function() {
     return seedInventory();
   })
+  .then(function() {
+    return seedReviews();
+  })
   .then(function(){
     return seedAddress();
+  })
+  .then(function(){
+    return seedOrders();
   })
   .then(function() {
     console.log(chalk.green('Seed successful!'));
