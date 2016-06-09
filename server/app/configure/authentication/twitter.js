@@ -18,10 +18,8 @@ module.exports = function (app, db) {
     var createNewUser = function (token, tokenSecret, profile) {
         return User.create({
             twitter_id: profile.id,
-            first_name: profile.displayName,
-            last_name: profile.displayName,
-            email: profile.emails ? profile.emails[0].value : [profile.username , 'no-email.com'].join('@'),
-            birth: 10/15/1988
+            name: profile.displayName,
+            email: profile.emails ? profile.emails[0].value : [profile.username , 'no-email.com'].join('@')
         });
     };
 
