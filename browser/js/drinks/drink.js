@@ -13,9 +13,9 @@ app.config(function ($stateProvider) {
     });
 
     $stateProvider.state('drinkItem', {
-        url: '/drink/:drinkId',
+        url: '/drinks/:drinkId',
         controller: 'DrinkController',
-        templateUrl: 'js/drink/drinkItem.html',
+        templateUrl: 'js/drinks/drink.html',
         resolve: {
           drinkItem: function (InventoryFactory, $stateParams) {
             return InventoryFactory.fetchById($stateParams.drinkId);
@@ -25,8 +25,14 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DrinksController', function ($scope) {
+app.controller('DrinksController', function ($scope, allDrinks) {
 
+    $scope.drinks = allDrinks;
 
+});
+
+app.controller('DrinkController', function ($scope, drinkItem) {
+    
+    $scope.drinkItem = drinkItem;
 
 });
