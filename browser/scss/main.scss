@@ -4,6 +4,12 @@
 
 body {
   background: #fdfdfd;
+
+  img {
+    height: 50px;
+    width: auto;
+  }
+
 }
 
 @mixin clearfix {

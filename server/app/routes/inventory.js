@@ -62,7 +62,7 @@ router.get('/type/:type', function (req, res, next) {
       type: type
       } 
     })
-  .then(items => res.json(items))
+  .then(items => res.send(items))
   .catch(next);
 });
 
