@@ -83,154 +83,154 @@ var seedInventory = function() {
     title: 'The Best Burger',
     quantity: 5,
     type: 'food',
-    price: 7.50,
+    price: 750,
     description: 'Perfect combination of the best burger in town, lettuce, tomatoes and a special sauce',
     image_url: 'http://i.imgur.com/HM6tQW2.jpg'
   }, {
     title: 'The Italian Dream',
     quantity: 2,
     type: 'food',
-    price: 8.50,
+    price: 850,
     description: "Plump frankfurter wrapped in a calzone crust",
     image_url: 'http://i.imgur.com/Q9LwYRk.jpg'
   }, {
     title: 'The Magic Carpet',
     quantity: 8,
     type: 'food',
-    price: 8.50,
+    price: 850,
     description: 'Falafel sandwich with mediterranean sauce and hummus',
     image_url: 'http://i.imgur.com/sZ16zr3.jpg'
   }, {
     title: 'The Mexican Vacation',
     quantity: 9,
     type: 'food',
-    price: 7.00,
+    price: 700,
     description: 'Spicy beef tacos with avocado',
     image_url: 'http://i.imgur.com/LHAUCmJ.jpg'
   }, {
     title: 'The Chicken Fingers',
     quantity: 5,
     type: 'food',
-    price: 6.50,
+    price: 650,
     description: 'Fried chicken served on a bed of lettuce',
     image_url: 'http://i.imgur.com/LJJ4rN0.jpg'
   }, {
     title: 'The Double Dog',
     quantity: 5,
     type: 'food',
-    price: 5.50,
+    price: 550,
     description: 'Hot dog with German sausage and swiss cheese! It is somehow vegan.',
     image_url: 'http://i.imgur.com/buRrvfr.jpg'
   }, {
     title: 'The French Fries',
     quantity: 5,
     type: 'side',
-    price: 5.00,
+    price: 500,
     description: 'Our french fries are made with sea salt and the best spices in town!',
     image_url: 'http://i.imgur.com/VJaBd7H.jpg'
   }, {
     title: 'The Tempura Mozzarella',
     quantity: 5,
     type: 'side',
-    price: 5.00,
+    price: 500,
     description: 'Japanese Italian fusion at its best',
     image_url: 'http://i.imgur.com/IZZW0OZ.jpg'
   }, {
     title: 'The Alloco',
     quantity: 5,
     type: 'side',
-    price: 5.00,
+    price: 500,
     description: 'An African famous fried plantain snack, often served with chili pepper and onions.',
     image_url: 'http://i.imgur.com/RgKJwyd.jpg'
   }, {
     title: 'The Let Me Be',
     quantity: 5,
     type: 'side',
-    price: 5.00,
+    price: 500,
     description: 'Mini burgers prepared with our special spices.',
     image_url: "http://i.imgur.com/oXSGQTx.jpg"
   }, {
     title: 'The Berry Christmas',
     quantity: 100,
     type: 'drink',
-    price: 7.00,
+    price: 700,
     description: "The perfect combination of watermelon and strawberry. It's like Christmas for your mouth!",
     image_url: "http://i.imgur.com/yyqyD2d.jpg"
   }, {
     title: 'The Citrus Curprise',
     quantity: 100,
     type: 'drink',
-    price: 7.00,
+    price: 700,
     description: "Sweetened lime and orange in one drink. Outstanding!",
     image_url: "http://i.imgur.com/gvh0lIk.jpg"
   }, {
     title: 'The Mango Mix',
     quantity: 100,
     type: 'drink',
-    price: 7.00,
+    price: 700,
     description: "Fresh mangoes and pineapple come together in a single delicious beverage!",
     image_url: "http://i.imgur.com/bQ8Ip5W.jpg"
   }, {
     title: 'The Cherry Apple Cobbler',
     quantity: 100,
     type: 'drink',
-    price: 7.00,
+    price: 700,
     description: "We threw two pies in a blender and this happened!",
     image_url: "http://i.imgur.com/bppwp9P.jpg"
   }, {
     title: 'The Blueberry Bubbly',
     quantity: 100,
     type: 'drink',
-    price: 7.00,
+    price: 700,
     description: "A local favorite since 2016.",
     image_url: "http://i.imgur.com/KleYqtC.jpg"
   }, {
     title: 'The Oranger Creamer',
     quantity: 100,
     type: 'drink',
-    price: 7.00,
+    price: 700,
     description: "Amazing Orange and Vanilla.  Very yummy, soon to be in your tummy.",
     image_url: "http://i.imgur.com/2Q3Ftrx.jpg"
   }, {
     title: 'The Original Phrosty',
     quantity: 100,
     type: 'alcoholic_drink',
-    price: 12.00,
+    price: 1200,
     description: 'The Phrosty that started it all... and almost ended it all! The Original Phrosty is now officially kind of safe, yet still tastes just as good as ever! Do not drink if you ever plan to travel to a country that requires a yellow fever vaccination or if you ever plan to receive a yellow fever vaccination for any reason.',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
     title: "The I'm Not Getting Involved",
     quantity: 100,
     type: 'alcoholic_drink',
-    price: 12.00,
+    price: 1200,
     description: 'Shove a straw in your mouth and skip out on the drama! Who needs bad vibes when you can sip your way into banana-coconut bliss.',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
     title: 'The Thank You Berry Much, But No Thanks',
     quantity: 100,
     type: 'alcoholic_drink',
-    price: 12.00,
+    price: 1200,
     description: 'If something sounds sketchy, then you have to say "No Thanks". Unless, of course, someone is offering you a berry-infused, and berry delicious, Phrosty.',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
     title: "The I'm My Own Date",
     quantity: 100,
     type: 'alcoholic_drink',
-    price: 12.00,
+    price: 1200,
     description: 'Bring on the dates, cacao nibs, chocolate, and secret ingredient just released in the US. With this Phrosty in hand, you can forget other guys and girls and date yourself!',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
     title: 'The Hair of the Dog',
     quantity: 100,
     type: 'alcoholic_drink',
-    price: 12.00,
+    price: 1200,
     description: "Now available all day! Yesterday's Phrosty got you feeling under the weather? Suck another one down and you'll be feeling fine in no time. Officially no longer has any hair.",
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
     title: "The That's My Bag",
     quantity: 100,
     type: 'alcoholic_drink',
-    price: 12.00,
+    price: 1200,
     description: "Who cares if it isn't your bag? Who cares if you're making a scene? After this grey-colored dream of a Phrosty, you deserve any damn bag you want! Made with pears and (pretty) edible stones.",
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }];
