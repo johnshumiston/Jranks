@@ -65,22 +65,3 @@ router.get('/type/:type', function (req, res, next) {
   .then(items => res.send(items))
   .catch(next);
 });
-
-// router.put('/:inventoryId/reviews/:reviewId', function(req, res, next) {   
-//   return Review.findById(req.params.reviewId)
-//   .then(function(review) {
-//     return review.update(req.body)
-//   })
-//   .then(updatedReview => res.sendStatus(200))
-//   .catch(next);
-// });
-
-// router.delete('/:inventoryId/reviews/:reviewId', function(req, res, next) {   
-//   return Review.destroy({
-//     where: {
-//       id: req.params.reviewId
-//     }
-//   })
-//   .then(response => res.sendStatus(204))
-//   .catch(next);
-// });

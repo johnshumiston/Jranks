@@ -4,7 +4,6 @@ module.exports = router;
 
 router.use('/members', require('./members'));
 router.use('/inventory', require('./inventory'));
-router.use('/billingInfo', require('./billingInfo'));
 router.use('/address', require('./address'));
 router.use('/order', require('./order'));
 router.use('/orderItem', require('./orderItem'));

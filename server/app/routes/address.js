@@ -41,26 +41,7 @@ router.post('/:userId', function (req, res, next) {
 		return address.save();
 	})
 	.then(function(createdAddress){
-		var addressId = createdAddress.id;
-		var userId = req.params.userId;
-		if (createdAddress.is_primary === true) {
-			Address.update(
-				{
-					is_primary: false
-				},
-			{
-				where: {
-					userId: userId,
-					id: {
-						$ne: addressId
-					}
-				}
-			})
-			.then(function(){
-				return "yes";
-			});
-		}
-		return createdAddress;
+		return createdAddress.reconcilePrimary();
 	})
 	.then(function(newAddress){
 		res.status(201).send(newAddress);
@@ -78,26 +59,7 @@ router.put('/:userId/:addressId', function (req, res, next) {
 		return userAddress.update(req.body);
 	})
 	.then(function(updatedAddress){
-		var addressId = updatedAddress.id;
-		var userId = req.params.userId;
-		if (updatedAddress.is_primary === true) {
-			Address.update(
-				{
-					is_primary: false
-				},
-			{
-				where: {
-					userId: userId,
-					id: {
-						$ne: addressId
-					}
-				}
-			})
-			.then(function(){
-				return "yes";
-			});
-		}
-		return updatedAddress;
+		return updatedAddress.reconcilePrimary();
 	})
 	.then(function(updatedAddress){
 		res.status(200).send(updatedAddress);
@@ -105,26 +67,12 @@ router.put('/:userId/:addressId', function (req, res, next) {
 	.catch(next);
 });
 
-// router.put('/:userId/:addressId/make', function (req, res, next) {
-// 	Address.findOne({
-// 		where: {
-// 			addressId: req.params.addressId
-// 		}
-// 	})
-// 	.then(function(userAddress){
-// 		userAddress.update(req.body);
-// 	})
-// 	.then(function(updatedAddress){
-// 		res.status(200).send(updatedAddress);
-// 	})
-// 	.catch(next);
-// });
-
-router.delete('/:userId/:addressId', function (req, res, next) {
-	Address.destroy({
-		where: {
-			addressId: req.params.addressId
-		}
+router.delete('/', function (req, res, next) { //check if agree #JP
+	Address.findById(req.body)
+	.then(function(address){
+		address.userId = null;
+		address.save();
+		return address;
 	})
 	.then(function(){
 		res.sendStatus(204);

@@ -17,11 +17,9 @@ router.get('/:id', function (req, res, next) {
   .catch(next);
 });
 
-router.post('/:userId/:addressId', function (req, res, next){
-  return Order.create(req.body)
+router.post('/', function (req, res, next){
+  Order.create(req.body)
   .then(function(order){
-  	order.addressId = req.params.addressId;
-  	order.userId = req.params.userId;
   	return order.save();
   })
   .then(order => res.status(201).send(order))
@@ -29,7 +27,7 @@ router.post('/:userId/:addressId', function (req, res, next){
 });
 
 router.delete('/:id', function (req, res, next){
-  return Order.destroy({where: {id: req.params.id}})
+  Order.destroy({where: {id: req.params.id}})
   .then(response => res.sendStatus(204));
 });
 

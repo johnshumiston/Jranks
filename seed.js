@@ -32,14 +32,14 @@ var seedAddress = function() {
     street_1: "First North",
     state: "NY",
     city: "NYC",
-    zip: 11211
+    zip: "11211"
   }, {
     instructions: "Take the y Road",
     is_primary: false,
     street_1: "Second North",
     state: "UT",
     city: "Provo",
-    zip: 32435
+    zip: "2435" //testing if min length is working #JP
   }];
 
   var creatingAddresses = addresses.map(function(address) {
@@ -77,154 +77,154 @@ var seedUsers = function() {
 var seedInventory = function() {
 
   var items = [{
-    item: 'The Best Burger',
+    title: 'The Best Burger',
     quantity: 5,
     type: 'food',
     price: 7.50,
     description: 'Perfect combination of the best burger in town, lettuce, tomatoes and a special sauce',
     image_url: 'http://i.imgur.com/HM6tQW2.jpg'
   }, {
-    item: 'The Italian Dream',
+    title: 'The Italian Dream',
     quantity: 2,
     type: 'food',
     price: 8.50,
     description: "Plump frankfurter wrapped in a calzone crust",
     image_url: 'http://i.imgur.com/Q9LwYRk.jpg'
   }, {
-    item: 'The Magic Carpet',
+    title: 'The Magic Carpet',
     quantity: 8,
     type: 'food',
     price: 8.50,
     description: 'Falafel sandwich with mediterranean sauce and hummus',
     image_url: 'http://i.imgur.com/sZ16zr3.jpg'
   }, {
-    item: 'The Mexican Vacation',
+    title: 'The Mexican Vacation',
     quantity: 9,
     type: 'food',
     price: 7.00,
     description: 'Spicy beef tacos with avocado',
     image_url: 'http://i.imgur.com/LHAUCmJ.jpg'
   }, {
-    item: 'The Chicken Fingers',
+    title: 'The Chicken Fingers',
     quantity: 5,
     type: 'food',
     price: 6.50,
     description: 'Fried chicken served on a bed of lettuce',
     image_url: 'http://i.imgur.com/LJJ4rN0.jpg'
   }, {
-    item: 'The Double Dog',
+    title: 'The Double Dog',
     quantity: 5,
     type: 'food',
     price: 5.50,
     description: 'Hot dog with German sausage and swiss cheese! It is somehow vegan.',
     image_url: 'http://i.imgur.com/buRrvfr.jpg'
   }, {
-    item: 'The French Fries',
+    title: 'The French Fries',
     quantity: 5,
     type: 'side',
     price: 5.00,
     description: 'Our french fries are made with sea salt and the best spices in town!',
     image_url: 'http://i.imgur.com/VJaBd7H.jpg'
   }, {
-    item: 'The Tempura Mozzarella',
+    title: 'The Tempura Mozzarella',
     quantity: 5,
     type: 'side',
     price: 5.00,
     description: 'Japanese Italian fusion at its best',
     image_url: 'http://i.imgur.com/IZZW0OZ.jpg'
   }, {
-    item: 'The Alloco',
+    title: 'The Alloco',
     quantity: 5,
     type: 'side',
     price: 5.00,
     description: 'An African famous fried plantain snack, often served with chili pepper and onions.',
     image_url: 'http://i.imgur.com/RgKJwyd.jpg'
   }, {
-    item: 'The Let Me Be',
+    title: 'The Let Me Be',
     quantity: 5,
     type: 'side',
     price: 5.00,
     description: 'Mini burgers prepared with our special spices.',
     image_url: "http://i.imgur.com/oXSGQTx.jpg"
   }, {
-    item: 'The Berry Christmas',
+    title: 'The Berry Christmas',
     quantity: 100,
     type: 'drink',
     price: 7.00,
     description: "The perfect combination of watermelon and strawberry. It's like Christmas for your mouth!",
     image_url: "http://i.imgur.com/yyqyD2d.jpg"
   }, {
-    item: 'The Citrus Curprise',
+    title: 'The Citrus Curprise',
     quantity: 100,
     type: 'drink',
     price: 7.00,
     description: "Sweetened lime and orange in one drink. Outstanding!",
     image_url: "http://i.imgur.com/gvh0lIk.jpg"
   }, {
-    item: 'The Mango Mix',
+    title: 'The Mango Mix',
     quantity: 100,
     type: 'drink',
     price: 7.00,
     description: "Fresh mangoes and pineapple come together in a single delicious beverage!",
     image_url: "http://i.imgur.com/bQ8Ip5W.jpg"
   }, {
-    item: 'The Cherry Apple Cobbler',
+    title: 'The Cherry Apple Cobbler',
     quantity: 100,
     type: 'drink',
     price: 7.00,
     description: "We threw two pies in a blender and this happened!",
     image_url: "http://i.imgur.com/bppwp9P.jpg"
   }, {
-    item: 'The Blueberry Bubbly',
+    title: 'The Blueberry Bubbly',
     quantity: 100,
     type: 'drink',
     price: 7.00,
     description: "A local favorite since 2016.",
     image_url: "http://i.imgur.com/KleYqtC.jpg"
   }, {
-    item: 'The Oranger Creamer',
+    title: 'The Oranger Creamer',
     quantity: 100,
     type: 'drink',
     price: 7.00,
     description: "Amazing Orange and Vanilla.  Very yummy, soon to be in your tummy.",
     image_url: "http://i.imgur.com/2Q3Ftrx.jpg"
   }, {
-    item: 'The Original Phrosty',
+    title: 'The Original Phrosty',
     quantity: 100,
     type: 'alcoholic_drink',
     price: 12.00,
     description: 'The Phrosty that started it all... and almost ended it all! The Original Phrosty is now officially kind of safe, yet still tastes just as good as ever! Do not drink if you ever plan to travel to a country that requires a yellow fever vaccination or if you ever plan to receive a yellow fever vaccination for any reason.',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
-    item: "The I'm Not Getting Involved",
+    title: "The I'm Not Getting Involved",
     quantity: 100,
     type: 'alcoholic_drink',
     price: 12.00,
     description: 'Shove a straw in your mouth and skip out on the drama! Who needs bad vibes when you can sip your way into banana-coconut bliss.',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
-    item: 'The Thank You Berry Much, But No Thanks',
+    title: 'The Thank You Berry Much, But No Thanks',
     quantity: 100,
     type: 'alcoholic_drink',
     price: 12.00,
     description: 'If something sounds sketchy, then you have to say "No Thanks". Unless, of course, someone is offering you a berry-infused, and berry delicious, Phrosty.',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
-    item: "The I'm My Own Date",
+    title: "The I'm My Own Date",
     quantity: 100,
     type: 'alcoholic_drink',
     price: 12.00,
     description: 'Bring on the dates, cacao nibs, chocolate, and secret ingredient just released in the US. With this Phrosty in hand, you can forget other guys and girls and date yourself!',
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
-    item: 'The Hair of the Dog',
+    title: 'The Hair of the Dog',
     quantity: 100,
     type: 'alcoholic_drink',
     price: 12.00,
     description: "Now available all day! Yesterday's Phrosty got you feeling under the weather? Suck another one down and you'll be feeling fine in no time. Officially no longer has any hair.",
     image_url: 'http://i.imgur.com/unv7Pcq.jpg'
   }, {
-    item: "The That's My Bag",
+    title: "The That's My Bag",
     quantity: 100,
     type: 'alcoholic_drink',
     price: 12.00,

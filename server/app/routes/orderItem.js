@@ -4,23 +4,15 @@ const db = require('../../db/_db');
 const OrderItem = db.model("orderItem");
 module.exports = router;
 
-router.get('/', function (req, res, next) {
-  OrderItem.findAll()
-  .then(orderItems => res.json(orderItems))
-  .catch(next);
-});
-
 router.get('/:id', function (req, res, next) {
   OrderItem.findById(req.params.id)
   .then(orderItems => res.json(orderItems))
   .catch(next);
 });
 
-router.post('/:orderId/:inventoryId', function (req, res, next){
-  return OrderItem.create(req.body)
+router.post('/', function (req, res, next){
+  OrderItem.create(req.body)
   .then(function(item){
-  	item.orderId = req.params.orderId;
-  	item.itemId = req.params.inventoryId;
   	return item.save();
   })
   .then(item => res.status(201).send(item))
@@ -28,7 +20,7 @@ router.post('/:orderId/:inventoryId', function (req, res, next){
 });
 
 router.delete('/:id', function (req, res, next){
-  return OrderItem.destroy({where: {id: req.params.id}})
+  OrderItem.destroy({where: {id: req.params.id}})
   .then(response => res.sendStatus(204));
 });
 
