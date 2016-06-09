@@ -43,7 +43,7 @@ app.factory('InventoryFactory', function ($http) {
   var InventoryFactory = {};
 
   InventoryFactory.fetchByType = function(type) {
-    return $http.get('/api/inventory/type/' + type)
+    return $http.get('/api/inventory/?type=' + type)
     .then(function(response){
       return response.data;
     });
