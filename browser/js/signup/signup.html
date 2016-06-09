@@ -1,0 +1,34 @@
+<form id="signup-form" name="signupForm" ng-submit="signupForm.$valid && sendSignup(signup)">
+
+    <alert type="danger" ng-show="error">
+        {{ error }}
+    </alert>
+
+
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" ng-model="signup.first_name" class="form-control" id="first_name" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" ng-model="signup.last_name" class="form-control" id="last_name" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+        <label for="birthdate">Birthdate</label>
+        <input type="date" ng-model="signup.birth" class="form-control" id="birthdate" placeholder="Enter birthdate">
+    </div>
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" ng-model="signup.email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="signup-password">Password</label>
+        <input type="password" ng-model="signup.password" class="form-control" id="signup-password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<div class="buffer oauth">
+   <p><oauth-button provider-name="Google"></oauth-button></p>
+   <p><oauth-button provider-name="Twitter"></oauth-button></p>
+   <p><oauth-button provider-name="Facebook"></oauth-button></p>
+ </div>
