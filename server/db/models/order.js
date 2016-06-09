@@ -1,18 +1,24 @@
 // 'use strict';
 var Sequelize = require('sequelize');
+var OrderItem = require('./orderItem');
 
 module.exports = function (db) {
 
     return db.define('order', {
         date: {
             type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: new Date()
+            defaultValue: function (){ return new Date(); }
         },
-        is_complete: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false
+        status: {
+            type: Sequelize.ENUM,
+            values: ['complete', 'cancelled', 'pending'],
+            defaultValue: 'pending'
         }
-    });
-
+    },
+    {
+        defaultScope: {
+            include: [OrderItem(db)]
+        }
+    }
+    );
 };

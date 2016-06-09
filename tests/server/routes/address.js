@@ -38,9 +38,8 @@ describe('Addresses Route', function () {
         var loggedInAgent;
 
         var userInfo = {
-            first_name: 'Johnes',
+            name: 'Johnes Burmingtonestillman',
             birth: 12/12/1912,
-            last_name: 'Humingstone',
             email: 'joe@gmail.com',
             password: 'shoopdawoop'
         };

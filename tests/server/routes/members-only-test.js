@@ -39,8 +39,7 @@ describe('Members Route', function () {
 		var loggedInAgent;
 
 		var userInfo = {
-    first_name: 'John',
-    last_name: 'Humiston',
+    name: 'J Humiston',
     birth: 10 / 15 / 1988,
     email: 'testing@fsa.com',
     password: 'password'

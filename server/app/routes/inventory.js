@@ -3,84 +3,108 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/_db');
+const Inventory = db.model('inventory');
+const Review = db.model('review');
 
-const Inventory = db.model("inventory");
-const Review = db.model("review");
 module.exports = router;
 
-router.get('/', function (req, res, next) {
-  Inventory.findAll()
-  .then(items => res.send(items))
-  .catch(next);
+// Review routes -----------------------------------------------------------
+
+router.get('/reviews', function(req, res, next) {
+  Review.findAll()
+    .then(reviews => res.send(reviews))
+    .catch(next);
 });
 
-router.post('/', function (req, res, next) {
-  return Inventory.create(req.body)
-  .then(item => res.sendStatus(201))
-  .catch(next);
-});
-
-router.get('/:inventoryId', function (req, res, next) {
-  return Inventory.findById(req.params.inventoryId)
-  .then(item => res.send(item))
-  .catch(next);
-});
-
-router.put('/:inventoryId', function (req, res, next) {
-  return Inventory.findById(req.params.inventoryId)
-  .then(function(item) {
-    return item.update(req.body)
-  })
-  .then(updatedItem => res.sendStatus(200))
-  .catch(next);
-});
-
-router.delete('/:inventoryId', function (req, res, next) {
-  return Inventory.destroy({
-    where: {
-      id: req.params.inventoryId
-    }
-  })
-  .then(response => res.sendStatus(204))
-  .catch(next);
-});
-
-router.post('/:inventoryId/reviews', function(req, res, next) {   
-  return Review.create(req.body)
+router.post('/reviews', function(req, res, next) {   
+  Review.create(req.body)
   .then(function(review) {
-    review.inventoryId = req.params.inventoryId;
     return review.save();
   })
   .then(review => res.sendStatus(201))
   .catch(next);
 });
 
-router.get('/type/:type', function (req, res, next) {
-  var type = req.params.type;
+router.param('reviewId', function (req, res, next, id) {
+  Review.findById(id)
+  .then(function(review){
+    if(review){
+      req.review = review;
+      next();
+    } else {
+      next(new Error('failed to load review'));
+    }
+  })
+  .catch(next);
+});
+
+router.get('/reviews/:reviewId', function(req, res, next) {
+  res.send(req.review);
+});
+
+router.put('/reviews/:reviewId', function(req, res, next) {
+  req.review.update(req.body)
+  .then(updatedReview => res.status(200).send(updatedReview))
+  .catch(next);
+});
+
+router.delete('/reviews/:reviewId', function(req, res, next) {
+  req.review.destroy({})
+  .then(response => res.status(204).send(response))
+  .catch(next);
+});
+
+// Inventory routes -----------------------------------------------------------
+
+router.get('/', function (req, res, next) {
   Inventory.findAll({ 
-    where: {
-      type: type
-      } 
+    where: 
+      req.query
+      
     })
   .then(items => res.send(items))
   .catch(next);
 });
 
-// router.put('/:inventoryId/reviews/:reviewId', function(req, res, next) {   
-//   return Review.findById(req.params.reviewId)
-//   .then(function(review) {
-//     return review.update(req.body)
-//   })
-//   .then(updatedReview => res.sendStatus(200))
-//   .catch(next);
-// });
+router.post('/', function (req, res, next) {
+  Inventory.create(req.body)
+  .then(item => res.sendStatus(201))
+  .catch(next);
+});
 
-// router.delete('/:inventoryId/reviews/:reviewId', function(req, res, next) {   
-//   return Review.destroy({
-//     where: {
-//       id: req.params.reviewId
-//     }
-//   })
-//   .then(response => res.sendStatus(204))
-//   .catch(next);
-// });
+router.param('id', function (req, res, next, id) {
+  Inventory.findById(id)
+  .then(function(inventory){
+    if(inventory){
+      req.inventory = inventory;
+      next();
+    } else {
+      next(new Error('failed to load inventory item'));
+    }
+  })
+  .catch(next);
+});
+
+router.get('/:id', function (req, res, next) {
+  res.send(req.inventory);
+});
+
+router.get('/:id/reviews', function (req, res, next) {
+  Review.findAll({where: {inventoryId: req.inventory.id}})
+  .then(function(reviews){
+    res.send(reviews);
+  })
+  .catch(next);
+});
+
+router.put('/:id', function (req, res, next) {
+  req.inventory.update(req.body)
+  .then(updatedItem => res.status(200).send(updatedItem))
+  .catch(next);
+});
+
+router.delete('/:id', function (req, res, next) {
+  req.inventory.destroy({})
+  .then(response => res.status(204).send(response))
+  .catch(next);
+});

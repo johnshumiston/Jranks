@@ -13,33 +13,41 @@ module.exports = function (db) {
         },
         street_1: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            notEmpty: true
         },
         street_2: {
             type: Sequelize.STRING
         },        
         state: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            notEmpty: true
         },
         city: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            notEmpty: true
         },
         zip: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
+            len: [5, 10],
             allowNull: false
         }
-    }
-    // , {
-    //     hooks: {
-    //         beforeUpdate: function (address) {
-    //             if (address.changed('is_primary')) {
-    //                 user.salt = user.Model.generateSalt();
-    //                 user.password = user.Model.encryptPassword(user.password, user.salt);
-    //             }
-    //         }
-    //     }
-    // }
-    );
+    },
+    {
+        instanceMethods: {
+            reconcilePrimary: function(){
+                if (this.is_primary){
+                    db.model('address').findAll({where: {id: {$ne: this.id}, userId: this.userId}})
+                    .then(function(addresses){
+                        addresses.forEach(function(singleAddress){
+                            singleAddress.update({is_primary: false});
+                        });
+                    })
+                }
+                return this;
+            }
+        }
+    });
 };

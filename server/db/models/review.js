@@ -3,21 +3,22 @@ var Sequelize = require('sequelize');
 module.exports = function (db) {
 
     return db.define('review', {
-        name: {
-            type: Sequelize.STRING
+        title: {
+            type: Sequelize.STRING,
+            notEmpty: true
         },
         review_body: {
             type: Sequelize.TEXT,
-            allowNull: false
+            allowNull: false,
+            notEmpty: true
         },
         date: {
             type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: new Date()
+            defaultValue: function (){ return new Date(); }
         },
         stars: {
             type: Sequelize.INTEGER,
-            validate: { min: 0, max: 5 }
+            validate: { min: 1, max: 5 }
         }
     });
 
