@@ -53,14 +53,12 @@ var seedAddress = function() {
 var seedUsers = function() {
 
   var users = [{
-    first_name: 'John',
-    last_name: 'Humiston',
+    name: 'John Humiston2',
     birth: 10 / 15 / 1988,
     email: 'testing@fsa.com',
     password: 'password'
   }, {
-    first_name: 'John2',
-    last_name: 'Humiston2',
+    name: 'John2 Hummingstoned',
     birth: 10 / 15 / 1983,
     email: 'obama@gmail.com',
     password: 'potus'

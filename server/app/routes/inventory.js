@@ -9,59 +9,56 @@ const Review = db.model("review");
 module.exports = router;
 
 router.get('/', function (req, res, next) {
-  Inventory.findAll()
+  Inventory.findAll({ 
+    where: 
+      req.query
+      
+    })
   .then(items => res.send(items))
   .catch(next);
 });
 
 router.post('/', function (req, res, next) {
-  return Inventory.create(req.body)
+  Inventory.create(req.body)
   .then(item => res.sendStatus(201))
   .catch(next);
 });
 
-router.get('/:inventoryId', function (req, res, next) {
-  return Inventory.findById(req.params.inventoryId)
-  .then(item => res.send(item))
-  .catch(next);
-});
-
-router.put('/:inventoryId', function (req, res, next) {
-  return Inventory.findById(req.params.inventoryId)
-  .then(function(item) {
-    return item.update(req.body)
-  })
-  .then(updatedItem => res.sendStatus(200))
-  .catch(next);
-});
-
-router.delete('/:inventoryId', function (req, res, next) {
-  return Inventory.destroy({
-    where: {
-      id: req.params.inventoryId
+router.param('id', function (req, res, next, id) { //check if it is correct #JP
+  Inventory.findById(id)
+  .then(function(inventory){
+    if(inventory){
+      req.inventory = inventory;
+      next();
+    } else {
+      next(new Error('failed to load inventory item'));
     }
   })
-  .then(response => res.sendStatus(204))
+  .catch(next);
+});
+
+router.get('/:id', function (req, res, next) {
+  res.send(req.inventory);
+});
+
+router.put('/:id', function (req, res, next) {
+  req.inventory.update(req.body)
+  .then(updatedItem => res.status(200).send(updatedItem))
+  .catch(next);
+});
+
+router.delete('/:id', function (req, res, next) {
+  req.inventory.destroy({})
+  .then(response => res.status(204).send(response))
   .catch(next);
 });
 
 router.post('/:inventoryId/reviews', function(req, res, next) {   
-  return Review.create(req.body)
+  Review.create(req.body)
   .then(function(review) {
     review.inventoryId = req.params.inventoryId;
     return review.save();
   })
   .then(review => res.sendStatus(201))
-  .catch(next);
-});
-
-router.get('/type/:type', function (req, res, next) {
-  var type = req.params.type;
-  Inventory.findAll({ 
-    where: {
-      type: type
-      } 
-    })
-  .then(items => res.send(items))
   .catch(next);
 });

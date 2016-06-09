@@ -97,8 +97,7 @@ describe('User model', function () {
 
             var createUser = function () {
                 return User.create({
-    first_name: 'John',
-    last_name: 'Humiston',
+    name: 'John H',
     birth: 10 / 15 / 1988,
     email: 'testing@fsa.com',
     password: 'potus'
@@ -145,8 +144,7 @@ describe('User model', function () {
 
             var createUser = function () {
                 return User.create({
-    first_name: 'John',
-    last_name: 'Humiston',
+    name: 'John Schwarzei',
     birth: 10 / 15 / 1988,
     email: 'testing@fsa.com',
     password: 'potus'

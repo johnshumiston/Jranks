@@ -10,17 +10,12 @@ module.exports = function (db) {
             type: Sequelize.BOOLEAN,
             defaultValue: false
         },
-        first_name: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        last_name: {
+        name: {
             type: Sequelize.STRING,
             allowNull: false
         },
         birth: {
-            type: Sequelize.DATE,
-            allowNull: false
+            type: Sequelize.DATE
         },
         email: {
             type: Sequelize.STRING,
