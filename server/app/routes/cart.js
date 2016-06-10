@@ -8,10 +8,27 @@ const Review = db.model('review');
 
 module.exports = router;
 
+router.get('/', function(req, res, next) {
+  res.send(req.session);
+});
+
+router.get('/myCart', function(req, res, next) {
+  Inventory.findAll({
+    where: {
+      id: {
+        $in: Object.keys(req.session.cart) 
+      }
+    }
+  })
+  .then(function(items){
+    res.send(items);
+  })
+});
+
 router.post('/add', function(req, res, next) {
   if (!req.session.cart) req.session.cart = {};
   var qty = req.session.cart[req.body.id] || 0; 
   req.session.cart[req.body.id] = qty + 1;
-  console.log(req.session.cart);
+  console.log(req.session);
   res.status(200).send(req.session.cart);
 });
