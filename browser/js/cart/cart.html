@@ -1,6 +1,15 @@
 <section id="cart">
   <h4>Your Order</h4>
-  <ul>
-    <li ng-repeat="items in cartItems">{{items.title}}</li>
-  </ul>
+  <table>
+    <tr>
+      <td>Item</td>
+      <td>Quantity</td>
+      <td>Price</td>
+    </tr>
+    <tr ng-repeat="items in cartItems">
+      <td>{{items.title}}</td>
+      <td>{{items.quantity}}</td>
+      <td>{{formatPrice(items.price * items.quantity)}}</td>
+    </tr>
+  </table>
 </section>

@@ -18,12 +18,12 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CartController', function ($scope, Session, theSession, InventoryFactory, cartItems) {
+app.controller('CartController', function ($scope, Session, theSession, InventoryFactory, cartItems, CartFactory) {
 
   console.log(Session)
 
   $scope.cartItems = cartItems;
-  
+  $scope.formatPrice = CartFactory.formatPrice;
 
 });
 
@@ -47,16 +47,16 @@ app.factory('CartFactory', function ($http) {
   }
 
   CartFactory.addToCart = function(inventoryId) {
-    //Add inventory to req.session
-    // inventoryId = String(inventoryId);
-    // var qty = $kookies.get(inventoryId) || 0; 
-    // $kookies.set(inventoryId, +qty + 1)
-    // console.log($kookies.get());
-
     $http.post('/api/cart/add', {id: inventoryId})
     .then(function(cart){
       return cart;
     })
+  }
+
+  CartFactory.formatPrice = function(price) {
+    var priceStr = String(price);
+    if (priceStr.length < 3) priceStr = ("00" + priceStr).slice(-3)
+    return "$" + priceStr.slice(0, -2) + "." + priceStr.slice(-2);
   }
 
 

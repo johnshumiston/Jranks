@@ -33,6 +33,14 @@ module.exports = function (db) {
         image_url: {
             type: Sequelize.STRING
         }
+    }, {
+        getterMethods: {
+            displayPrice: function() {
+                var priceStr = String(this.price);
+                if (priceStr.length < 3) priceStr = ("00" + priceStr).slice(-3)
+                return "$" + priceStr.slice(0, -2) + "." + priceStr.slice(-2);
+            }
+        }
     });
 
 };
