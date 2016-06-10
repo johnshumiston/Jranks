@@ -31,7 +31,7 @@ module.exports = function (app, db) {
     // A POST /login route is created to handle login.
     app.post('/signup', function (req, res, next) {
         User.create(req.body)
-        .then(user => res.status(200))
+        .then(user => res.sendStatus(200))
         .catch(next);
     });
 
