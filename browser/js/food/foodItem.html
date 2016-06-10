@@ -1,5 +1,5 @@
 <section id="foodItem">
         <img src="{{foodItem.image_url}}">
         <h4>{{foodItem.title}}</h4>
-        <button>Add to Cart</button>
+        <button ng-click="addToCart(foodItem.id)">Add to Cart</button>
 </section>

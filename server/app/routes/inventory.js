@@ -57,6 +57,7 @@ router.delete('/reviews/:reviewId', function(req, res, next) {
 // Inventory routes -----------------------------------------------------------
 
 router.get('/', function (req, res, next) {
+  console.log("XxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx", req.session)
   Inventory.findAll({ 
     where: 
       req.query
