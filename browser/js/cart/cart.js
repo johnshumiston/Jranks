@@ -10,6 +10,6 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('FoodController', function ($scope) {
+app.controller('CartController', function ($scope) {
 
 });
