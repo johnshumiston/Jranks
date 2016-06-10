@@ -59,12 +59,10 @@ router.put('/:addressId', function (req, res, next) {
 	.catch(next);
 });
 
-router.delete('/', function (req, res, next) {
-	Address.findById(req.body.id)
+router.delete('/:addressId', function (req, res, next) {
+	Address.findById(req.params.addressId)
 	.then(function(address){
-		address.userId = null;
-		address.save();
-		return address;
+		return address.update({userId: null});
 	})
 	.then(function(){
 		res.sendStatus(204);

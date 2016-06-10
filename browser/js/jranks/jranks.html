@@ -1,5 +1,8 @@
 <section id="jranks">
-    <p>
-        Cool, it works!
-    </p>
+      <div ng-repeat="jrank in jranks">
+      <a ui-sref="jrankItem({jrankId: jrank.id})">
+        <img src="{{jrank.image_url}}">
+        <p>{{jrank.title}}</p>
+      </a>
+      </div>
 </section>
