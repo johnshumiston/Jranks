@@ -1,8 +1,8 @@
 <section id="jranks">
-      <div ng-repeat="jrank in jranks">
+      <div class="inventory-grid" ng-repeat="jrank in jranks">
       <a ui-sref="jrankItem({jrankId: jrank.id})">
         <img src="{{jrank.image_url}}">
-        <p>{{jrank.title}}</p>
+        <h4>{{jrank.title}}</h4>
       </a>
       </div>
 </section>
