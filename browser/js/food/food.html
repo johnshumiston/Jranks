@@ -1,8 +1,8 @@
 <section id="food">
-      <div ng-repeat="food in foods">
+      <div class="inventory-grid" ng-repeat="food in foods">
       <a ui-sref="foodItem({foodId: food.id})">
         <img src="{{food.image_url}}">
-        <p>{{food.title}}</p>
+        <h4>{{food.title}}</h4>
       </a>
       </div>
 </section>
