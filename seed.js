@@ -27,6 +27,29 @@ const Order = db.model('order');
 const Promise = require('sequelize').Promise;
 
 
+
+var seedUsers = function() {
+
+  var users = [{
+    name: 'John Humiston2',
+    birth: 10 / 15 / 1988,
+    email: 'testing@fsa.com',
+    password: 'password'
+  }, {
+    name: 'John2 Hummingstoned',
+    birth: 10 / 15 / 1983,
+    email: 'obama@gmail.com',
+    password: 'potus'
+  }];
+
+  var creatingUsers = users.map(function(userObj) {
+    return User.create(userObj);
+  });
+
+  return Promise.all(creatingUsers);
+
+};
+
 var seedAddress = function() {
 
   var addresses = [{
@@ -52,28 +75,6 @@ var seedAddress = function() {
   });
 
   return Promise.all(creatingAddresses);
-
-};
-
-var seedUsers = function() {
-
-  var users = [{
-    name: 'John Humiston2',
-    birth: 10 / 15 / 1988,
-    email: 'testing@fsa.com',
-    password: 'password'
-  }, {
-    name: 'John2 Hummingstoned',
-    birth: 10 / 15 / 1983,
-    email: 'obama@gmail.com',
-    password: 'potus'
-  }];
-
-  var creatingUsers = users.map(function(userObj) {
-    return User.create(userObj);
-  });
-
-  return Promise.all(creatingUsers);
 
 };
 
@@ -242,6 +243,30 @@ var seedInventory = function() {
   return Promise.all(creatingInventory);
 
 };
+var seedOrders = function(){
+  var orders = [
+  {
+    status: "complete",
+    userId: 1,
+    addressId: 2
+  },
+  {
+    status: "cancelled",
+    userId: 2,
+    addressId: 2
+  },
+  {
+    status: "complete",
+    userId: 1,
+    addressId: 1
+  }]
+
+  var creatingOrders = orders.map(function(order) {
+    return Order.create(order);
+  });
+
+  return Promise.all(creatingOrders);
+}
 
 var seedReviews = function(){
   var reviews = [
@@ -282,30 +307,6 @@ var seedReviews = function(){
   return Promise.all(creatingReviews);
 }
 
-var seedOrders = function(){
-  var orders = [
-  {
-    status: "complete",
-    userId: 1,
-    addressId: 2
-  },
-  {
-    status: "cancelled",
-    userId: 2,
-    addressId: 2
-  },
-  {
-    status: "complete",
-    userId: 1,
-    addressId: 1
-  }]
-
-  var creatingOrders = orders.map(function(order) {
-    return Order.create(order);
-  });
-
-  return Promise.all(creatingOrders);
-}
 
 db.sync({ force: true })
   .then(function() {
@@ -314,11 +315,11 @@ db.sync({ force: true })
   .then(function() {
     return seedInventory();
   })
-  .then(function() {
-    return seedReviews();
-  })
   .then(function(){
     return seedAddress();
+  })
+  .then(function() {
+    return seedReviews();
   })
   .then(function(){
     return seedOrders();
