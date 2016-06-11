@@ -22,7 +22,7 @@ app.controller('CartController', function ($scope, $rootScope, Session, Inventor
 
   CartFactory.fetchAllInCart()
   .then(function(items){
-    $scope.cartItems = items;  
+    $scope.cartItems = items; 
   })
 
   CartFactory.getGrandTotal()
