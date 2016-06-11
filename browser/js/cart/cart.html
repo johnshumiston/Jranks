@@ -8,8 +8,13 @@
     </tr>
     <tr ng-repeat="items in cartItems">
       <td>{{items.title}}</td>
-      <td>{{items.quantity}}</td>
-      <td>{{formatPrice(items.price * items.quantity)}}</td>
+      <td>{{items.qty}}</td>
+      <td>{{formatPrice(items.price * items.qty)}}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Total:</td>
+      <td>{{formatPrice(grandTotal)}}</td>
     </tr>
   </table>
 </section>

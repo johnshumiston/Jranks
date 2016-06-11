@@ -36,6 +36,7 @@ app.controller('FoodController', function ($scope, foodItem, CartFactory) {
 
   $scope.foodItem = foodItem;
 
-  $scope.addToCart = CartFactory.addToCart;
+  $scope.addToCart = CartFactory.addToCart
+  //function(item) {return CartFactory.addToCart(item)};
 
 });

@@ -21,7 +21,15 @@ router.get('/myCart', function(req, res, next) {
     }
   })
   .then(function(items){
-    res.send(items);
+    var qtys = [];
+    for (var key in req.session.cart) {
+      qtys.push(req.session.cart[key])
+    }
+    var updatedItems = items.map(function(item, index) {
+      item.dataValues.qty = qtys[index]
+      return item;
+    })
+    res.send(updatedItems);
   })
 });
 

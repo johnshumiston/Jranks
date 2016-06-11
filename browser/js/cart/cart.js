@@ -23,6 +23,9 @@ app.controller('CartController', function ($scope, Session, theSession, Inventor
   console.log(Session)
 
   $scope.cartItems = cartItems;
+  $scope.grandTotal = cartItems.reduce(function(sum, item){
+    return sum + (item.price * item.qty);
+  }, 0)
   $scope.formatPrice = CartFactory.formatPrice;
 
 });
@@ -41,13 +44,13 @@ app.factory('CartFactory', function ($http) {
   CartFactory.fetchAllInCart = function() {
     return $http.get('/api/cart/myCart')
     .then(function(response) {
-      console.log("hello", response.data)
+      console.log("Did we make fetch")
       return response.data
     })
   }
 
   CartFactory.addToCart = function(inventoryId) {
-    $http.post('/api/cart/add', {id: inventoryId})
+    return $http.post('/api/cart/add', {id: inventoryId})
     .then(function(cart){
       return cart;
     })
