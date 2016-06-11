@@ -12,12 +12,12 @@ app.config(function ($stateProvider) {
     });
 
     $stateProvider.state('jrankItem', {
-        url: '/jranks/:jrankId',
+        url: '/jranks/:id',
         controller: 'JrankController',
         templateUrl: 'js/jranks/jrank.html',
         resolve: {
           jrankItem: function (InventoryFactory, $stateParams) {
-            return InventoryFactory.fetchById($stateParams.jrankId);
+            return InventoryFactory.fetchById($stateParams.id);
           }
         }
     });

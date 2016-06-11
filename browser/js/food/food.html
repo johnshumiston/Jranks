@@ -1,6 +1,6 @@
 <section id="food">
       <div class="inventory-grid" ng-repeat="food in foods">
-      <a ui-sref="foodItem({foodId: food.id})">
+      <a ui-sref="foodItem({id: food.id})">
         <img src="{{food.image_url}}">
         <h4>{{food.title}}</h4>
       </a>

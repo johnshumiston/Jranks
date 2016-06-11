@@ -13,12 +13,12 @@ app.config(function ($stateProvider) {
     });
 
     $stateProvider.state('drinkItem', {
-        url: '/drinks/:drinkId',
+        url: '/drinks/:id',
         controller: 'DrinkController',
         templateUrl: 'js/drinks/drink.html',
         resolve: {
           drinkItem: function (InventoryFactory, $stateParams) {
-            return InventoryFactory.fetchById($stateParams.drinkId);
+            return InventoryFactory.fetchById($stateParams.id);
           }
         }
     });
