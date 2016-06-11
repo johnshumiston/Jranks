@@ -5,12 +5,29 @@ var app = express();
 
 module.exports = function (db) {
 
+    var User = db.model('user');
     // Pass our express application pipeline into the configuration
     // function located at server/app/configure/index.js
     require('./configure')(app, db);
 
     app.use('/', function(req, res, next) {
-        if (req.user) console.log(req.user.dataValues);
+        if (req.user) {
+            console.log('PREVIOUS SESSION', req.session);
+            User.findById(req.session.passport.user)
+            .then(function(user){
+                if (!Object.keys(req.session.cart).length){
+                    for (var key in user.cart){
+                        req.session.cart[key] = user.cart[key];
+                    }
+                    // req.session.cart = user.cart;
+                    console.log('NO THERE WAS NO CART', req.session.cart);
+                }
+                else {
+                    user.update({cart: req.session.cart});
+                    console.log('YES THERE WAS A CART', req.session.cart);
+                }
+            })
+        }
         next();
     })
 

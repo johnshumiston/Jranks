@@ -16,6 +16,7 @@ module.exports = function (db) {
         },
         cart: {
             type: Sequelize.JSON,
+            defaultValue: {}
         },
         birth: {
             type: Sequelize.DATE

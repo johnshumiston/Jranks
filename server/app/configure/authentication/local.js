@@ -52,20 +52,22 @@ module.exports = function (app, db) {
             req.logIn(user, function (loginErr) {
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
-                User.update(
-                    {
-                        cart: cart
-                    },
-                    {
-                        where: {
-                            email: booser.email
-                        }
-                    })
-                    .then(function(){
-                        res.status(200).send({
-                            user: user.sanitize()
-                        });
-                    })
+                
+                res.redirect('/');
+                // User.update(
+                //     {
+                //         cart: cart
+                //     },
+                //     {
+                //         where: {
+                //             email: booser.email
+                //         }
+                //     })
+                //     .then(function(){
+                //         res.status(200).send({
+                //             user: user.sanitize()
+                //         });
+                //     })
             });
 
         };
