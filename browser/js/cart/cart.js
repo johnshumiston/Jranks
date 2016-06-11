@@ -9,28 +9,39 @@ app.config(function ($stateProvider) {
         resolve: {
           theSession: function (CartFactory) {
             return CartFactory.getSession();
-          },
-          cartItems: function(CartFactory) {
-            return CartFactory.fetchAllInCart();
           }
+          // cartItems: function(CartFactory) {
+          //   return CartFactory.fetchAllInCart();
+          // }
         }
     });
 
 });
 
-app.controller('CartController', function ($scope, Session, theSession, InventoryFactory, cartItems, CartFactory) {
+app.controller('CartController', function ($scope, Session, theSession, InventoryFactory, cartItems, CartFactory, $state) {
 
-  console.log(Session)
 
-  $scope.cartItems = cartItems;
+  CartFactory.fetchAllInCart()
+  .then(function(cart){
+    $scope.cartItems = cart;
+  })
+
+  $scope.updateCart = function(){
+    $scope.$apply()
+    $state.go('cart');
+  }
+
   $scope.grandTotal = cartItems.reduce(function(sum, item){
     return sum + (item.price * item.qty);
   }, 0)
+  
   $scope.formatPrice = CartFactory.formatPrice;
 
 });
 
 app.factory('CartFactory', function ($http) {
+
+  var CachedCart = [];
 
   var CartFactory = {};
 
@@ -45,14 +56,18 @@ app.factory('CartFactory', function ($http) {
     return $http.get('/api/cart/myCart')
     .then(function(response) {
       console.log("Did we make fetch")
-      return response.data
+      angular.copy("hey", CachedCart);
+      console.log("weird stuff ", CachedCart);
+      // return response.data
+      return CachedCart;
     })
   }
 
   CartFactory.addToCart = function(inventoryId) {
     return $http.post('/api/cart/add', {id: inventoryId})
     .then(function(cart){
-      return cart;
+      CachedCart.push(cart.data);
+      return cart.data;
     })
   }
 
@@ -61,8 +76,6 @@ app.factory('CartFactory', function ($http) {
     if (priceStr.length < 3) priceStr = ("00" + priceStr).slice(-3)
     return "$" + priceStr.slice(0, -2) + "." + priceStr.slice(-2);
   }
-
-
 
   return CartFactory;
 

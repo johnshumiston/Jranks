@@ -17,7 +17,7 @@ module.exports = function (app, db) {
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
 
-        console.log(profile)
+        console.log(profile);
 
         User.findOne({
                 where: {
@@ -47,13 +47,12 @@ module.exports = function (app, db) {
 
     passport.use(new FacebookStrategy(facebookCredentials, verifyCallback));
 
-    app.get('/auth/facebook', passport.authenticate('facebook', {
-        scope: 'email'
-    }));
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {failureRedirect: '/login'}),
         function (req, res) {
+            // console.log('ssssssssssssssssssssssssssssss',req.session);
             res.redirect('/');
         });
 
