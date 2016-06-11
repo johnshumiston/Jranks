@@ -7,6 +7,8 @@ module.exports = function (db) {
 
     // Pass our express application pipeline into the configuration
     // function located at server/app/configure/index.js
+
+
     require('./configure')(app, db);
 
     app.use('/', function(req, res, next) {

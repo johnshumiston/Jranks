@@ -66,6 +66,8 @@
     "sinon": "^1.13.0",
     "socket.io": "^1.3.4",
     "socket.io-client": "^1.3.5",
+    "stripe": "^4.7.0",
+    "stripe.js": "0.0.1",
     "supertest": "^0.15.0"
   }
 }

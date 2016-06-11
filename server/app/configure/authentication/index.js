@@ -13,6 +13,8 @@ var ENABLED_AUTH_STRATEGIES = [
 
 module.exports = function (app, db) {
 
+    // Stripe.setPublishableKey('pk_test_LAJoZlKrqhHKYsMvmToI5Gn1');
+
     var dbStore = new SequelizeStore({
         db: db
     });
