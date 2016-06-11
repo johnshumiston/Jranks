@@ -38,20 +38,8 @@ module.exports = function (app, db) {
     app.post('/login', function (req, res, next) {
         var cart = req.session.cart
         var booser = req.body
-        
-        // User.update(
-        // {
-        //     cart: oldCart
-        // },
-        // {
-        //     where: req.body
-        // })
-        // .then(function(user){
-        //     console.log("one")
-        // })
 
         var authCb = function (err, user) {
-            console.log("two")
             if (err) return next(err);
 
             if (!user) {
