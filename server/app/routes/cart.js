@@ -9,7 +9,6 @@ const Review = db.model('review');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
-  console.log('THIS IS THE CART ROUTE --------------', req.session);
   res.send(req.session);
 });
 
