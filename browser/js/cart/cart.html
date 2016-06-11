@@ -1,3 +1,20 @@
 <section id="cart">
-  <h4>welcome to cart™</h4>
+  <h4>Your Order</h4>
+  <table>
+    <tr>
+      <td>Item</td>
+      <td>Quantity</td>
+      <td>Price</td>
+    </tr>
+    <tr ng-repeat="items in cartItems">
+      <td>{{items.title}}</td>
+      <td>{{items.qty}}</td>
+      <td>{{formatPrice(items.price * items.qty)}}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Total:</td>
+      <td>{{formatPrice(grandTotal)}}</td>
+    </tr>
+  </table>
 </section>
