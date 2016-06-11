@@ -36,9 +36,10 @@ module.exports = function (app, db) {
     });
 
     app.post('/login', function (req, res, next) {
+        var cart = req.session.cart
+        var booser = req.body
 
         var authCb = function (err, user) {
-
             if (err) return next(err);
 
             if (!user) {
@@ -51,14 +52,25 @@ module.exports = function (app, db) {
             req.logIn(user, function (loginErr) {
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
-                res.status(200).send({
-                    user: user.sanitize()
-                });
+                User.update(
+                    {
+                        cart: cart
+                    },
+                    {
+                        where: {
+                            email: booser.email
+                        }
+                    })
+                    .then(function(){
+                        res.status(200).send({
+                            user: user.sanitize()
+                        });
+                    })
             });
 
         };
 
-        passport.authenticate('local', authCb)(req, res, next);
+        passport.authenticate('local', authCb)(req, res, next)
 
     });
 

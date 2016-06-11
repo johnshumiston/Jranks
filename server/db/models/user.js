@@ -14,6 +14,9 @@ module.exports = function (db) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        cart: {
+            type: Sequelize.JSON,
+        },
         birth: {
             type: Sequelize.DATE
         },
