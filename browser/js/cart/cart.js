@@ -18,11 +18,12 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CartController', function ($scope, Session, InventoryFactory, cartItems, CartFactory, $state) {
+app.controller('CartController', function ($scope, $rootScope, Session, InventoryFactory, cartItems, CartFactory, $state) {
 
-  $state.go($state.current, {}, {reload: true});
-
-  $scope.cartItems = cartItems;
+  CartFactory.fetchAllInCart()
+  .then(function(items){
+    $scope.cartItems = items;  
+  })
 
   CartFactory.getGrandTotal()
   .then (function (total){
