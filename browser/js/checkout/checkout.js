@@ -5,22 +5,20 @@ app.config(function ($stateProvider) {
     $stateProvider.state('checkout', {
         url: '/checkout',
         controller: 'CheckoutController',
-        templateUrl: 'js/checkout/checkout.html'
+        templateUrl: 'js/checkout/checkout.html',
+        resolve: {
+          grandTotal: function(CartFactory){
+            return CartFactory.getGrandTotal();
+          }
+        }
     });
 
 });
 
-app.controller('CheckoutController', function ($scope, CartFactory) {
+app.controller('CheckoutController', function ($scope, CartFactory, grandTotal) {
 
-  CartFactory.getGrandTotal()
-  .then (function (total){
-    $scope.grandTotal = total;
-  })
+  $scope.grandTotal = grandTotal;
 
   $scope.test = "test";
-  // $scope.grandTotal = cartItems.reduce(function(sum, item){
-  //       return sum + (item.price * item.qty);
-  //   }, 0);
   
-  // $scope.formatPrice = CartFactory.formatPrice;
 });
