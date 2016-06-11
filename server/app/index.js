@@ -14,7 +14,7 @@ module.exports = function (db) {
 
     app.use('/', function(req, res, next) {
         if (req.user) {
-            console.log('PREVIOUS SESSION', req.session);
+            // console.log('PREVIOUS SESSION', req.session);
             User.findById(req.session.passport.user)
             .then(function(user){
                 if (!Object.keys(req.session.cart).length){
@@ -22,16 +22,18 @@ module.exports = function (db) {
                         req.session.cart[key] = user.cart[key];
                     }
                     // req.session.cart = user.cart;
-                    console.log('NO THERE WAS NO CART', req.session.cart);
+                    // console.log('NO THERE WAS NO CART', req.session.cart);
                 }
                 else {
                     user.update({cart: req.session.cart});
-                    console.log('YES THERE WAS A CART', req.session.cart);
+                    // console.log('YES THERE WAS A CART', req.session.cart);
                 }
             })
         }
         next();
     })
+
+    app.use('/checkout', require('./routes/checkout.js'));
 
     // Routes that will be accessed via AJAX should be prepended with
     // /api so they are isolated from our GET /* wildcard.
