@@ -2,4 +2,15 @@
         <img src="{{ type.image_url }}">
         <h4>{{ type.title }}</h4>
         <button ng-click="addToCart(type.id)">Add to Cart</button>
+        <h3>DESCRIPTION</h3>
+        <h4>{{ type.description }}</h4>
+        <h3>REVIEWS</h3>
+        <div ng-repeat="review in reviews">
+        <h4>{{ review.title }}</h4>
+	        <div class="rating-box">
+	   			<div style="{{starThing(review.stars)}}" class="rating"></div>
+			</div>
+        <h4>{{ review.review_body }}</h4>
+        <h4>Created on {{ review.date }}</h4>
+        </div>
 </section>

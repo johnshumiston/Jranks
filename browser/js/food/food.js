@@ -14,12 +14,12 @@ app.config(function ($stateProvider) {
     });
 
     $stateProvider.state('foodItem', {
-        url: '/food/:foodId',
+        url: '/food/:id',
         controller: 'FoodController',
         templateUrl: 'js/food/foodItem.html',
         resolve: {
           foodItem: function (InventoryFactory, $stateParams) {
-            return InventoryFactory.fetchById($stateParams.foodId);
+            return InventoryFactory.fetchById($stateParams.id);
           }
         }
     });

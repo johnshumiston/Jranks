@@ -25,4 +25,7 @@ Order.hasMany(OrderItem);
 //Address relationships
 Address.belongsTo(User);
 
+//Inventory relationships
+Inventory.hasMany(Review);
+
 db.sync();

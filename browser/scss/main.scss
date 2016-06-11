@@ -67,6 +67,23 @@ body {
   margin: 0 auto;
 }
 
+.rating-box {
+ background: url("http://stevewamsley.com/wp-content/uploads/2012/09/bkg_rating.png") repeat-x;
+ font-size: 0;
+ height: 13px;
+ line-height: 0;
+ overflow: hidden;
+ text-indent: -999em;
+ width: 70px;
+}
+
+.rating-box .rating {
+ background: url("http://stevewamsley.com/wp-content/uploads/2012/09/bkg_rating.png") repeat-x;
+ background-position: 0 100%;
+ float: left;
+ height: 13px;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
