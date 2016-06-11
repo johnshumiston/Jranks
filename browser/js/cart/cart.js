@@ -9,10 +9,10 @@ app.config(function ($stateProvider) {
         resolve: {
           theSession: function (CartFactory) {
             return CartFactory.getSession();
+          },
+          cartItems: function(CartFactory) {
+            return CartFactory.fetchAllInCart();
           }
-          // cartItems: function(CartFactory) {
-          //   return CartFactory.fetchAllInCart();
-          // }
         }
     });
 
@@ -21,15 +21,15 @@ app.config(function ($stateProvider) {
 app.controller('CartController', function ($scope, Session, theSession, InventoryFactory, cartItems, CartFactory, $state) {
 
 
-  CartFactory.fetchAllInCart()
-  .then(function(cart){
-    $scope.cartItems = cart;
-  })
+  // CartFactory.fetchAllInCart()
+  // .then(function(cart){
+    $scope.cartItems = cartItems;
+  // })
 
-  $scope.updateCart = function(){
-    $scope.$apply()
-    $state.go('cart');
-  }
+  // $scope.updateCart = function(){
+  //   $scope.$apply()
+  //   $state.go('cart');
+  // }
 
   $scope.grandTotal = cartItems.reduce(function(sum, item){
     return sum + (item.price * item.qty);
@@ -41,7 +41,7 @@ app.controller('CartController', function ($scope, Session, theSession, Inventor
 
 app.factory('CartFactory', function ($http) {
 
-  var CachedCart = [];
+  // var CachedCart = [];
 
   var CartFactory = {};
 
@@ -55,19 +55,19 @@ app.factory('CartFactory', function ($http) {
   CartFactory.fetchAllInCart = function() {
     return $http.get('/api/cart/myCart')
     .then(function(response) {
-      console.log("Did we make fetch")
-      angular.copy("hey", CachedCart);
-      console.log("weird stuff ", CachedCart);
-      // return response.data
-      return CachedCart;
+      // console.log("Did we make fetch")
+      // angular.copy("hey", CachedCart);
+      // console.log("weird stuff ", CachedCart);
+      return response.data
+      // return CachedCart;
     })
   }
 
   CartFactory.addToCart = function(inventoryId) {
     return $http.post('/api/cart/add', {id: inventoryId})
     .then(function(cart){
-      CachedCart.push(cart.data);
-      return cart.data;
+      // CachedCart.push(cart.data);
+      return cart;
     })
   }
 
