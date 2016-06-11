@@ -86,35 +86,35 @@ var seedInventory = function() {
     type: 'food',
     price: 750,
     description: 'Perfect combination of the best burger in town, lettuce, tomatoes and a special sauce',
-    image_url: 'http://i.imgur.com/HM6tQW2.jpg'
+    image_url: 'http://media2.s-nbcnews.com/i/newscms/2016_11/1017896/pawpa-twitter-sad-today-tease-1-160318_b1449db6f64e0c3371911ee963ef3633.jpg'
   }, {
     title: 'The Italian Dream',
     quantity: 2,
     type: 'food',
     price: 850,
     description: "Plump frankfurter wrapped in a calzone crust",
-    image_url: 'http://i.imgur.com/Q9LwYRk.jpg'
+    image_url: 'http://t.fod4.com/t/b8e5e6ed87/c1920x1080_40.jpg'
   }, {
     title: 'The Magic Carpet',
     quantity: 8,
     type: 'food',
     price: 850,
     description: 'Falafel sandwich with mediterranean sauce and hummus',
-    image_url: 'http://i.imgur.com/sZ16zr3.jpg'
+    image_url: 'http://www.traderjoes.com/images/fearless-flyer/uploads/article-1180/98020-falafel-wrap450%20copy.png'
   }, {
     title: 'The Mexican Vacation',
     quantity: 9,
     type: 'food',
     price: 700,
     description: 'Spicy beef tacos with avocado',
-    image_url: 'http://i.imgur.com/LHAUCmJ.jpg'
+    image_url: 'http://65.media.tumblr.com/ab3038a612836ce04793e91ced740264/tumblr_nmvnvqQbW91re0c97o1_1280.jpg'
   }, {
     title: 'The Chicken Fingers',
     quantity: 5,
     type: 'food',
     price: 650,
     description: 'Fried chicken served on a bed of lettuce',
-    image_url: 'http://i.imgur.com/LJJ4rN0.jpg'
+    image_url: 'http://img03.deviantart.net/a58b/i/2013/009/1/3/chicken_nugget_from_jack_in_the_box_by_violetfireflies-d5r0k56.jpg'
   }, {
     title: 'The Double Dog',
     quantity: 5,
