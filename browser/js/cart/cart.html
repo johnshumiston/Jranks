@@ -17,6 +17,17 @@
       <td>{{formatPrice(grandTotal)}}</td>
     </tr>
   </table>
-  <button ui-sref="checkout" class="btn fa fa-cc-stripe"></button>
-  <form action="" method="POST">
 </section>
+
+<form action="/checkout" method="POST" ng-show="grandTotal">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_6RlcJ6p8tRTTQpkAIEIxEOCV"
+    data-amount="{{grandTotal}}"
+    data-name="Phrosties"
+    data-image="http://i.imgur.com/unv7Pcq.jpg"
+    data-locale="auto"
+    data-shipping-address="false"
+    data-zip-code="true">
+  </script>
+</form>
