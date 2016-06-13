@@ -5,9 +5,6 @@
   <h4>EMAIL</h4>
     <input required type="email" name="email" ng-model="editingUser.email"/>
   <h4>ADMIN</h4>
-    <select ng-init="addingItem.is_admin = true" required name="is_admin" ng-model="editingUser.is_admin">
-      <option>true</option>
-      <option>false</option>
-    </select>
+    <input type="checkbox" name="is_admin" ng-true-value="true" ng-false-value="false" ng-model="editingUser.is_admin" />
   <button type="submit">Edit</button>
 </form>
