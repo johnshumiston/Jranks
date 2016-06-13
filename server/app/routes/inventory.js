@@ -114,7 +114,6 @@ router.get('/:id/reviews', function (req, res, next) {
     ]
   })
   .then(function(reviews){
-    console.log("REVIEWS");
     res.send(reviews);
   })
   .catch(next);
