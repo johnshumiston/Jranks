@@ -30,11 +30,13 @@ app.controller('CartController', function ($scope, $rootScope, Session, Inventor
     $scope.grandTotal = total;
   })
   
+
+
   $scope.formatPrice = CartFactory.formatPrice;
 
 });
 
-app.factory('CartFactory', function ($http) {
+app.factory('CartFactory', function ($http, $state) {
 
   var CartFactory = {};
 
@@ -62,8 +64,8 @@ app.factory('CartFactory', function ($http) {
 
   CartFactory.addToCart = function(inventoryId) {
     return $http.post('/api/cart/add', {id: inventoryId})
-    .then(function(cart){
-      return cart;
+    .then(function(res){
+      return res.data;
     })
   }
 
@@ -75,4 +77,21 @@ app.factory('CartFactory', function ($http) {
 
   return CartFactory;
 
+});
+
+app.directive('checkoutscript', function (CartFactory, InventoryFactory, $stateParams) {
+  return {
+    restrict: 'E',
+    scope: {
+      type: '='
+    },
+    templateUrl: 'js/cart/checkout.html',
+    link: function(scope) {
+
+      CartFactory.getGrandTotal()
+      .then (function (total){
+        scope.grandTotal = total;
+      })
+    }
+  }
 });

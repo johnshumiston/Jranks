@@ -89,9 +89,24 @@ router.get('/:id', function (req, res, next) {
   res.send(req.inventory);
 });
 
+router.get('/available/:id', function (req, res, next) {
+  console.log("GOT TO AVAILABLE/ID ROUTE",req.session);
+  if (!req.session.cart) req.session.cart = {};
+  var qty = req.session.cart[req.params.id] || 0;
+  console.log("STOCK NUMBER", req.inventory.dataValues.quantity);
+  console.log("CART QTY", req.session.cart[req.body.id]);
+  if (req.inventory.dataValues.quantity <= qty) {
+    res.send(false);
+  }
+  else {
+    res.send(true);
+  }
+});
+
 router.get('/:id/reviews', function (req, res, next) {
   Review.findAll({where: {inventoryId: req.inventory.id}})
   .then(function(reviews){
+    console.log("REVIEWS");
     res.send(reviews);
   })
   .catch(next);

@@ -12,7 +12,7 @@ module.exports = function (db) {
         },
         quantity: {
             type: Sequelize.INTEGER,
-            min: 1,
+            min: 0,
             allowNull: false
         },
         type: {

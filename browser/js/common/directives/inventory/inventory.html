@@ -1,7 +1,8 @@
 <section id="{{ type }}">
         <img src="{{ type.image_url }}">
         <h4>{{ type.title }}</h4>
-        <button ng-click="addToCart(type.id)">Add to Cart</button>
+        <h2 ng-if="!showAddButton" ng-cloak>Sorry, this product is currently unavailable</h2>
+        <button ng-show="showAddButton" ng-click="addToCart(type.id)">Add to Cart</button>
         <h2>DESCRIPTION</h3>
         <h4>{{ type.description }}</h4>
         <h2>REVIEWS</h3>

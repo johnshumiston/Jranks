@@ -7,8 +7,19 @@ const User = db.model('user');
 const Order = db.model('order');
 const Address = db.model('address');
 const PreviousCart = db.model('previouscart');
+const Inventory = db.model('inventory');
 
 module.exports = router;
+
+
+function updateInventory(cart){
+  for (var key in cart){
+    Inventory.findById(key)
+    .then(function(item){
+      return item.update({quantity: item.quantity - cart[key]})
+    })
+  }
+}
 
 router.post('/', function(req, res, next) {
   console.log(req.body);
@@ -29,9 +40,12 @@ router.post('/', function(req, res, next) {
   }, function(err, charge) {
     if (err && err.type === 'StripeCardError') {
       // The card has been declined
+      console.log("DELETED ITEMS FROM INVENTORY");
+      
     }
   });
-
+  
+  updateInventory(req.session.cart);
 
   User.findById(req.session.passport.user)
   .then(function(user){
@@ -65,6 +79,7 @@ router.post('/', function(req, res, next) {
         zip: req.body.stripeBillingAddressZip
       }])
     }
+    return;
   })
   .then(function(){
     req.session.cart = {};
