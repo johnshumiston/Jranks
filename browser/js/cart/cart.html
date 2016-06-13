@@ -5,11 +5,19 @@
       <td>Item</td>
       <td>Quantity</td>
       <td>Price</td>
+      <td>Update Quantity</td>
+      <td>Remove Item</td>
     </tr>
     <tr ng-repeat="items in cartItems">
       <td>{{items.title}}</td>
       <td>{{items.qty}}</td>
       <td>{{formatPrice(items.price * items.qty)}}</td>
+      <td>
+        <input type="number" ng-model="itemsToUpdate[items.id]"></input>
+      </td>
+      <td>
+        <button ng-click="removeItem(items)">Remove</button>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -17,6 +25,7 @@
       <td>{{formatPrice(grandTotal)}}</td>
     </tr>
   </table>
+  <button ng-click="updateItemQty(itemsToUpdate)">Update Quantities</button>
 </section>
 
 <form action="/checkout" method="POST" ng-show="grandTotal">

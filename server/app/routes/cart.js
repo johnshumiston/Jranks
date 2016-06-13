@@ -35,7 +35,17 @@ router.get('/myCart', function(req, res, next) {
 
 router.post('/add', function(req, res, next) {
   if (!req.session.cart) req.session.cart = {};
-  var qty = req.session.cart[req.body.id] || 0; 
-  req.session.cart[req.body.id] = qty + 1;
+  var qty = +req.session.cart[req.body.id] || 0; 
+  req.session.cart[req.body.id] = qty + req.body.qty;
+  res.status(200).send(req.session.cart);
+});
+
+router.put('/update', function(req, res, next) {
+  req.session.cart=req.body;
+  res.status(200).send(req.session.cart);
+});
+
+router.put('/delete', function(req, res, next) {
+  delete req.session.cart[req.body.id];
   res.status(200).send(req.session.cart);
 });
