@@ -2,6 +2,13 @@ app.factory('InventoryFactory', function ($http, $state) {
 
   var InventoryFactory = {};
 
+  InventoryFactory.fetchAll = function() {
+    return $http.get('/api/inventory')
+    .then(function(response){
+      return response.data;
+    });
+  };
+
   InventoryFactory.fetchByType = function(type) {
     return $http.get('/api/inventory/?type=' + type)
     .then(function(response){

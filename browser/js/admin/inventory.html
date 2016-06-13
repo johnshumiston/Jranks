@@ -1,0 +1,25 @@
+<h3>All Inventory</h3>
+<table>
+  <tr>
+    <td>Delete</td>
+    <td>Edit</td>
+    <td>Reviews</td>
+    <td>TITLE</td>
+    <td>QUANTITY</td>
+    <td>TYPE</td>
+    <td>PRICE</td>
+    <td>DESCRIPTION</td>
+    <td>IMAGE</td>
+  </tr>
+  <tr ng-repeat="item in items | orderBy: 'id'">
+    <td><a ng-click="confirmDelete(item.id)" class="fa fa-remove"></a></td>
+    <td><a ui-sref="edit-inventory({id: item.id})" class="fa fa-pencil"></a></td>
+    <td><a ui-sref="inventory-reviews({id: item.id})" class="fa fa-star-half-o"></a></td>
+    <td>{{item.title}}</td>
+    <td>{{item.quantity}}</td>
+    <td>{{item.type}}</td>
+    <td>{{item.displayPrice}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.image_url}}</td>    
+  </tr>
+</table>

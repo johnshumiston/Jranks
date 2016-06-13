@@ -39,7 +39,8 @@ var seedUsers = function() {
     name: 'John2 Hummingstoned',
     birth: 10 / 15 / 1983,
     email: 'obama@gmail.com',
-    password: 'potus'
+    password: 'potus',
+    is_admin: true
   }];
 
   var creatingUsers = users.map(function(userObj) {

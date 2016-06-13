@@ -33,6 +33,16 @@ module.exports = function (db) {
         next();
     })
 
+    app.use('/admin', function(req, res, next) {
+        if (!req.user) {
+            res.sendStatus(403);
+        } else if (!req.user.is_admin){
+            delete req.user.is_admin
+            res.sendStatus(403)
+        }
+        else res.sendFile(app.get('adminHTMLPath'));
+    })
+
     app.use('/checkout', require('./routes/checkout.js'));
 
     // Routes that will be accessed via AJAX should be prepended with
