@@ -1,0 +1,19 @@
+<h3>Users</h3>
+<table>
+  <tr>
+    <td>Delete</td>
+    <td>Edit</td>
+    <td>NAME</td>
+    <td>EMAIL</td>
+    <td>BIRTHDATE</td>
+    <td>ADMIN</td>
+  </tr>
+  <tr ng-repeat="user in users | orderBy: 'id'">
+    <td><a ng-click="confirmDelete(user.id)" class="fa fa-remove"></a></td>
+    <td><a ui-sref="edit-user({id: user.id})" class="fa fa-pencil"></a></td>
+    <td>{{user.name}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.birth}}</td>
+    <td>{{user.is_admin}}</td>
+  </tr>
+</table>

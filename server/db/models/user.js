@@ -19,7 +19,7 @@ module.exports = function (db) {
             defaultValue: {}
         },
         birth: {
-            type: Sequelize.DATE
+            type: Sequelize.DATEONLY
         },
         email: {
             type: Sequelize.STRING,

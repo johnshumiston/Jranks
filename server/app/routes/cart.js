@@ -39,7 +39,7 @@ router.post('/add', function(req, res, next) {
   Inventory.findById(req.body.id)
   .then(function(item){
     // console.log(item);
-    if (item.quantity <= qty){
+    if (item.quantity < qty + req.body.qty){
       console.log("Not enough items on inventory", item.quantity);
       // req.session.cart[req.body.id] = item.quantity;
       return res.status(200).send(false);  
@@ -47,10 +47,19 @@ router.post('/add', function(req, res, next) {
     }
     else {
       console.log("We have enough items on inventory: ", item.quantity);
-      req.session.cart[req.body.id] = qty + 1;
+      req.session.cart[req.body.id] = qty + req.body.qty;
       return res.status(200).send(true);
       // return qty;
     }
   })
+});
 
+router.put('/update', function(req, res, next) {
+  req.session.cart=req.body;
+  res.status(200).send(req.session.cart);
+});
+
+router.put('/delete', function(req, res, next) {
+  delete req.session.cart[req.body.id];
+  res.status(200).send(req.session.cart);
 });

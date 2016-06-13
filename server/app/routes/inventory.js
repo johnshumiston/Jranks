@@ -5,6 +5,7 @@ const router = express.Router();
 const db = require('../../db/_db');
 const Inventory = db.model('inventory');
 const Review = db.model('review');
+const User = db.model('user');
 
 module.exports = router;
 
@@ -104,7 +105,17 @@ router.get('/available/:id', function (req, res, next) {
 });
 
 router.get('/:id/reviews', function (req, res, next) {
-  Review.findAll({where: {inventoryId: req.inventory.id}})
+  Review.findAll({
+    where: {
+      inventoryId: req.inventory.id
+    }, 
+    include: [
+      {
+        model: User,
+        attributes: ['name']
+      }
+    ]
+  })
   .then(function(reviews){
     console.log("REVIEWS");
     res.send(reviews);

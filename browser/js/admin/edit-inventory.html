@@ -1,20 +1,21 @@
+<h3>Edit {{editingItem.title}}</h3>
 <form name="edit-inventory" ng-submit="edit(editingItem.id, editingItem)">
   <h4>TITLE</h4>
-    <input type="text" name="title" ng-model="editingItem.title"/>
+    <input required maxlength="50" type="text" name="title" ng-model="editingItem.title"/>
   <h4>QUANTITY</h4>
-    <input type="number" name="quantity" ng-model="editingItem.quantity"/>
+    <input type="number" name="quantity" required min="0" ng-model="editingItem.quantity"/>
   <h4>TYPE</h4>
-    <select name="type" ng-model="editingItem.type">
+    <select ng-init="addingItem.type = 'food'" required name="type" ng-model="editingItem.type">
       <option>food</option>
       <option>drink</option>
       <option>alocholic_drink</option>
       <option>side</option>
     </select>
   <h4>PRICE</h4>
-    <input type="number" name="price" ng-model="editingItem.price"/>
+    <input required type="number" name="price" ng-model="editingItem.price"/>
   <h4>DESCRIPTION</h4>
-    <textarea rows="4" cols="50" name="description" ng-model="editingItem.description"></textarea>
-  <h4>IMAGE</h4>
-    <textarea rows="4" cols="50" name="image-url" ng-model="editingItem.image_url"></textarea>
+    <textarea required rows="4" cols="50" name="description" ng-model="editingItem.description"></textarea>
+  <h4>IMAGE URL</h4>
+    <input type="url" name="image-url" ng-model="editingItem.image_url" />
   <button type="submit">Edit</button>
 </form>

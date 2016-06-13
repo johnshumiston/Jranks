@@ -17,6 +17,17 @@ router.get('/:id', function (req, res, next) {
   .catch(next);
 });
 
+router.put('/:id', function (req, res, next) {
+  User.update(
+    req.body,
+    {
+      where: {
+        id: req.params.id
+      }
+    }
+  )
+});
+
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         next();
