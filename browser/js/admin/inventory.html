@@ -1,0 +1,30 @@
+<!-- <h3>Edit Inventory</h3>
+<form name="edit-inventory">
+  <select ng-options="item.title for item in inventory"></select>
+</form>
+
+<hr>
+<h3>Add Inventory</h3>
+
+<hr> -->
+<h3>All Inventory</h3>
+<table>
+  <tr>
+    <td>Edit</td>
+    <td>TITLE</td>
+    <td>QUANTITY</td>
+    <td>TYPE</td>
+    <td>PRICE</td>
+    <td>DESCRIPTION</td>
+    <td>IMAGE</td>
+  </tr>
+  <tr ng-repeat="item in items">
+    <td><a ui-sref="edit-inventory({id: item.id})" class="fa fa-pencil"></a></td>
+    <td>{{item.title}}</td>
+    <td>{{item.quantity}}</td>
+    <td>{{item.type}}</td>
+    <td>{{item.displayPrice}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.image_url}}</td>    
+  </tr>
+</table>
