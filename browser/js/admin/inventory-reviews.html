@@ -8,7 +8,7 @@
     <td>BODY</td>
     <td>DATE</td>
   </tr>
-  <tr ng-repeat="review in reviews">
+  <tr ng-repeat="review in reviews | orderBy: 'id'">
     <td><a ng-click="confirmDelete(review.id)" class="fa fa-remove"></a></td>
     <td>{{review.title}}</td>
     <td>{{review.userId}}</td>

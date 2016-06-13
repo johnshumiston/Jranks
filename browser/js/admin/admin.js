@@ -53,12 +53,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-app.controller('AdminController', function ($scope, InventoryFactory) {
+app.controller('AdminController', function ($scope, InventoryFactory, AdminFactory) {
 
     InventoryFactory.fetchAll()
     .then(function(items) {
       $scope.items = items;
     })
+
+    $scope.confirmDelete = AdminFactory.confirmDeleteItem;
 
 });
 
@@ -78,14 +80,11 @@ app.controller('EditReviewController', function ($scope, editingItem, AdminFacto
 
     $scope.reviews = reviews;
 
-    $scope.confirmDelete = function(id) {
-      AdminFactory.confirmDelete(id);
-      $state.go($state.current, {}, {reload: true})
-    }
+    $scope.confirmDelete = AdminFactory.confirmDeleteReview;
 
 });
 
-app.factory('AdminFactory', function ($http) {
+app.factory('AdminFactory', function ($http, $state) {
 
     var AdminFactory = {};
 
@@ -93,9 +92,20 @@ app.factory('AdminFactory', function ($http) {
       $http.put('/api/inventory/' + id, data)
     }
 
-    AdminFactory.confirmDelete = function(id) {
+    AdminFactory.confirmDeleteReview = function(id) {
       var ok = confirm("Delete this review?");
-      if (ok) $http.delete('/api/inventory/reviews/' + id);
+      if (ok) {
+        $http.delete('/api/inventory/reviews/' + id);
+        $state.go($state.current, {}, {reload: true})
+      }
+    }
+
+    AdminFactory.confirmDeleteItem = function(id) {
+      var ok = confirm("Delete this item?");
+      if (ok) {
+        $http.delete('/api/inventory/' + id);
+        $state.go($state.current, {}, {reload: true})
+      }
     }
 
     return AdminFactory
