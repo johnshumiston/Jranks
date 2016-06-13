@@ -20,14 +20,17 @@
 </section>
 
 <form action="/checkout" method="POST" ng-show="grandTotal">
+<!-- The next line puts the grandtotal in the req.body, but has security issues -->
+  <input name="amount" value="{{grandTotal}}" ng-show="false">
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_6RlcJ6p8tRTTQpkAIEIxEOCV"
     data-amount="{{grandTotal}}"
+    data-key="pk_test_6RlcJ6p8tRTTQpkAIEIxEOCV"
+    amount="{{grandTotal}}"
     data-name="Phrosties"
     data-image="http://i.imgur.com/unv7Pcq.jpg"
     data-locale="auto"
-    data-shipping-address="false"
+    data-shipping-address="true"
     data-zip-code="true"
     data-billingAddress="true">
   </script>

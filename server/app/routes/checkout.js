@@ -22,16 +22,16 @@ router.post('/', function(req, res, next) {
   var stripeToken = req.body.stripeToken;
 
   var charge = stripe.charges.create({
-    amount: 1000, // amount in cents, again
+    amount: +req.body.amount, // amount in cents, again
     currency: "usd",
     source: stripeToken,
-    description: "Example charge",
-    receipt_email: req.body.stripeEmail
+    description: "Example charge"
   }, function(err, charge) {
     if (err && err.type === 'StripeCardError') {
-      console.log("card declined"); // The card has been declined
+      // The card has been declined
     }
   });
+
 
   User.findById(req.session.passport.user)
   .then(function(user){
@@ -45,6 +45,26 @@ router.post('/', function(req, res, next) {
       return PreviousCart.create({items: req.session.cart}, {userId: updatedUser.id})
     }
     return;
+  })
+  .then(function(newCart){
+    if(newCart){
+      return Address.bulkCreate([{
+        userId: req.session.passport.user,
+        is_primary: true,
+        street_1: req.body.stripeShippingAddressLine1,
+        state: req.body.stripeShippingAddressState,
+        city: req.body.stripeShippingAddressCity,
+        zip: req.body.stripeShippingAddressZip
+      },
+      {
+        userId: req.session.passport.user,
+        is_primary: false,
+        street_1: req.body.stripeBillingAddressLine1,
+        state: req.body.stripeBillingAddressState,
+        city: req.body.stripeBillingAddressCity,
+        zip: req.body.stripeBillingAddressZip
+      }])
+    }
   })
   .then(function(){
     req.session.cart = {};
