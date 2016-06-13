@@ -42,7 +42,6 @@ router.post('/add', function(req, res, next) {
       return res.status(200).send(false);  
     }
     else {
-      console.log("We have enough items on inventory: ", item.quantity);
       req.session.cart[req.body.id] = qty + req.body.qty;
       return res.status(200).send(true);
     }
