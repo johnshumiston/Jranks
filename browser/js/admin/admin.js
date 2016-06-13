@@ -46,7 +46,23 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('users', {
         url: '/admin/users',
         templateUrl: 'js/admin/users.html',
-        controller: 'AdminController'
+        controller: 'UserController',
+        resolve: {
+          users: function(AdminFactory) {
+            return AdminFactory.fetchAllUsers()
+          } 
+        }
+    });
+
+    $stateProvider.state('edit-user', {
+        url: '/admin/users/:id',
+        templateUrl: 'js/admin/edit-user.html',
+        controller: 'EditUserController',
+        resolve: {
+          editingUser: function(AdminFactory, $stateParams) {
+            return AdminFactory.fetchUserById($stateParams.id)
+          }
+        }
     });
 
     $urlRouterProvider.when("/admin", "admin/inventory")
@@ -74,6 +90,14 @@ app.controller('EditController', function ($scope, editingItem, AdminFactory) {
 
 });
 
+app.controller('EditUserController', function ($scope, editingUser, AdminFactory) {
+
+    $scope.editingUser = editingUser;
+
+    $scope.edit = AdminFactory.editUser
+
+});
+
 app.controller('EditReviewController', function ($scope, editingItem, AdminFactory, reviews, $state) {
 
     $scope.editingItem = editingItem;
@@ -86,6 +110,12 @@ app.controller('EditReviewController', function ($scope, editingItem, AdminFacto
 
 });
 
+app.controller('UserController', function ($scope, users) {
+
+    $scope.users = users;
+
+});
+
 app.factory('AdminFactory', function ($http, $state) {
 
     var AdminFactory = {};
@@ -93,6 +123,11 @@ app.factory('AdminFactory', function ($http, $state) {
     AdminFactory.editItem = function(id, data) {
       $http.put('/api/inventory/' + id, data)
       $state.go('inventory')
+    }
+
+    AdminFactory.editUser = function(id, data) {
+      $http.put('/api/members/' + id, data)
+      $state.go('users')
     }
 
     AdminFactory.addItem = function(data) {
@@ -115,6 +150,20 @@ app.factory('AdminFactory', function ($http, $state) {
         $http.delete('/api/inventory/' + id);
         $state.go($state.current, {}, {reload: true})
       }
+    }
+
+    AdminFactory.fetchAllUsers = function() {
+      return $http.get('api/members')
+      .then(function(response) {
+        return response.data
+      })
+    }
+
+    AdminFactory.fetchUserById = function(id) {
+      return $http.get('api/members/' + id)
+      .then(function(response) {
+        return response.data
+      })
     }
 
     return AdminFactory

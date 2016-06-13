@@ -1,7 +1,6 @@
 <h3>Add Inventory</h3>
 <form name="add-inventory" ng-submit="add(addingItem)">
   <h4>TITLE</h4>
-  <div class="validation-error" ng-show="add-inventory.title.$invalid" >Title is required</div>
     <input type="text" name="title" required maxlength="50" ng-model="addingItem.title"/>
   <h4>QUANTITY</h4>
     <input type="number" name="quantity" required min="0" ng-model="addingItem.quantity"/>
