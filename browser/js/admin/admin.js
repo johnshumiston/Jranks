@@ -23,6 +23,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }
     });
 
+    $stateProvider.state('inventory-reviews', {
+        url: '/admin/inventory/:id/reviews',
+        templateUrl: 'js/admin/inventory-reviews.html',
+        controller: 'EditReviewController',
+        resolve: {
+          editingItem: function(InventoryFactory, $stateParams) {
+            return InventoryFactory.fetchById($stateParams.id)
+          },
+          reviews: function(InventoryFactory, $stateParams) {
+            return InventoryFactory.fetchReviewsById($stateParams.id)
+          }
+        }
+    });
+
     $stateProvider.state('orders', {
         url: '/admin/orders',
         templateUrl: 'js/admin/orders.html',
@@ -52,7 +66,22 @@ app.controller('EditController', function ($scope, editingItem, AdminFactory) {
 
     $scope.editingItem = editingItem;
 
-    $scope.edit = AdminFactory.edit
+    $scope.edit = AdminFactory.editItem
+
+});
+
+app.controller('EditReviewController', function ($scope, editingItem, AdminFactory, reviews, $state) {
+
+    $scope.editingItem = editingItem;
+
+    $scope.edit = AdminFactory.edit;
+
+    $scope.reviews = reviews;
+
+    $scope.confirmDelete = function(id) {
+      AdminFactory.confirmDelete(id);
+      $state.go($state.current, {}, {reload: true})
+    }
 
 });
 
@@ -60,8 +89,13 @@ app.factory('AdminFactory', function ($http) {
 
     var AdminFactory = {};
 
-    AdminFactory.edit = function(id, data) {
+    AdminFactory.editItem = function(id, data) {
       $http.put('/api/inventory/' + id, data)
+    }
+
+    AdminFactory.confirmDelete = function(id) {
+      var ok = confirm("Delete this review?");
+      if (ok) $http.delete('/api/inventory/reviews/' + id);
     }
 
     return AdminFactory

@@ -11,6 +11,12 @@ router.get('/', function (req, res, next) {
   .catch(next);
 });
 
+router.get('/:id', function (req, res, next) {
+  User.findById(req.params.id)
+  .then(user => res.json(user))
+  .catch(next);
+});
+
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         next();
