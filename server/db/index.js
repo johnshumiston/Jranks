@@ -8,6 +8,7 @@ var Order = require('./models/order')(db);
 var Address = require('./models/address')(db);
 var OrderItem = require('./models/orderItem')(db);
 var Review = require('./models/review')(db);
+var PreviousCart = require('./models/previouscart')(db);
 
 //Review relationships
 Review.belongsTo(Inventory);
@@ -27,5 +28,8 @@ Address.belongsTo(User);
 
 //Inventory relationships
 Inventory.hasMany(Review);
+
+//Cart relationships
+PreviousCart.belongsTo(User);
 
 db.sync();
