@@ -15,7 +15,6 @@ app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams
       }
 
       scope.addReview = function(review){
-        console.log(review)
         InventoryFactory.addReview(review)
       }
       
