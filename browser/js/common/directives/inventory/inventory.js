@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams, $state) {
+app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams) {
   return {
     restrict: 'E',
     scope: {
