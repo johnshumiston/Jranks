@@ -11,7 +11,7 @@
   <tr ng-repeat="review in reviews | orderBy: 'id'">
     <td><a ng-click="confirmDelete(review.id)" class="fa fa-remove"></a></td>
     <td>{{review.title}}</td>
-    <td>{{review.userId}}</td>
+    <td>{{review.user.name}}</td>
     <td>{{review.stars}}</td>
     <td>{{review.review_body}}</td>
     <td>{{review.date}}</td> 

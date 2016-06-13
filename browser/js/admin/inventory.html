@@ -1,3 +1,26 @@
+<h3>Add Inventory</h3>
+<form name="add-inventory" ng-submit="add(addingItem)">
+  <h4>TITLE</h4>
+  <div class="validation-error" ng-show="add-inventory.title.$invalid" >Title is required</div>
+    <input type="text" name="title" required maxlength="50" ng-model="addingItem.title"/>
+  <h4>QUANTITY</h4>
+    <input type="number" name="quantity" required min="0" ng-model="addingItem.quantity"/>
+  <h4>TYPE</h4>
+    <select ng-init="addingItem.type = 'food'" required name="type" ng-model="addingItem.type">
+      <option>food</option>
+      <option>drink</option>
+      <option>alocholic_drink</option>
+      <option>side</option>
+    </select>
+  <h4>PRICE (¢)</h4>
+    <input required min="50" type="number" name="price" ng-model="addingItem.price"/>
+  <h4>DESCRIPTION</h4>
+    <textarea required rows="4" cols="50" name="description" ng-model="addingItem.description"></textarea>
+  <h4>IMAGE URL</h4>
+    <input type="url" name="image-url" ng-model="addingItem.image_url" />
+  <button type="submit">Add</button>
+</form>
+
 <h3>All Inventory</h3>
 <table>
   <tr>

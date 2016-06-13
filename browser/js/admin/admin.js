@@ -62,6 +62,8 @@ app.controller('AdminController', function ($scope, InventoryFactory, AdminFacto
 
     $scope.confirmDelete = AdminFactory.confirmDeleteItem;
 
+    $scope.add = AdminFactory.addItem
+
 });
 
 app.controller('EditController', function ($scope, editingItem, AdminFactory) {
@@ -90,6 +92,13 @@ app.factory('AdminFactory', function ($http, $state) {
 
     AdminFactory.editItem = function(id, data) {
       $http.put('/api/inventory/' + id, data)
+      $state.go('inventory')
+    }
+
+    AdminFactory.addItem = function(data) {
+      console.log(data);
+      $http.post('/api/inventory/', data)
+      $state.go($state.current, {}, {reload: true})
     }
 
     AdminFactory.confirmDeleteReview = function(id) {
