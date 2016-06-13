@@ -36,6 +36,8 @@ app.controller('CartController', function ($scope, $rootScope, Session, Inventor
 
   $scope.removeItem = CartFactory.removeItem;
   
+
+
   $scope.formatPrice = CartFactory.formatPrice;
 
 });
@@ -96,4 +98,21 @@ app.factory('CartFactory', function ($http, $state) {
 
   return CartFactory;
 
+});
+
+app.directive('checkoutscript', function (CartFactory, InventoryFactory, $stateParams) {
+  return {
+    restrict: 'E',
+    scope: {
+      type: '='
+    },
+    templateUrl: 'js/cart/checkout.html',
+    link: function(scope) {
+
+      CartFactory.getGrandTotal()
+      .then (function (total){
+        scope.grandTotal = total;
+      })
+    }
+  }
 });

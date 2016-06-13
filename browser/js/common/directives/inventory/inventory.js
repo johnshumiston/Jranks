@@ -8,7 +8,15 @@ app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams
     },
     templateUrl: 'js/common/directives/inventory/inventory.html',
     link: function(scope) {
-      scope.addToCart = CartFactory.addToCart;
+      scope.addToCart = function(item){
+          CartFactory.addToCart(item)
+          .then(function(){
+            return InventoryFactory.showAddButton($stateParams.id)
+          })
+          .then(function(availability){
+            scope.showAddButton = availability.data;
+          })
+      }
 
       scope.starThing = function(num){
         return "width: " + num*20+ "%";
@@ -18,6 +26,11 @@ app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams
         InventoryFactory.addReview(review)
       }
       
+      InventoryFactory.showAddButton($stateParams.id)
+      .then(function(availability){
+        scope.showAddButton = availability.data;
+      })
+
       InventoryFactory.fetchReviewsById($stateParams.id)
       .then(function(reviews){
         scope.reviews=reviews;

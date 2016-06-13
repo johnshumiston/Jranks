@@ -3,7 +3,7 @@
 	    <span class="input-group-addon">Filter</span>
 	    <input type="text" class="form-control" placeholder="You batter choose one" ng-model="nameSearch">
 	  </div>
-      <div class="inventory-grid" ng-repeat="drink in drinks | filter: { title: nameSearch }">
+      <div class="inventory-grid" ng-repeat="drink in drinks | filter: { title: nameSearch } | orderBy:'id'">
       <a ui-sref="drinkItem({id: drink.id})">
         <img src="{{drink.image_url}}">
         <h4>{{drink.title}}</h4>

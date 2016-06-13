@@ -35,9 +35,17 @@ router.get('/myCart', function(req, res, next) {
 
 router.post('/add', function(req, res, next) {
   if (!req.session.cart) req.session.cart = {};
-  var qty = +req.session.cart[req.body.id] || 0; 
-  req.session.cart[req.body.id] = qty + req.body.qty;
-  res.status(200).send(req.session.cart);
+  var qty = req.session.cart[req.body.id] || 0;
+  Inventory.findById(req.body.id)
+  .then(function(item){
+    if (item.quantity < qty + req.body.qty){
+      return res.status(200).send(false);  
+    }
+    else {
+      req.session.cart[req.body.id] = qty + req.body.qty;
+      return res.status(200).send(true);
+    }
+  })
 });
 
 router.put('/update', function(req, res, next) {

@@ -38,6 +38,13 @@ app.factory('InventoryFactory', function ($http, $state) {
     })
   }
 
+  InventoryFactory.showAddButton = function(inventoryId){
+    return $http.get('/api/inventory/available/' + inventoryId)
+    .then(function(availability){
+      return availability;
+    })
+  };
+
   return InventoryFactory;
 
 });

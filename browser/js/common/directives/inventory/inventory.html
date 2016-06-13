@@ -1,7 +1,8 @@
 <section id="{{ type }}">
         <img src="{{ type.image_url }}">
         <h4>{{ type.title }}</h4>
-        <button ng-click="addToCart(type)">Add to Cart</button>
+        <h2 ng-if="!showAddButton" ng-cloak>Sorry, this product is currently unavailable</h2>
+        <button ng-show="showAddButton" ng-click="addToCart(type)">Add to Cart</button>
           <fieldset class="form-group">
             <label>Quantity:</label>
             <select ng-model="type.qty">

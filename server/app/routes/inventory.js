@@ -90,6 +90,17 @@ router.get('/:id', function (req, res, next) {
   res.send(req.inventory);
 });
 
+router.get('/available/:id', function (req, res, next) {
+  if (!req.session.cart) req.session.cart = {};
+  var qty = req.session.cart[req.params.id] || 0;
+  if (req.inventory.dataValues.quantity <= qty) {
+    res.send(false);
+  }
+  else {
+    res.send(true);
+  }
+});
+
 router.get('/:id/reviews', function (req, res, next) {
   Review.findAll({
     where: {
