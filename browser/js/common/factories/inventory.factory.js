@@ -1,4 +1,4 @@
-app.factory('InventoryFactory', function ($http) {
+app.factory('InventoryFactory', function ($http, $state) {
 
   var InventoryFactory = {};
 
@@ -17,10 +17,11 @@ app.factory('InventoryFactory', function ($http) {
   };
 
   InventoryFactory.addReview = function(newReview) {
-    return $http.post('/api/inventory/reviews', newReview)
+    $http.post('/api/inventory/reviews', newReview)
     .then(function(response){
       return response.data;
     })
+    $state.go($state.current, {}, {reload: true})
   }
 
   InventoryFactory.fetchReviewsById = function(id) {

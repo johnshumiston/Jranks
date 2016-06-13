@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams) {
+app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams, $state) {
   return {
     restrict: 'E',
     scope: {
@@ -17,9 +17,6 @@ app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams
       scope.addReview = function(review){
         console.log(review)
         InventoryFactory.addReview(review)
-        .then(function(response){
-          return response
-        })
       }
       
       InventoryFactory.fetchReviewsById($stateParams.id)
