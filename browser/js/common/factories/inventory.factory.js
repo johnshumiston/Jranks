@@ -32,7 +32,6 @@ app.factory('InventoryFactory', function ($http, $state) {
   }
 
   InventoryFactory.fetchReviewsById = function(id) {
-    console.log("FACTORY FETCH REVIEWS BY ID")
     return $http.get('/api/inventory/' + id + '/reviews')
     .then(function(response) {
       return response.data
@@ -40,10 +39,8 @@ app.factory('InventoryFactory', function ($http, $state) {
   }
 
   InventoryFactory.showAddButton = function(inventoryId){
-    console.log("CALLED INVENTORY FACTORY SHOW ADD BUTTON");
     return $http.get('/api/inventory/available/' + inventoryId)
     .then(function(availability){
-      console.log("IT GETS TO INVENTORY FACTORY SHOW ADD BUTTON")
       return availability;
     })
   };
