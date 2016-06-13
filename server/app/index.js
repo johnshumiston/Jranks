@@ -66,16 +66,6 @@ module.exports = function (db) {
 
     });
 
-    // app.get('/admin/*', function(req, res, next) {
-    //     if (!req.user) {
-    //         res.sendStatus(403);
-    //     } else if (!req.user.is_admin){
-    //         delete req.user.is_admin
-    //         res.sendStatus(403)
-    //     }
-    //     else res.sendFile(app.get('adminHTMLPath'));
-    // })
-
     app.get('/*', function (req, res) {
         res.sendFile(app.get('indexHTMLPath'));
     });
