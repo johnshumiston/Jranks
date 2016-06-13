@@ -32,12 +32,12 @@ var seedUsers = function() {
 
   var users = [{
     name: 'John Humiston2',
-    birth: 10 / 15 / 1988,
+    birth: '1988-12-31',
     email: 'testing@fsa.com',
     password: 'password'
   }, {
     name: 'John2 Hummingstoned',
-    birth: 10 / 15 / 1983,
+    birth: '1987-09-01',
     email: 'obama@gmail.com',
     password: 'potus',
     is_admin: true

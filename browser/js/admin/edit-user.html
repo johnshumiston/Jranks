@@ -1,0 +1,10 @@
+<h3>Edit {{editingUser.name}}</h3>
+<form name="edit-inventory" ng-submit="edit(editingUser.id, editingUser)">
+  <h4>NAME</h4>
+    <input required maxlength="50" type="text" name="name" ng-model="editingUser.name"/>
+  <h4>EMAIL</h4>
+    <input required type="email" name="email" ng-model="editingUser.email"/>
+  <h4>ADMIN</h4>
+    <input type="checkbox" name="is_admin" ng-true-value="true" ng-false-value="false" ng-model="editingUser.is_admin" />
+  <button type="submit">Edit</button>
+</form>
