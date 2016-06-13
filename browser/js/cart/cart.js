@@ -29,12 +29,18 @@ app.controller('CartController', function ($scope, $rootScope, Session, Inventor
   .then (function (total){
     $scope.grandTotal = total;
   })
+
+  $scope.itemsToUpdate = {};
+
+  $scope.updateItemQty = CartFactory.updateItemQty;
+
+  $scope.removeItem = CartFactory.removeItem;
   
   $scope.formatPrice = CartFactory.formatPrice;
 
 });
 
-app.factory('CartFactory', function ($http) {
+app.factory('CartFactory', function ($http, $state) {
 
   var CartFactory = {};
 
@@ -60,8 +66,9 @@ app.factory('CartFactory', function ($http) {
     })
   }
 
-  CartFactory.addToCart = function(inventoryId) {
-    return $http.post('/api/cart/add', {id: inventoryId})
+  CartFactory.addToCart = function(item) {
+    var qty = +item.qty;
+    return $http.post('/api/cart/add', {id: item.id, qty: qty})
     .then(function(cart){
       return cart;
     })
@@ -71,6 +78,20 @@ app.factory('CartFactory', function ($http) {
     var priceStr = String(price);
     if (priceStr.length < 3) priceStr = ("00" + priceStr).slice(-3)
     return "$" + priceStr.slice(0, -2) + "." + priceStr.slice(-2);
+  }
+
+  CartFactory.updateItemQty = function(items) {
+    return $http.put('/api/cart/update', items)
+    .then(function(){
+      $state.go($state.current, {}, {reload: true})
+    })
+  }
+
+  CartFactory.removeItem = function(item) {
+    $http.put('/api/cart/delete', {id: item.id})
+    .then(function(){
+      $state.go($state.current, {}, {reload: true})
+    })
   }
 
   return CartFactory;
