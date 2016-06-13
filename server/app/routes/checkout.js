@@ -22,7 +22,6 @@ function updateInventory(cart){
 }
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
 
   // Set your secret key: remember to change this to your live secret key in production
   // See your keys here https://dashboard.stripe.com/account/apikeys
@@ -40,8 +39,6 @@ router.post('/', function(req, res, next) {
   }, function(err, charge) {
     if (err && err.type === 'StripeCardError') {
       // The card has been declined
-      console.log("DELETED ITEMS FROM INVENTORY");
-      
     }
   });
   
