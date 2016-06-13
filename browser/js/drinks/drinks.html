@@ -1,5 +1,9 @@
 <section id="drinks">
-      <div class="inventory-grid" ng-repeat="drink in drinks">
+	  <div class="panel input-group">
+	    <span class="input-group-addon">Filter</span>
+	    <input type="text" class="form-control" placeholder="You batter choose one" ng-model="nameSearch">
+	  </div>
+      <div class="inventory-grid" ng-repeat="drink in drinks | filter: { title: nameSearch }">
       <a ui-sref="drinkItem({id: drink.id})">
         <img src="{{drink.image_url}}">
         <h4>{{drink.title}}</h4>
