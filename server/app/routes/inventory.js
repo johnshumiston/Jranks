@@ -17,6 +17,7 @@ router.get('/reviews', function(req, res, next) {
 });
 
 router.post('/reviews', function(req, res, next) {   
+  console.log(req)
   Review.create(req.body)
   .then(function(review) {
     return review.save();

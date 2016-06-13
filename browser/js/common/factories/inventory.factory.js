@@ -16,6 +16,13 @@ app.factory('InventoryFactory', function ($http) {
     });
   };
 
+  InventoryFactory.addReview = function(newReview) {
+    return $http.post('/api/inventory/reviews', newReview)
+    .then(function(response){
+      return response.data;
+    })
+  }
+
   InventoryFactory.fetchReviewsById = function(id) {
     return $http.get('/api/inventory/' + id + '/reviews')
     .then(function(response) {

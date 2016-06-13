@@ -13,11 +13,20 @@ app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams
       scope.starThing = function(num){
         return "width: " + num*20+ "%";
       }
-      
 
+      scope.addReview = function(review){
+        console.log(review)
+        InventoryFactory.addReview(review)
+        .then(function(response){
+          return response
+        })
+      }
+      
       InventoryFactory.fetchReviewsById($stateParams.id)
       .then(function(reviews){
         scope.reviews=reviews;
+        scope.newReview = {};
+        scope.newReview.inventoryId = $stateParams.id;
       })
     }
   }
