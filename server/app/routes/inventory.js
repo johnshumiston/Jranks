@@ -94,10 +94,10 @@ router.get('/available/:id', function (req, res, next) {
   if (!req.session.cart) req.session.cart = {};
   var qty = req.session.cart[req.params.id] || 0;
   if (req.inventory.dataValues.quantity <= qty) {
-    res.send(false);
+    res.send({veracity: false, qtyAvailable: req.inventory.dataValues.quantity-qty});
   }
   else {
-    res.send(true);
+    res.send({veracity: true, qtyAvailable: req.inventory.dataValues.quantity-qty});
   }
 });
 

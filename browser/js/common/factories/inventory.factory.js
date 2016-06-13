@@ -40,8 +40,15 @@ app.factory('InventoryFactory', function ($http, $state) {
 
   InventoryFactory.showAddButton = function(inventoryId){
     return $http.get('/api/inventory/available/' + inventoryId)
-    .then(function(availability){
-      return availability;
+    .then(function(res){
+      return res.data.veracity;
+    })
+  };
+
+  InventoryFactory.showQtyNumber = function(inventoryId){
+    return $http.get('/api/inventory/available/' + inventoryId)
+    .then(function(res){
+      return res.data.qtyAvailable;
     })
   };
 

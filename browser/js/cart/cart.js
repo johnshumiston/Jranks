@@ -90,8 +90,10 @@ app.factory('CartFactory', function ($http, $state) {
   }
 
   CartFactory.removeItem = function(item) {
+    console.log(item)
     $http.put('/api/cart/delete', {id: item.id})
-    .then(function(){
+    .then(function(cart){
+      console.log('factory', cart)
       $state.go($state.current, {}, {reload: true})
     })
   }
