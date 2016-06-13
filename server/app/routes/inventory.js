@@ -17,7 +17,6 @@ router.get('/reviews', function(req, res, next) {
 });
 
 router.post('/reviews', function(req, res, next) {   
-  console.log(req)
   Review.create(req.body)
   .then(function(review) {
     return review.save();
@@ -58,7 +57,6 @@ router.delete('/reviews/:reviewId', function(req, res, next) {
 // Inventory routes -----------------------------------------------------------
 
 router.get('/', function (req, res, next) {
-  console.log("XxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx", req.session)
   Inventory.findAll({ 
     where: 
       req.query
