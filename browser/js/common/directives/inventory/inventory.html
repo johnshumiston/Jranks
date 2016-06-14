@@ -28,11 +28,15 @@
 			</div>
         <h4>{{ review.review_body }}</h4>
         <h4>Created on {{ review.date }}</h4>
+        <h4>Created by {{ review.name }}</h4>
         </div>
         <h2>LEAVE NEW REVIEW</h2>
         <form class="form-horizontal"
             ng-submit="addReview(newReview)">
           <fieldset class="form-group">
+            <label>Name:</label>
+            <textarea class="form-control" rows="1"
+                ng-model="newReview.name"></textarea>
             <label>Title:</label>
             <textarea class="form-control" rows="1"
                 ng-model="newReview.title"></textarea>

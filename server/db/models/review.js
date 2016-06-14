@@ -3,6 +3,11 @@ var Sequelize = require('sequelize');
 module.exports = function (db) {
 
     return db.define('review', {
+        name: {
+            type: Sequelize.STRING,
+            notEmpty: true,
+            defaultValue: "Anonymous"
+        },
         title: {
             type: Sequelize.STRING,
             notEmpty: true
