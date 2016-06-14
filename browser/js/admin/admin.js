@@ -126,7 +126,13 @@ app.controller('UserController', function ($scope, users, AdminFactory) {
 
     $scope.users = users;
 
-    $scope.confirmDelete = AdminFactory.confirmDeleteUser;
+    $scope.confirmDelete = function(id) {
+      AdminFactory.fetchUserById(id)
+      .then(function(user){
+        if (user.is_admin) alert("Cannot delete admins!");
+        else AdminFactory.confirmDeleteUser(id);
+      })
+    };
 
 });
 
