@@ -127,7 +127,6 @@ router.get('/:orderId/items', function(req, res, next){
   if(isAdmin){
     OrderItem.findAll({where: {orderId: +req.params.orderId}})
     .then(function(items){
-      console.log(items);
       res.send(items);
     })
   }
