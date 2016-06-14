@@ -66,6 +66,9 @@ router.get('/orderItem/:id', function (req, res, next) {
 
 router.post('/orderItem', function (req, res, next){
   OrderItem.create(req.body)
+  .then(function(item){
+    return item.setOrder(req.body.orderId);
+  })
   .then(item => res.status(201).send(item))
   .catch(next);
 });

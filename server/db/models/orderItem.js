@@ -10,11 +10,5 @@ module.exports = function (db) {
             min: 1,
             allowNull: false
         }
-    },
-        {
-        defaultScope: {
-            include: [Review(db)]
-        }
-    }
-    );
+    });
 };
