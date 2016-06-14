@@ -29,12 +29,14 @@ module.exports = function (db) {
                     }
                 }
                 else {
-                    user.update({cart: req.session.cart});
+                    // user.update({cart: req.session.cart});
                 }
             })
         }
         next();
     })
+
+    app.use('/checkout', require('./routes/checkout.js'));
 
     app.use('/admin', function(req, res, next) {
         if (!req.user) {
@@ -46,7 +48,6 @@ module.exports = function (db) {
         else res.sendFile(app.get('adminHTMLPath'));
     })
 
-    app.use('/checkout', require('./routes/checkout.js'));
 
     // Routes that will be accessed via AJAX should be prepended with
     // /api so they are isolated from our GET /* wildcard.

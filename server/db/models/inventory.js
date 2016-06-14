@@ -12,8 +12,9 @@ module.exports = function (db) {
         },
         quantity: {
             type: Sequelize.INTEGER,
-            min: 0,
-            allowNull: false
+            // min: 0,
+            allowNull: false,
+            validate: { min: 0}
         },
         type: {
             type: Sequelize.ENUM,

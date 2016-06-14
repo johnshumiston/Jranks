@@ -4,8 +4,16 @@ const db = require('../../db/_db');
 const Order = db.model('order');
 const OrderItem = db.model('orderItem');
 const User = db.model('user');
+const Inventory = db.model('inventory');
 
 module.exports = router;
+
+function updateInventory(orderItem, changedAmount){
+  Inventory.findById(orderItem.itemId)
+  .then(function(item){
+    return item.update({quantity: item.quantity - changedAmount})
+  })
+}
 
 // Order Routes ------------------------------------------------------
 router.get('/', function (req, res, next) {
@@ -42,9 +50,25 @@ router.post('/', function (req, res, next){
   .catch(next);
 });
 
-router.delete('/', function (req, res, next){
-  Order.destroy({where: req.body})
+router.delete('/:id', function (req, res, next){
+  OrderItem.findAll({where: {orderId: req.params.id}})
+  .then(function(items){
+    items.forEach(function(item){
+      updateInventory(item, -item.quantity);
+      item.destroy();
+    });
+  })
+  .then(function(){
+    return Order.findById(req.params.id)
+  })
+  .then(function(order){
+    order.destroy();
+  })
   .then(response => res.sendStatus(204));
+
+
+  // Order.destroy({where: req.body})
+  // .then(response => res.sendStatus(204));
 });
 
 router.put('/:id', function(req, res, next){
@@ -73,8 +97,26 @@ router.post('/orderItem', function (req, res, next){
   .catch(next);
 });
 
+router.post('/admin/orderItem', function (req, res, next){
+  OrderItem.create(req.body)
+  .then(function(item){
+    return item.setOrder(req.body.orderId);
+  })
+  .then(function(item){
+    return updateInventory(item, req.body.quantity)
+  })
+  .then(item => res.status(201).send(item))
+  .catch(next);
+});
+
 router.delete('/orderItem/:id', function (req, res, next){
-  OrderItem.destroy({where: {id: req.params.id}})
+  OrderItem.findById(req.params.id)
+  .then(function(item){
+    return updateInventory(item, -item.quantity);
+  })
+  .then(function(item){
+    OrderItem.destroy({where: {id: req.params.id}})
+  })
   .then(response => res.sendStatus(204));
 });
 
