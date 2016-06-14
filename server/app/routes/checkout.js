@@ -5,8 +5,8 @@ const router = express.Router();
 const db = require('../../db/_db');
 const User = db.model('user');
 const Order = db.model('order');
+const OrderItem = db.model('orderItem');
 const Address = db.model('address');
-const PreviousCart = db.model('previouscart');
 const Inventory = db.model('inventory');
 
 module.exports = router;
@@ -19,6 +19,13 @@ function updateInventory(cart){
       return item.update({quantity: item.quantity - cart[key]})
     })
   }
+}
+
+function createOrderItems(key, qty, orderId){
+  OrderItem.create({quantity: qty, orderId: orderId})
+  .then(function(item){
+    return item.setItem(key);
+  })
 }
 
 router.post('/', function(req, res, next) {
@@ -47,18 +54,31 @@ router.post('/', function(req, res, next) {
   User.findById(req.session.passport.user)
   .then(function(user){
     if (user){
-    		return user.update({cart: {}});
+    		return user.update({cart: {}})
     }
-  	return;
+    else {
+  	 return; 
+    }
   })
   .then(function(updatedUser){
     if(updatedUser){
-      return PreviousCart.create({items: req.session.cart}, {userId: updatedUser.id})
+      return Order.create({status: "complete"}, {userId: req.session.passport.user})
     }
     return;
   })
+  .then(function(order){
+    return order.setUser(req.session.passport.user);
+  })
+  .then(function(order){
+    if (order){
+      for (var key in req.session.cart){
+        createOrderItems(key, req.session.cart[key], order.id);
+      }
+      return true;
+    }
+  })
   .then(function(newCart){
-    if(newCart){
+    if (newCart){
       return Address.bulkCreate([{
         userId: req.session.passport.user,
         is_primary: true,

@@ -1,0 +1,25 @@
+<h3>Add Item</h3>
+<form name="addOrderItem" ng-submit="add(addingItem)">
+  <h4>ID</h4>
+    <input type="number" name="inventoryId" required ng-model="addingItem.inventoryId"/>
+  <h4>Quantity</h4>
+    <input type="number" name="quantity" required min="0" ng-model="addingItem.quantity"/>
+    <input type="number" name="orderId" value='orderId' ng-model="addingItem.orderId" ng-show="false"/>
+  <button type="submit">Add</button>
+</form>
+
+<h3>All items</h3>
+<table>
+  <tr>
+    <td>Delete</td>
+    <td>Id</td>
+    <td>Quantity</td>
+    <td>Title</td>
+  </tr>
+  <tr ng-repeat="item in items">
+    <td><a ng-click="confirmDelete(item.id)" class="fa fa-remove"></a></td>
+    <td>{{item.id}}</td>
+    <td>{{item.quantity}}</td>
+    <td>{{item.title}}</td>
+  </tr>
+</table>

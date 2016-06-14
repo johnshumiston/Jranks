@@ -13,34 +13,45 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state('edit-inventory', {
-        url: '/admin/inventory/:id',
-        templateUrl: 'js/admin/edit-inventory.html',
-        controller: 'EditController',
-        resolve: {
-          editingItem: function(InventoryFactory, $stateParams) {
-            return InventoryFactory.fetchById($stateParams.id)
-          }
+      url: '/admin/inventory/:id',
+      templateUrl: 'js/admin/edit-inventory.html',
+      controller: 'EditController',
+      resolve: {
+        editingItem: function(InventoryFactory, $stateParams) {
+          return InventoryFactory.fetchById($stateParams.id)
         }
+      }
     });
 
     $stateProvider.state('inventory-reviews', {
-        url: '/admin/inventory/:id/reviews',
-        templateUrl: 'js/admin/inventory-reviews.html',
-        controller: 'EditReviewController',
-        resolve: {
-          editingItem: function(InventoryFactory, $stateParams) {
-            return InventoryFactory.fetchById($stateParams.id)
-          },
-          reviews: function(InventoryFactory, $stateParams) {
-            return InventoryFactory.fetchReviewsById($stateParams.id)
-          }
+      url: '/admin/inventory/:id/reviews',
+      templateUrl: 'js/admin/inventory-reviews.html',
+      controller: 'EditReviewController',
+      resolve: {
+        editingItem: function(InventoryFactory, $stateParams) {
+          return InventoryFactory.fetchById($stateParams.id)
+        },
+        reviews: function(InventoryFactory, $stateParams) {
+          return InventoryFactory.fetchReviewsById($stateParams.id)
         }
+      }
     });
 
     $stateProvider.state('orders', {
         url: '/admin/orders',
         templateUrl: 'js/admin/orders.html',
-        controller: 'AdminController'
+        controller: 'OrderController'
+    });
+
+    $stateProvider.state('orderitems', {
+        url: '/admin/orders/:id/orderitems',
+        templateUrl: 'js/admin/orderitems.html',
+        controller: 'OrderItemsController',
+        resolve: {
+          items: function(AdminFactory, $stateParams){
+            return AdminFactory.fetchItemsInOrder($stateParams.id)
+          }
+        }
     });
 
     $stateProvider.state('users', {
@@ -82,7 +93,6 @@ app.controller('AdminController', function ($scope, InventoryFactory, AdminFacto
     $scope.confirmDelete = AdminFactory.confirmDeleteItem;
 
     $scope.add = AdminFactory.addItem
-
 });
 
 app.controller('EditController', function ($scope, editingItem, AdminFactory) {
@@ -136,6 +146,30 @@ app.controller('UserController', function ($scope, users, AdminFactory) {
 
 });
 
+app.controller('OrderController', function ($scope, AdminFactory){
+    AdminFactory.fetchAllOrders()
+    .then(function(orders){
+      $scope.orders = orders;
+    })
+})
+
+app.controller('OrderItemsController', function (AdminFactory, $scope, items){
+    $scope.items = items;
+
+    $scope.items.forEach(function(item){
+      AdminFactory.fetchInventoryItem(item.id)
+      .then(function(inventory){
+        item.title = inventory.title;
+      })   
+    });
+
+    $scope.orderId = $scope.items[0].orderId;
+
+    $scope.add = AdminFactory.addOrderItem;
+
+    $scope.confirmDelete = AdminFactory.confirmDeleteOrderItem;
+})
+
 app.factory('AdminFactory', function ($http, $state) {
 
     var AdminFactory = {};
@@ -158,6 +192,11 @@ app.factory('AdminFactory', function ($http, $state) {
       console.log(data);
       $http.post('/api/inventory/', data)
       $state.go($state.current)
+    }
+
+    AdminFactory.addOrderItem = function(data) {
+      $http.post('/api/order/orderItem', data)
+      $state.go($state.current, {}, {reload: true})
     }
 
     AdminFactory.confirmDeleteReview = function(id) {
@@ -184,6 +223,14 @@ app.factory('AdminFactory', function ($http, $state) {
       }
     }
 
+    AdminFactory.confirmDeleteOrderItem = function(id) {
+      var ok = confirm("Delete this item?");
+      if (ok) {
+        $http.delete('/api/order/orderItem' + id);
+        $state.go($state.current, {}, {reload: true})
+      }
+    }
+
     AdminFactory.fetchAllUsers = function() {
       return $http.get('api/members')
       .then(function(response) {
@@ -198,9 +245,17 @@ app.factory('AdminFactory', function ($http, $state) {
       })
     }
 
+
     AdminFactory.getAdmins = function() {
       return $http.get('api/members/admins')
       .then(function(response) {
+        return response.data
+      })
+    }
+
+    AdminFactory.fetchAllOrders = function(){
+      return $http.get('api/cart/all')
+      .then(function(response){
         return response.data
       })
     }
@@ -212,12 +267,31 @@ app.factory('AdminFactory', function ($http, $state) {
       })
     }
 
+    AdminFactory.fetchItemsInOrder = function(orderId){
+      return $http.get('api/cart/' + orderId + '/items')
+      .then(function(response){
+        return response.data
+      })
+    }
+
     AdminFactory.resetMe = function(loginObj) {
       return $http.post('api/members/resetMe', loginObj)
       .then(function(response) {
         console.log(response.data)
         return response.data
       });
+    }
+
+    AdminFactory.fetchInventoryItem = function(inventoryId){
+      return $http.get('api/inventory/' + inventoryId)
+      .then(function(response){
+        return response.data
+      })
+    }
+
+    AdminFactory.editOrderItem = function(inventoryId, data){
+      return $http.put('api/order/orderItem' + inventoryId, data)
+      $state.go('orderitems');
     }
 
     return AdminFactory

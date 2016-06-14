@@ -244,30 +244,7 @@ var seedInventory = function() {
   return Promise.all(creatingInventory);
 
 };
-var seedOrders = function(){
-  var orders = [
-  {
-    status: "complete",
-    userId: 1,
-    addressId: 2
-  },
-  {
-    status: "cancelled",
-    userId: 2,
-    addressId: 2
-  },
-  {
-    status: "complete",
-    userId: 1,
-    addressId: 1
-  }]
 
-  var creatingOrders = orders.map(function(order) {
-    return Order.create(order);
-  });
-
-  return Promise.all(creatingOrders);
-}
 
 var seedReviews = function(){
   var reviews = [
@@ -429,9 +406,6 @@ db.sync({ force: true })
   })
   .then(function() {
     return seedReviews();
-  })
-  .then(function(){
-    return seedOrders();
   })
   .then(function() {
     console.log(chalk.green('Seed successful!'));

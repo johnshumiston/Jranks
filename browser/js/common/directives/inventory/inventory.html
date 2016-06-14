@@ -3,19 +3,19 @@
         <h4>{{ type.title }}</h4>
         <h2 ng-if="!showAddButton" ng-cloak>Sorry, this product is currently unavailable</h2>
         <button ng-show="showAddButton" ng-click="addToCart(type)">Add to Cart</button>
-          <fieldset class="form-group">
+          <fieldset ng-show="showAddButton" class="form-group">
             <label>Quantity:</label>
             <select ng-model="type.qty">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
+              <option ng-if="qtyAvail>=1" value="1">1</option>
+              <option ng-if="qtyAvail>=2" value="2">2</option>
+              <option ng-if="qtyAvail>=3" value="3">3</option>
+              <option ng-if="qtyAvail>=4" value="4">4</option>
+              <option ng-if="qtyAvail>=5" value="5">5</option>
+              <option ng-if="qtyAvail>=6" value="6">6</option>
+              <option ng-if="qtyAvail>=7" value="7">7</option>
+              <option ng-if="qtyAvail>=8" value="8">8</option>
+              <option ng-if="qtyAvail>=9" value="9">9</option>
+              <option ng-if="qtyAvail>=10" value="10">10</option>
             </select>
           </fieldset>
         <h2>DESCRIPTION</h3>
@@ -28,11 +28,15 @@
 			</div>
         <h4>{{ review.review_body }}</h4>
         <h4>Created on {{ review.date }}</h4>
+        <h4>Created by {{ review.name }}</h4>
         </div>
         <h2>LEAVE NEW REVIEW</h2>
         <form class="form-horizontal"
             ng-submit="addReview(newReview)">
           <fieldset class="form-group">
+            <label>Name:</label>
+            <textarea class="form-control" rows="1"
+                ng-model="newReview.name"></textarea>
             <label>Title:</label>
             <textarea class="form-control" rows="1"
                 ng-model="newReview.title"></textarea>
