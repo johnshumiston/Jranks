@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/myCart', function(req, res, next) {
-  console.log("getting items", req.session.cart)
   Inventory.findAll({
     where: {
       id: {
