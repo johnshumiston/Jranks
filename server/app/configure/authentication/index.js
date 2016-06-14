@@ -70,7 +70,6 @@ module.exports = function (app, db) {
     // Simple /logout route.
     app.get('/logout', function (req, res) {
         req.session.cart = {};
-        console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', req.session.cart);
         req.logout();
         res.status(200).end();
     });

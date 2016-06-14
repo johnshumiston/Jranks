@@ -21,6 +21,13 @@ body {
     padding-top: 20px;
   }
 
+  #jranks div.inventory-grid img {
+    height: 35vh;
+    width: auto;
+    margin: 0 auto;
+    display: table;
+  }
+
   div.inventory-grid {   
     position: relative; 
     display: inline-block;
@@ -30,6 +37,7 @@ body {
     min-width: 260px;
     margin: 5px;
     box-shadow: rgb(59, 26, 121) 0px 0px 26px;
+    background: white;
 
     img {
       width: 100%;

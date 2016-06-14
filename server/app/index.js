@@ -14,19 +14,22 @@ module.exports = function (db) {
 
     app.use('/', function(req, res, next) {
         if (req.user) {
-            // console.log('PREVIOUS SESSION', req.session);
+
+            //NEW FUNCTIONALITY FOR PASSWORD RESET
+            if (req.user.reset) {
+                
+            }
+            //NEW FUNCTIONALITY FOR PASSWORD RESET
+
             User.findById(req.session.passport.user)
             .then(function(user){
                 if (!Object.keys(req.session.cart).length){
                     for (var key in user.cart){
                         req.session.cart[key] = user.cart[key];
                     }
-                    // req.session.cart = user.cart;
-                    // console.log('NO THERE WAS NO CART', req.session.cart);
                 }
                 else {
                     user.update({cart: req.session.cart});
-                    // console.log('YES THERE WAS A CART', req.session.cart);
                 }
             })
         }

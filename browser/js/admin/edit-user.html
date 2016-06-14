@@ -5,6 +5,8 @@
   <h4>EMAIL</h4>
     <input required type="email" name="email" ng-model="editingUser.email"/>
   <h4>ADMIN</h4>
-    <input type="checkbox" name="is_admin" ng-true-value="true" ng-false-value="false" ng-model="editingUser.is_admin" />
+    <input type="checkbox" name="is_admin" ng-true-value="true" ng-false-value="false" ng-disabled="editingUser.is_admin && admins.length === 1" ng-model="editingUser.is_admin" />
   <button type="submit">Edit</button>
 </form>
+
+<button ng-click="passwordReset">RESET PASSWORD</button>
