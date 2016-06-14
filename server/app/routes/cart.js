@@ -81,7 +81,19 @@ router.put('/update', function(req, res, next) {
 });
 
 router.put('/delete', function(req, res, next) {
-  delete req.session.cart[req.body.id];
+  console.log(Object.keys(req.session.cart).length)
+  console.log(req.body)
+  // if(Object.keys(req.session.cart).length===1){
+  //   console.log("hey")
+  //   // delete req.session.cart;
+  //   req.session.cart = {};
+  //   console.log("post emptying", req.session.cart)
+  // }
+  // else{
+    console.log("pre", req.session.cart)
+    delete req.session.cart[req.body.id];
+    console.log("post", req.session.cart)
+  // }
   res.status(200).send(req.session.cart);
 });
 

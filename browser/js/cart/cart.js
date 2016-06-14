@@ -91,7 +91,7 @@ app.factory('CartFactory', function ($http, $state) {
 
   CartFactory.removeItem = function(item) {
     $http.put('/api/cart/delete', {id: item.id})
-    .then(function(){
+    .then(function(cart){
       $state.go($state.current, {}, {reload: true})
     })
   }

@@ -15,6 +15,13 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.user = null;
 
+            scope.confirmAge = function(label) {
+                console.log(label)
+                if(label === 'Jranks'){
+                    window.confirm("Click OK if you are old enough to jrank!")
+                }
+            }
+
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
             };

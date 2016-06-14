@@ -3,6 +3,7 @@ app.factory('InventoryFactory', function ($http, $state) {
   var InventoryFactory = {};
 
   InventoryFactory.fetchAll = function() {
+      window.confirm("Are you old enough to jrank?")
     return $http.get('/api/inventory')
     .then(function(response){
       return response.data;
@@ -40,8 +41,15 @@ app.factory('InventoryFactory', function ($http, $state) {
 
   InventoryFactory.showAddButton = function(inventoryId){
     return $http.get('/api/inventory/available/' + inventoryId)
-    .then(function(availability){
-      return availability;
+    .then(function(res){
+      return res.data.veracity;
+    })
+  };
+
+  InventoryFactory.showQtyNumber = function(inventoryId){
+    return $http.get('/api/inventory/available/' + inventoryId)
+    .then(function(res){
+      return res.data.qtyAvailable;
     })
   };
 
