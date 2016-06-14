@@ -1,59 +1,66 @@
 <section id="{{ type }}">
-        <img src="{{ type.image_url }}">
-        <h4>{{ type.title }}</h4>
-        <h2 ng-if="!showAddButton" ng-cloak>Sorry, this product is currently unavailable</h2>
-        <button ng-show="showAddButton" ng-click="addToCart(type)">Add to Cart</button>
-          <fieldset ng-show="showAddButton" class="form-group">
-            <label>Quantity:</label>
-            <select ng-model="type.qty">
-              <option ng-if="qtyAvail>=1" value="1">1</option>
-              <option ng-if="qtyAvail>=2" value="2">2</option>
-              <option ng-if="qtyAvail>=3" value="3">3</option>
-              <option ng-if="qtyAvail>=4" value="4">4</option>
-              <option ng-if="qtyAvail>=5" value="5">5</option>
-              <option ng-if="qtyAvail>=6" value="6">6</option>
-              <option ng-if="qtyAvail>=7" value="7">7</option>
-              <option ng-if="qtyAvail>=8" value="8">8</option>
-              <option ng-if="qtyAvail>=9" value="9">9</option>
-              <option ng-if="qtyAvail>=10" value="10">10</option>
-            </select>
-          </fieldset>
-        <h2>DESCRIPTION</h3>
-        <h4>{{ type.description }}</h4>
-        <h2>REVIEWS</h3>
-        <div ng-repeat="review in reviews">
-        <h3>{{ review.title }}</h3>
-	        <div class="rating-box">
-	   			<div style="{{starThing(review.stars)}}" class="rating"></div>
-			</div>
-        <h4>{{ review.review_body }}</h4>
-        <h4>Created on {{ review.date }}</h4>
-        <h4>Created by {{ review.name }}</h4>
+        <h2>{{ type.title }}</h2>
+        <img class="featured-inventory" src="{{ type.image_url }}">
+        <div class="product-details">
+          <h4>DESCRIPTION</h4>
+          <p>{{ type.description }}</p>
+          <h2 ng-if="!showAddButton" ng-cloak>Sorry, this product is currently unavailable</h2>
+          <form name="toCartForm">
+          <button ng-show="showAddButton" class="btn-item-page btn btn-success" ng-click="addToCart(type)">Add to Cart</button>
+            <fieldset ng-show="showAddButton" class="form-group col-sm-2">
+              <select required min="1" class="form-control" ng-model="type.qty">
+                <option ng-if="qtyAvail>=1" value="" disabled selected>Quantity</option>
+                <option ng-if="qtyAvail>=1" value="1">1</option>
+                <option ng-if="qtyAvail>=2" value="2">2</option>
+                <option ng-if="qtyAvail>=3" value="3">3</option>
+                <option ng-if="qtyAvail>=4" value="4">4</option>
+                <option ng-if="qtyAvail>=5" value="5">5</option>
+                <option ng-if="qtyAvail>=6" value="6">6</option>
+                <option ng-if="qtyAvail>=7" value="7">7</option>
+                <option ng-if="qtyAvail>=8" value="8">8</option>
+                <option ng-if="qtyAvail>=9" value="9">9</option>
+                <option ng-if="qtyAvail>=10" value="10">10</option>
+              </select>
+            </fieldset>
+          </form>
         </div>
-        <h2>LEAVE NEW REVIEW</h2>
-        <form class="form-horizontal"
-            ng-submit="addReview(newReview)">
-          <fieldset class="form-group">
-            <label>Name:</label>
-            <textarea class="form-control" rows="1"
-                ng-model="newReview.name"></textarea>
-            <label>Title:</label>
-            <textarea class="form-control" rows="1"
-                ng-model="newReview.title"></textarea>
-            <label>Your Review:</label>
-            <textarea class="form-control" rows="5"
-                ng-model="newReview.review_body"></textarea>
-          </fieldset>
-          <fieldset class="form-group">
-            <label>Stars:</label>
-            <select ng-model="newReview.stars">
-              <option value="5">5 stars</option>
-              <option value="4">4 stars</option>
-              <option value="3">3 stars</option>
-              <option value="2">2 stars</option>
-              <option value="1">1 star</option>
-            </select>
-          </fieldset>
-          <button type="submit" class="btn btn-primary pull-left">Submit</button>
-        </form>
+        <div class="review-section">
+          <h4>Review {{type.title}}!</h4>
+          <form class="form-horizontal"
+              ng-submit="addReview(newReview)">
+            <fieldset class="form-group">
+            <div class="col-sm-6">
+              <input required type="text" placeholder="Name" class="form-control" rows="1" ng-model="newReview.name" />
+            </div>
+            <div class="col-sm-6">
+              <select min="1" required class="form-control" ng-model="newReview.stars">
+                <option value="" disabled selected>Stars</option>
+                <option value="5">5 stars</option>
+                <option value="4">4 stars</option>
+                <option value="3">3 stars</option>
+                <option value="2">2 stars</option>
+                <option value="1">1 star</option>
+              </select>
+            </div>
+            <div class="col-sm-12">
+              <input required placeholder="Title" class="form-control" rows="1" ng-model="newReview.title" />
+            </div>
+            <div class="col-sm-12">
+              <textarea required placeholder="Review" class="form-control" rows="5"
+                  ng-model="newReview.review_body"></textarea>
+            </div>
+            </fieldset>
+            <button type="submit" class="btn btn-success pull-right">Submit</button>
+          </form>
+          <h4 class="review-posts">REVIEWS</h4>
+          <div ng-repeat="review in reviews">
+          <b>{{ review.name }}</b>
+          <p>{{ formatDate(review.date) }}</p>
+          <h4>{{ review.title }}</h4>
+            <div class="rating-box">
+            <div style="{{starThing(review.stars)}}" class="rating"></div>
+        </div>
+          <p>{{ review.review_body }}</p>
+          </div>
+        </div>
 </section>

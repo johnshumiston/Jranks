@@ -22,26 +22,26 @@
 
 <h3>All Inventory</h3>
 <table>
-  <tr>
-    <td>Delete</td>
-    <td>Edit</td>
-    <td>Reviews</td>
-    <td>TITLE</td>
-    <td>QUANTITY</td>
-    <td>TYPE</td>
-    <td>PRICE</td>
-    <td>DESCRIPTION</td>
-    <td>IMAGE</td>
+  <tr class="headers">
+    <td class="table_delete">Del</td>
+    <td class="table_edit">Edit</td>
+    <td class="table_reviews">Rvw</td>
+    <td class="table_title">TITLE</td>
+    <td class="table_quantity">QTY</td>
+    <td class="table_type">TYPE</td>
+    <td class="table_price">PRICE</td>
+    <td class="table_description">DESCRIPTION</td>
+    <td class="table_image">IMAGE</td>
   </tr>
   <tr ng-repeat="item in items | orderBy: 'id'">
-    <td><a ng-click="confirmDelete(item.id)" class="fa fa-remove"></a></td>
-    <td><a ui-sref="edit-inventory({id: item.id})" class="fa fa-pencil"></a></td>
-    <td><a ui-sref="inventory-reviews({id: item.id})" class="fa fa-star-half-o"></a></td>
-    <td>{{item.title}}</td>
-    <td>{{item.quantity}}</td>
-    <td>{{item.type}}</td>
-    <td>{{item.displayPrice}}</td>
-    <td>{{item.description}}</td>
-    <td>{{item.image_url}}</td>    
+    <td class="table_delete"><a ng-click="confirmDelete(item.id)" class="fa fa-remove"></a></td>
+    <td class="table_edit"><a ui-sref="edit-inventory({id: item.id})" class="fa fa-pencil"></a></td>
+    <td class="table_reviews"><a ui-sref="inventory-reviews({id: item.id})" class="fa fa-star-half-o"></a></td>
+    <td class="table_title">{{item.title}}</td>
+    <td class="table_quantity">{{item.quantity}}</td>
+    <td class="table_type">{{item.type}}</td>
+    <td class="table_price">{{item.displayPrice}}</td>
+    <td class="table_description">{{item.description}}</td>
+    <td class="table_image">{{item.image_url}}</td>    
   </tr>
 </table>

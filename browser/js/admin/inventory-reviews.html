@@ -1,7 +1,7 @@
 <h3>Reviews for {{editingItem.title}}</h3>
 <table>
-  <tr>
-    <td>Delete</td>
+  <tr class="headers">
+    <td class="table_delete">Del</td>
     <td>TITLE</td>
     <td>USER</td>
     <td>STARS</td>
@@ -9,7 +9,7 @@
     <td>DATE</td>
   </tr>
   <tr ng-repeat="review in reviews | orderBy: 'id'">
-    <td><a ng-click="confirmDelete(review.id)" class="fa fa-remove"></a></td>
+    <td class="table_delete"><a ng-click="confirmDelete(review.id)" class="fa fa-remove"></a></td>
     <td>{{review.title}}</td>
     <td>{{review.user.name}}</td>
     <td>{{review.stars}}</td>
