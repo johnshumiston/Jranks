@@ -1,0 +1,15 @@
+<h3>All Orders</h3>
+<table>
+  <tr>
+    <td>User</td>
+    <td>Date</td>
+    <td>Status</td>
+    <td>Items</td>
+  </tr>
+  <tr ng-repeat="order in orders | orderBy: 'id'">
+    <td><a ui-sref='orderitems({id: order.id})'>See items</a></td>
+    <td>{{order.userId}}</td>
+    <td>{{order.date}}</td>
+    <td>{{order.status}}</td>
+  </tr>
+</table>

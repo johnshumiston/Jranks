@@ -44,15 +44,33 @@ router.get('/reviews/:reviewId', function(req, res, next) {
 });
 
 router.put('/reviews/:reviewId', function(req, res, next) {
-  req.review.update(req.body)
-  .then(updatedReview => res.status(200).send(updatedReview))
-  .catch(next);
+  var isAdmin = false
+  if(req.user){
+    isAdmin = req.user.is_admin;
+  }
+  if (isAdmin){
+    req.review.update(req.body)
+    .then(updatedReview => res.status(200).send(updatedReview))
+    .catch(next);
+  }
+  else {
+    res.redirect('/');
+  }
 });
 
 router.delete('/reviews/:reviewId', function(req, res, next) {
-  req.review.destroy({})
-  .then(response => res.status(204).send(response))
-  .catch(next);
+  var isAdmin = false
+  if(req.user){
+    isAdmin = req.user.is_admin;
+  } 
+  if (isAdmin){
+    req.review.destroy({})
+    .then(response => res.status(204).send(response))
+    .catch(next);
+  }
+  else {
+    res.redirect('/');
+  }
 });
 
 // Inventory routes -----------------------------------------------------------
@@ -68,9 +86,18 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  Inventory.create(req.body)
-  .then(item => res.sendStatus(201))
-  .catch(next);
+  var isAdmin = false
+  if(req.user){
+    isAdmin = req.user.is_admin;
+  }
+  if (isAdmin){
+    Inventory.create(req.body)
+    .then(item => res.sendStatus(201))
+    .catch(next);
+  }
+  else {
+    res.redirect('/');
+  }
 });
 
 router.param('id', function (req, res, next, id) {
@@ -120,13 +147,31 @@ router.get('/:id/reviews', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-  req.inventory.update(req.body)
-  .then(updatedItem => res.status(200).send(updatedItem))
-  .catch(next);
+  var isAdmin = false
+  if(req.user){
+    isAdmin = req.user.is_admin;
+  }
+  if (isAdmin){
+    req.inventory.update(req.body)
+    .then(updatedItem => res.status(200).send(updatedItem))
+    .catch(next);
+  }
+  else {
+    res.redirect('/');
+  }
 });
 
 router.delete('/:id', function (req, res, next) {
-  req.inventory.destroy({})
-  .then(response => res.status(204).send(response))
-  .catch(next);
+  var isAdmin = false
+  if(req.user){
+    isAdmin = req.user.is_admin;
+  }
+  if (isAdmin){
+    req.inventory.destroy({})
+    .then(response => res.status(204).send(response))
+    .catch(next);
+  }
+  else {
+    res.redirect('/');
+  }
 });
