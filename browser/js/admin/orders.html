@@ -1,14 +1,18 @@
 <h3>All Orders</h3>
 <table>
   <tr>
-    <td>User</td>
+    <td>Delete</td>
+    <td>See Items</td>
+    <td>User ID</td>
+    <td>User Name</td>
     <td>Date</td>
     <td>Status</td>
-    <td>Items</td>
   </tr>
   <tr ng-repeat="order in orders | orderBy: 'id'">
+    <td><a ng-click="confirmDelete(order.id)" class="fa fa-remove"></a></td>
     <td><a ui-sref='orderitems({id: order.id})'>See items</a></td>
     <td>{{order.userId}}</td>
+    <td>{{order.userName}}</td>
     <td>{{order.date}}</td>
     <td>{{order.status}}</td>
   </tr>
