@@ -20,6 +20,8 @@ app.config(function ($stateProvider) {
 
 app.controller('CartController', function ($scope, $rootScope, Session, InventoryFactory, cartItems, CartFactory, $state) {
 
+  
+
   CartFactory.fetchAllInCart()
   .then(function(items){
     $scope.cartItems = items; 
@@ -51,7 +53,7 @@ app.controller('CartController', function ($scope, $rootScope, Session, Inventor
 
 });
 
-app.factory('CartFactory', function ($http, $state) {
+app.factory('CartFactory', function ($http, $state, $rootScope) {
 
   var CartFactory = {};
 
@@ -60,6 +62,14 @@ app.factory('CartFactory', function ($http, $state) {
     .then(function(items){
       return items.reduce(function(sum, item){
         return sum + (item.price * item.qty);
+    }, 0)});
+  }
+
+ CartFactory.getQtyTotal = function(){
+    return CartFactory.fetchAllInCart()
+    .then(function(items){
+      return items.reduce(function(sum, item){
+        return sum + item.qty;
     }, 0)});
   }
 
@@ -83,6 +93,10 @@ app.factory('CartFactory', function ($http, $state) {
     .then(function(cart){
       return cart;
     })
+    .then(function(cart) {
+      $rootScope.$broadcast("addedToCart")}
+      )
+    .then($state.go($state.current, {}, {reload: true}))
   }
 
   CartFactory.formatPrice = function(price) {
@@ -93,14 +107,18 @@ app.factory('CartFactory', function ($http, $state) {
 
   CartFactory.updateItemQty = function(items) {
     return $http.put('/api/cart/update', items)
-    .then(function(){
-      $state.go($state.current, {}, {reload: true})
-    })
+    .then(function(cart) {
+      $rootScope.$broadcast("addedToCart")}
+      )
+    .then($state.go($state.current, {}, {reload: true}))
   }
 
   CartFactory.removeItem = function(item) {
     $http.put('/api/cart/delete', {id: item.id})
-    .then(function(cart){
+    .then(function(cart) {
+      $rootScope.$broadcast("addedToCart")}
+      )
+    .then(function(){
       $state.go($state.current, {}, {reload: true})
     })
   }

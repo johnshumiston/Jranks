@@ -1,4 +1,4 @@
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, CartFactory) {
 
     return {
         restrict: 'E',
@@ -12,6 +12,12 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 { label: 'Drinks', state: 'drinks' },
                 { label: 'Jranks', state: 'jranks', auth: true }
             ];
+
+            CartFactory.getQtyTotal()
+            .then(function(total){
+                console.log("first", total)
+                scope.qty = total;
+            })
 
             scope.user = null;
 
@@ -41,6 +47,13 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             var removeUser = function () {
                 scope.user = null;
             };
+
+            $rootScope.$on('addedToCart', function () {
+                CartFactory.getQtyTotal()
+                .then(function(total){
+                    scope.qty = total;
+                })
+            });
 
             setUser();
 

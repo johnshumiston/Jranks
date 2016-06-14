@@ -14,8 +14,8 @@
             <span>{{ user.name }}</span>
             <a ng-click="logout()">Logout</a>
         </div>
-
-        <button ui-sref="cart" class="btn fa fa-shopping-basket"></button>
-
+        <button ui-sref="cart" class="btn fa fa-shopping-basket">
+            <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/>{{ qty }}</a>
+        </button>
     </div>
 </nav>

@@ -3,7 +3,6 @@
   <table>
     <tr>
       <td>Item</td>
-<!--       <td>Quantity</td> -->
       <td>Price</td>
       <td>Qty in Cart</td>
       <td>Qty in Stock</td>
@@ -11,10 +10,10 @@
     </tr>
     <tr ng-repeat="items in cartItems">
       <td>{{items.title}}</td>
-<!--       <td>{{items.qty}}</td> -->
       <td>{{formatPrice(items.price * items.qty)}}</td>
       <td>
-        <input type="number" ng-model="itemsToUpdate[items.id]" placeholder="{{items.qty}}" min="0" max="{{items.quantity}}"></input>
+      <!-- need to set a default value in case you only edit one item in items to update -->
+        <input type="number" ng-model="itemsToUpdate[items.id]" ng-init="1" value="{{items.qty}}" min="0" max="{{items.quantity}}"></input>
       </td>
       <td>{{items.quantity}}</td>      
       <td>
