@@ -64,10 +64,17 @@ router.post('/', function(req, res, next) {
     if(updatedUser){
       return Order.create({status: "complete"}, {userId: req.session.passport.user})
     }
-    return;
+    else {
+      return Order.create({status: "complete"});
+    }
   })
   .then(function(order){
-    return order.setUser(req.session.passport.user);
+    if (req.session.passport.user){
+      return order.setUser(req.session.passport.user);
+    }
+    else {
+      return order;
+    }
   })
   .then(function(order){
     if (order){
@@ -99,8 +106,16 @@ router.post('/', function(req, res, next) {
     return;
   })
   .then(function(){
-    req.session.cart = {};
-  	res.redirect('/');
+    return User.findById(req.session.passport.user)
+  })
+  .then(function(){
+    for (var key in req.session.cart){
+      delete req.session.cart[key];
+    }
+  })
+  .then(function(){
+  	req.session.cart = {};
+    res.redirect('/');
   })
   .catch(next);
 });

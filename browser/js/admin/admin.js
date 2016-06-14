@@ -150,20 +150,35 @@ app.controller('OrderController', function ($scope, AdminFactory){
     AdminFactory.fetchAllOrders()
     .then(function(orders){
       $scope.orders = orders;
+      $scope.orders.forEach(function(order){
+        AdminFactory.fetchUserById(order.userId)
+        .then(function(user){
+          order.userName = user.name;
+        })
+      })
     })
+
+    $scope.confirmDelete = AdminFactory.confirmDeleteOrder;
 })
 
-app.controller('OrderItemsController', function (AdminFactory, $scope, items){
+app.controller('OrderItemsController', function (InventoryFactory, AdminFactory, $scope, items){
     $scope.items = items;
 
+    InventoryFactory.fetchAll()
+    .then(function(items) {
+      $scope.inventoryItems = items;
+    })
+
     $scope.items.forEach(function(item){
-      AdminFactory.fetchInventoryItem(item.id)
+      AdminFactory.fetchInventoryItem(item.itemId)
       .then(function(inventory){
+        item.InventoryLeft = inventory.quantity;
         item.title = inventory.title;
-      })   
+        $state.go('orderitems');
+      })
     });
 
-    $scope.orderId = $scope.items[0].orderId;
+    $scope.addingItem = {orderId: $scope.items[0].orderId};
 
     $scope.add = AdminFactory.addOrderItem;
 
@@ -189,13 +204,12 @@ app.factory('AdminFactory', function ($http, $state) {
     }
 
     AdminFactory.addItem = function(data) {
-      console.log(data);
       $http.post('/api/inventory/', data)
       $state.go($state.current)
     }
 
     AdminFactory.addOrderItem = function(data) {
-      $http.post('/api/order/orderItem', data)
+      $http.post('/api/order/admin/orderItem', data)
       $state.go($state.current, {}, {reload: true})
     }
 
@@ -226,9 +240,17 @@ app.factory('AdminFactory', function ($http, $state) {
     AdminFactory.confirmDeleteOrderItem = function(id) {
       var ok = confirm("Delete this item?");
       if (ok) {
-        $http.delete('/api/order/orderItem' + id);
-        $state.go($state.current, {}, {reload: true})
+        $http.delete('/api/order/orderItem/' + id);
       }
+      $state.go($state.current, {}, {reload: true})
+    }
+
+    AdminFactory.confirmDeleteOrder = function(id) {
+      var ok = confirm("Delete this order?");
+      if (ok) {
+        $http.delete('/api/order/' + id);
+      }
+      $state.go($state.current, {}, {reload: true})
     }
 
     AdminFactory.fetchAllUsers = function() {
@@ -277,7 +299,6 @@ app.factory('AdminFactory', function ($http, $state) {
     AdminFactory.resetMe = function(loginObj) {
       return $http.post('api/members/resetMe', loginObj)
       .then(function(response) {
-        console.log(response.data)
         return response.data
       });
     }
