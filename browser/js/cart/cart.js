@@ -37,15 +37,6 @@ app.controller('CartController', function ($scope, $rootScope, Session, Inventor
   $scope.updateItemQty = CartFactory.updateItemQty;
 
   $scope.removeItem = CartFactory.removeItem;
-  
-  // cartItems.forEach(function(item){
-  //   CartFactory.showQtyNumber(item.id)
-  //   console.log(item.id)
-  //   .then(function(qty){
-  //     console.log(qty)
-  //     item.qtyAvail = qty;
-  //   })
-  // })
 
   $scope.showQtyNumber = CartFactory.showQtyNumber
 
