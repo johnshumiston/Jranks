@@ -11,11 +11,13 @@
         <button ng-show="!user" ui-sref="signup" class="btn signup-button">Sign Up</button>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <div ng-show="user" class="welcome">
-            <span>{{ user.name }}</span>
             <a ng-click="logout()">Logout</a>
         </div>
-        <button ui-sref="cart" class="btn fa fa-shopping-basket">
-            <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/>{{ qty }}</a>
-        </button>
+
+        <button ui-sref="cart" class="btn fa fa-shopping-basket"><asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/>{{ qty }}</a></button>
+        
+        <div ng-show="user" class="welcome">
+            <span>{{ user.name }}</span>
+        </div>
     </div>
 </nav>

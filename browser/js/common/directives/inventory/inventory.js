@@ -28,6 +28,11 @@ app.directive('inventory', function (CartFactory, InventoryFactory, $stateParams
         return "width: " + num*20+ "%";
       }
 
+      scope.formatDate = function(dateInput) {
+        var date = new Date(dateInput);
+        return date.getMonth() + "/" + date.getDay() + "/" + date.getFullYear();
+      }
+
       scope.addReview = function(review){
         InventoryFactory.addReview(review)
       }

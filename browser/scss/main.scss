@@ -8,11 +8,15 @@ body {
   background: -webkit-linear-gradient(left,  #6b4ba3 0%,#7453b8 9%,#7453b8 92%,#6b4ba3 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right,  #6b4ba3 0%,#7453b8 9%,#7453b8 92%,#6b4ba3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b4ba3', endColorstr='#6b4ba3',GradientType=1 ); /* IE6-9 */
-
+  width: 100%;
 
   img {
     max-height: 400px;
     max-width: 400px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'roboto';
   }
 
   .container {
@@ -71,25 +75,131 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 10px;
   margin: 0 auto;
 }
 
 .rating-box {
- background: url("http://stevewamsley.com/wp-content/uploads/2012/09/bkg_rating.png") repeat-x;
- font-size: 0;
- height: 13px;
- line-height: 0;
- overflow: hidden;
- text-indent: -999em;
- width: 70px;
+    background: url("http://i.imgur.com/mY8W0xt.png") repeat-x;
+    background-size: 20px;
+    font-size: 0;
+    height: 25px;
+    line-height: 0;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 100px;
 }
 
 .rating-box .rating {
- background: url("http://stevewamsley.com/wp-content/uploads/2012/09/bkg_rating.png") repeat-x;
- background-position: 0 100%;
- float: left;
- height: 13px;
+    background: url("http://i.imgur.com/mY8W0xt.png") repeat-x;
+    background-position: 0 100%;
+    background-size: 20px;
+    float: left;
+    height: 18px;
+}
+
+table {
+  background: white;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.51);
+  table-layout: fixed;
+  width: 100%;
+  
+  a.fa {
+    font-size: 22px;
+    margin: 0 auto;
+    display: table;
+    text-decoration: none;
+  }
+
+  a.fa-remove {
+  color: #d62727;
+  transition: color 0.2s;
+  cursor: pointer;
+    &:hover {
+      background: none;
+      color: red;
+    }
+    &:focus {
+      background: none;
+    }
+  }
+  
+  a.fa-pencil {
+    color: #eaa419;
+    transition: color 0.2s;
+      &:hover {
+        background: none;
+        color: #ffba32;
+      }
+      &:focus {
+        background: none;
+      }
+  }
+
+  a.fa-star-half-o {
+    color: #a7a7a7;
+    transition: color 0.2s;
+      &:hover {
+        background: none;
+        color: #c5c5c5;
+      }
+      &:focus {
+        background: none;
+      }
+  }
+
+  tr.headers {
+    font-family: 'roboto';
+    text-align: center;
+    background: #350658;
+    color: white;
+  }
+
+  td {
+    padding: 10px;
+    border: 1px ridge black;
+    overflow-wrap: break-word;
+  }
+
+  .table_description {
+    width:300px;
+  }
+
+  .table_image {
+    width:200px;
+  }
+
+  .table_delete, .table_edit, .table_reviews {
+    width:50px;
+  }
+}
+
+// .form-horizontal .form-group {
+//     margin-right: 0;
+//     margin-left: 0;
+// }
+
+.featured-inventory {
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 40px;
+}
+
+.review-section {
+  clear: both;
+}
+
+textarea.form-control, select.form-control, input.form-control {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.36);
+    margin-bottom: 3px;
+}
+
+button.btn-item-page {
+  float:left;
+}
+
+.review-posts {
+  clear: both;
 }
 
 @import 'directives/main';
