@@ -7,7 +7,17 @@ var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
   User.findAll({})
-  .then(items => res.json(items))
+  .then(users => res.json(users))
+  .catch(next);
+});
+
+router.get('/admins/', function (req, res, next) {
+  User.findAll({
+    where: {
+      is_admin: true
+    }
+  })
+  .then(users => res.json(users))
   .catch(next);
 });
 
@@ -15,6 +25,20 @@ router.get('/:id', function (req, res, next) {
   User.findById(req.params.id)
   .then(user => res.json(user))
   .catch(next);
+});
+
+router.post('/resetMe/', function (req, res, next) {
+  // res.send(req.user.reset)
+  console.log("what dis", req.body.email)
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }
+    ).then(function(user) {
+    console.log(user)
+    res.send(user)
+  }).catch(next)
 });
 
 router.put('/:id', function (req, res, next) {
@@ -25,8 +49,35 @@ router.put('/:id', function (req, res, next) {
         id: req.params.id
       }
     }
-  )
+  ).then(function(updatedUser) {
+    res.sendStatus(204);
+  }).catch(next)
 });
+
+router.delete('/:id', function (req, res, next) {
+  User.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(function() {
+    res.sendStatus(204);
+  })
+  .catch(next);
+});
+
+router.put('/:id/reset', function (req, res, next) {
+  User.update(
+    {reset: true},
+    {
+      where: {
+        id: req.params.id
+      }
+    }
+  ).then(function(updatedUser) {
+    res.sendStatus(204);
+  }).catch(next)
+})
 
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {

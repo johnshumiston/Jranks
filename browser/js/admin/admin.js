@@ -61,6 +61,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         resolve: {
           editingUser: function(AdminFactory, $stateParams) {
             return AdminFactory.fetchUserById($stateParams.id)
+          },
+          passwordReset: function(AdminFactory, $stateParams) {
+            return AdminFactory.passwordReset($stateParams.id)
           }
         }
     });
@@ -90,11 +93,20 @@ app.controller('EditController', function ($scope, editingItem, AdminFactory) {
 
 });
 
-app.controller('EditUserController', function ($scope, editingUser, AdminFactory) {
+app.controller('EditUserController', function ($scope, editingUser, AdminFactory, $state, passwordReset) {
 
     $scope.editingUser = editingUser;
 
     $scope.edit = AdminFactory.editUser
+    
+    AdminFactory.getAdmins()
+    .then(function(admins) {
+      $scope.admins = admins;
+    })
+
+    $scope.confirmDelete = AdminFactory.confirmDeleteUser;
+
+    $scope.passwordReset = passwordReset;
 
 });
 
@@ -110,9 +122,11 @@ app.controller('EditReviewController', function ($scope, editingItem, AdminFacto
 
 });
 
-app.controller('UserController', function ($scope, users) {
+app.controller('UserController', function ($scope, users, AdminFactory) {
 
     $scope.users = users;
+
+    $scope.confirmDelete = AdminFactory.confirmDeleteUser;
 
 });
 
@@ -126,14 +140,18 @@ app.factory('AdminFactory', function ($http, $state) {
     }
 
     AdminFactory.editUser = function(id, data) {
+      console.time('editing user');
       $http.put('/api/members/' + id, data)
+      .then(function() {
+        console.timeEnd('editing user')
+      })
       $state.go('users')
     }
 
     AdminFactory.addItem = function(data) {
       console.log(data);
       $http.post('/api/inventory/', data)
-      $state.go($state.current, {}, {reload: true})
+      $state.go($state.current)
     }
 
     AdminFactory.confirmDeleteReview = function(id) {
@@ -152,6 +170,14 @@ app.factory('AdminFactory', function ($http, $state) {
       }
     }
 
+    AdminFactory.confirmDeleteUser = function(id) {
+      var ok = confirm("Delete this user?");
+      if (ok) {
+        $http.delete('/api/members/' + id);
+        $state.go($state.current, {}, {reload: true})
+      }
+    }
+
     AdminFactory.fetchAllUsers = function() {
       return $http.get('api/members')
       .then(function(response) {
@@ -164,6 +190,28 @@ app.factory('AdminFactory', function ($http, $state) {
       .then(function(response) {
         return response.data
       })
+    }
+
+    AdminFactory.getAdmins = function() {
+      return $http.get('api/members/admins')
+      .then(function(response) {
+        return response.data
+      })
+    }
+
+    AdminFactory.passwordReset = function(id) {
+      return $http.put('api/members/' + id +'/reset')
+      .then(function(response) {
+        return response.data
+      })
+    }
+
+    AdminFactory.resetMe = function(loginObj) {
+      return $http.post('api/members/resetMe', loginObj)
+      .then(function(response) {
+        console.log(response.data)
+        return response.data
+      });
     }
 
     return AdminFactory

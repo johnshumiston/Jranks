@@ -36,8 +36,6 @@ module.exports = function (app, db) {
     });
 
     app.post('/login', function (req, res, next) {
-        var cart = req.session.cart
-        var booser = req.body
 
         var authCb = function (err, user) {
             if (err) return next(err);
@@ -54,20 +52,6 @@ module.exports = function (app, db) {
                 // We respond with a response object that has user with _id and email.
                 
                 res.redirect('/');
-                // User.update(
-                //     {
-                //         cart: cart
-                //     },
-                //     {
-                //         where: {
-                //             email: booser.email
-                //         }
-                //     })
-                //     .then(function(){
-                //         res.status(200).send({
-                //             user: user.sanitize()
-                //         });
-                //     })
             });
 
         };

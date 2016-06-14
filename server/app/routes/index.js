@@ -7,6 +7,7 @@ router.use('/inventory', require('./inventory'));
 router.use('/address', require('./address'));
 router.use('/order', require('./order'));
 router.use('/cart', require('./cart'));
+router.use('/reset', require('./reset'));
 // router.use('/checkout', require('./checkout'));
 
 // Make sure this is after all of
