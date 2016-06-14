@@ -18,7 +18,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             scope.confirmAge = function(label) {
                 console.log(label)
                 if(label === 'Jranks'){
-                    window.confirm("Are you old enough to jrank?")
+                    window.confirm("Click OK if you are old enough to jrank!")
                 }
             }
 
