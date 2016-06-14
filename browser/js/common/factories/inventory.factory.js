@@ -3,7 +3,6 @@ app.factory('InventoryFactory', function ($http, $state) {
   var InventoryFactory = {};
 
   InventoryFactory.fetchAll = function() {
-      window.confirm("Are you old enough to jrank?")
     return $http.get('/api/inventory')
     .then(function(response){
       return response.data;
