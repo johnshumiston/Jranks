@@ -36,7 +36,16 @@ app.controller('CartController', function ($scope, $rootScope, Session, Inventor
 
   $scope.removeItem = CartFactory.removeItem;
   
+  // cartItems.forEach(function(item){
+  //   CartFactory.showQtyNumber(item.id)
+  //   console.log(item.id)
+  //   .then(function(qty){
+  //     console.log(qty)
+  //     item.qtyAvail = qty;
+  //   })
+  // })
 
+  $scope.showQtyNumber = CartFactory.showQtyNumber
 
   $scope.formatPrice = CartFactory.formatPrice;
 
@@ -95,6 +104,13 @@ app.factory('CartFactory', function ($http, $state) {
       $state.go($state.current, {}, {reload: true})
     })
   }
+
+  CartFactory.showQtyNumber = function(itemId){
+    return $http.get('/api/inventory/available/' + itemId)
+    .then(function(res){
+      return res.data.qtyAvailable;
+    })
+  };
 
   return CartFactory;
 
