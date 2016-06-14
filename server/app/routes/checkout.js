@@ -62,7 +62,6 @@ router.post('/', function(req, res, next) {
   })
   .then(function(updatedUser){
     if(updatedUser){
-      console.log(updatedUser);
       return Order.create({status: "complete"}, {userId: req.session.passport.user})
     }
     return;
