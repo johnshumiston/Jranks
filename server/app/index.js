@@ -29,7 +29,6 @@ module.exports = function (db) {
                     }
                 }
                 else {
-                    console.log("Req.session.cart: ", req.session.cart);
                     // user.update({cart: req.session.cart});
                 }
             })
