@@ -206,35 +206,35 @@ var seedInventory = function() {
     type: 'alcoholic_drink',
     price: 1200,
     description: 'Shove a straw in your mouth and skip out on the drama! Who needs bad vibes when you can sip your way into banana-coconut bliss.',
-    image_url: 'http://i.imgur.com/unv7Pcq.jpg'
+    image_url: 'http://i.imgur.com/ovtwMDq.png'
   }, {
     title: 'The Thank You Berry Much, But No Thanks',
     quantity: 100,
     type: 'alcoholic_drink',
     price: 1200,
     description: 'If something sounds sketchy, then you have to say "No Thanks". Unless, of course, someone is offering you a berry-infused, and berry delicious, Phrosty.',
-    image_url: 'http://i.imgur.com/unv7Pcq.jpg'
+    image_url: 'http://i.imgur.com/sbYV940.png'
   }, {
     title: "The I'm My Own Date",
     quantity: 100,
     type: 'alcoholic_drink',
     price: 1200,
     description: 'Bring on the dates, cacao nibs, chocolate, and secret ingredient just released in the US. With this Phrosty in hand, you can forget other guys and girls and date yourself!',
-    image_url: 'http://i.imgur.com/unv7Pcq.jpg'
+    image_url: 'http://i.imgur.com/Wdvo7cg.png'
   }, {
     title: 'The Hair of the Dog',
     quantity: 100,
     type: 'alcoholic_drink',
     price: 1200,
     description: "Now available all day! Yesterday's Phrosty got you feeling under the weather? Suck another one down and you'll be feeling fine in no time. Officially no longer has any hair.",
-    image_url: 'http://i.imgur.com/unv7Pcq.jpg'
+    image_url: 'http://i.imgur.com/y6keCIZ.png'
   }, {
     title: "The That's My Bag",
     quantity: 100,
     type: 'alcoholic_drink',
     price: 1200,
     description: "Who cares if it isn't your bag? Who cares if you're making a scene? After this grey-colored dream of a Phrosty, you deserve any damn bag you want! Made with pears and (pretty) edible stones.",
-    image_url: 'http://i.imgur.com/unv7Pcq.jpg'
+    image_url: 'http://i.imgur.com/pqYAI16.png'
   }];
 
   var creatingInventory = items.map(function(item) {

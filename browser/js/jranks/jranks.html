@@ -4,7 +4,7 @@
     <input type="text" class="form-control" placeholder="Search our massive inventory!" ng-model="nameSearch">
   </div>
   <hr class="enforcer">
-      <div class="inventory-grid" ng-repeat="jrank in jranks | filter: { title: nameSearch }">
+      <div class="inventory-grid" ng-repeat="jrank in jranks | filter: { title: nameSearch } | orderBy: 'id'">
       <a ui-sref="jrankItem({id: jrank.id})">
         <img src="{{jrank.image_url}}">
         <h4>{{jrank.title}}</h4>
