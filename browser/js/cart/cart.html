@@ -1,7 +1,7 @@
 <section id="cart">
   <h4>Your Order</h4>
   <table>
-    <tr>
+    <tr class="headers">
       <td>Item</td>
       <td>Price</td>
       <td>Qty in Cart</td>
@@ -17,20 +17,22 @@
       </td>
       <td>{{items.quantity}}</td>      
       <td>
-        <button ng-click="removeItem(items)">Remove</button>
+        <a class="fa fa-remove" ng-click="removeItem(items)"></a>
       </td>
     </tr>
     <tr>
-      <td></td>
-      <td>Total:</td>
-      <td>{{formatPrice(grandTotal)}}</td>
+      <td class="hide-right"></td>
+      <td class="hide-right"></td>
+      <td class="hide-right"></td>
+      <td class="hide-right"></td>
+      <td>Total: {{formatPrice(grandTotal)}}</td>
     </tr>
   </table>
-  <button ng-click="updateItemQty(itemsToUpdate)">Update Quantities</button>
+  <button class="update-qty btn btn-success" ng-click="updateItemQty(itemsToUpdate)">Update Quantities</button>
 </section>
 
 <form action="/checkout" method="POST" ng-show="grandTotal" ng-submit="checkAmount()">
 <!-- The next line puts the grandtotal in the req.body, but has security issues -->
   <input name="amount" value="{{grandTotal}}" ng-if="false" ng-cloak>
-  <checkoutscript></checkoutscript>
+  <checkoutscript class="checkoutscript"></checkoutscript>
 </form>

@@ -61,7 +61,10 @@ app.factory('CartFactory', function ($http, $state, $rootScope) {
     .then(function(items){
       return items.reduce(function(sum, item){
         return sum + item.qty;
-    }, 0)});
+    }, 0)})
+    .then(function(number) {
+      return number ? number : "";
+    });
   }
 
   CartFactory.getSession = function() {
