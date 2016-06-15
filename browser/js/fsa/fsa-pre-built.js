@@ -105,7 +105,10 @@
         this.logout = function () {
             return $http.get('/logout').then(function () {
                 Session.destroy();
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess, "addedToCart");
+            })
+            .then(function(){
+                $rootScope.$broadcast("cartUpdated");
             });
         };
 
