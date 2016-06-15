@@ -46,7 +46,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
                 scope.user = null;
             };
 
-            $rootScope.$on('addedToCart', function () {
+            $rootScope.$on('cartUpdated', function () {
                 CartFactory.getQtyTotal()
                 .then(function(total){
                     scope.qty = total;

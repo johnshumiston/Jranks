@@ -12,10 +12,9 @@
       <td>{{items.title}}</td>
       <td>{{formatPrice(items.price * items.qty)}}</td>
       <td>
-      <!-- need to set a default value in case you only edit one item in items to update -->
         <input type="number" ng-model="itemsToUpdate[items.id]" ng-init="1" value="{{items.qty}}" min="0" max="{{items.quantity}}"></input>
       </td>
-      <td>{{items.quantity}}</td>      
+      <td>{{items.quantity}}</td>
       <td>
         <a class="fa fa-remove" ng-click="removeItem(items)"></a>
       </td>
@@ -32,7 +31,5 @@
 </section>
 
 <form action="/checkout" method="POST" ng-show="grandTotal" ng-submit="checkAmount()">
-<!-- The next line puts the grandtotal in the req.body, but has security issues -->
-  <input name="amount" value="{{grandTotal}}" ng-if="false" ng-cloak>
   <checkoutscript class="checkoutscript"></checkoutscript>
 </form>

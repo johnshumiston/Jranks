@@ -20,8 +20,6 @@ app.config(function ($stateProvider) {
 
 app.controller('CartController', function ($scope, $rootScope, Session, InventoryFactory, cartItems, CartFactory, $state) {
 
-  
-
   CartFactory.fetchAllInCart()
   .then(function(items){
     $scope.cartItems = items; 
@@ -88,7 +86,7 @@ app.factory('CartFactory', function ($http, $state, $rootScope) {
       return cart;
     })
     .then(function(cart) {
-      $rootScope.$broadcast("addedToCart")}
+      $rootScope.$broadcast("cartUpdated")}
       )
     .then($state.go($state.current, {}, {reload: true}))
   }
@@ -102,7 +100,7 @@ app.factory('CartFactory', function ($http, $state, $rootScope) {
   CartFactory.updateItemQty = function(items) {
     return $http.put('/api/cart/update', items)
     .then(function(cart) {
-      $rootScope.$broadcast("addedToCart")}
+      $rootScope.$broadcast("cartUpdated")}
       )
     .then($state.go($state.current, {}, {reload: true}))
   }
@@ -110,7 +108,7 @@ app.factory('CartFactory', function ($http, $state, $rootScope) {
   CartFactory.removeItem = function(item) {
     $http.put('/api/cart/delete', {id: item.id})
     .then(function(cart) {
-      $rootScope.$broadcast("addedToCart")}
+      $rootScope.$broadcast("cartUpdated")}
       )
     .then(function(){
       $state.go($state.current, {}, {reload: true})
