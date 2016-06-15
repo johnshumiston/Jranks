@@ -20,8 +20,6 @@ app.config(function ($stateProvider) {
 
 app.controller('CartController', function ($scope, $rootScope, Session, InventoryFactory, cartItems, CartFactory, $state) {
 
-  
-
   CartFactory.fetchAllInCart()
   .then(function(items){
     $scope.cartItems = items; 

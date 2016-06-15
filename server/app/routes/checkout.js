@@ -38,17 +38,6 @@ router.post('/', function(req, res, next) {
   // Get the credit card details submitted by the form
   var stripeToken = req.body.stripeToken;
 
-  var charge = stripe.charges.create({
-    amount: +req.body.amount, // amount in cents, again
-    currency: "usd",
-    source: stripeToken,
-    description: "Example charge"
-  }, function(err, charge) {
-    if (err && err.type === 'StripeCardError') {
-      // The card has been declined
-    }
-  });
-  
   updateInventory(req.session.cart);
 
   User.findById(req.session.passport.user)
@@ -106,12 +95,30 @@ router.post('/', function(req, res, next) {
     return;
   })
   .then(function(){
-    return User.findById(req.session.passport.user)
+    return Inventory.findAll({where: {
+      id: {
+        $in: Object.keys(req.session.cart)
+      }}
+    })
   })
-  .then(function(){
-    for (var key in req.session.cart){
-      delete req.session.cart[key];
-    }
+  .then(function(items){
+    var price = 0;
+    items.forEach(function(item){
+      price += req.session.cart[item.id]*item.price;
+    })
+    return price;
+  })
+  .then (function(price){
+    var charge = stripe.charges.create({
+      amount: price, // amount in cents, again
+      currency: "usd",
+      source: stripeToken,
+      description: "Example charge"
+    }, function(err, charge) {
+      if (err && err.type === 'StripeCardError') {
+        // The card has been declined
+      }
+    });
   })
   .then(function(){
   	req.session.cart = {};
