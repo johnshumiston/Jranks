@@ -1,9 +1,10 @@
 <section id="jranks">
-	  <div class="panel input-group">
-	    <span class="input-group-addon">Filter</span>
-	    <input type="text" class="form-control" placeholder="You batter choose one" ng-model="nameSearch">
-	  </div>
-      <div class="inventory-grid" ng-repeat="jrank in jranks | filter: { title: nameSearch }">
+  <div class="panel-filter panel input-group">
+    <span class="input-group-addon"><span class="fa fa-search"></span></span>
+    <input type="text" class="form-control" placeholder="Search our massive inventory!" ng-model="nameSearch">
+  </div>
+  <hr class="enforcer">
+      <div class="inventory-grid" ng-repeat="jrank in jranks | filter: { title: nameSearch } | orderBy: 'id'">
       <a ui-sref="jrankItem({id: jrank.id})">
         <img src="{{jrank.image_url}}">
         <h4>{{jrank.title}}</h4>

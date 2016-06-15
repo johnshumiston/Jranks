@@ -9,6 +9,7 @@ body {
   background: linear-gradient(to right,  #6b4ba3 0%,#7453b8 9%,#7453b8 92%,#6b4ba3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b4ba3', endColorstr='#6b4ba3',GradientType=1 ); /* IE6-9 */
   width: 100%;
+  padding-bottom: 50px;
 
   img {
     max-height: 400px;
@@ -204,6 +205,68 @@ button.btn-item-page {
 
 .review-posts {
   clear: both;
+}
+
+#home li {
+  list-style: none;
+}
+
+hr.enforcer {
+  margin-bottom: 60px;
+  border-color: transparent;
+}
+
+.panel-filter.panel.input-group {
+    width: 300px;
+    float: right;
+}
+
+.update-qty {
+  float: right;
+  margin-left: 5px;
+}
+
+#cart {
+  table {
+    margin-bottom: 10px;
+  }
+  
+}
+
+checkoutscript {
+  float: right;
+}
+
+.hide-right {
+  border-right: 1px solid transparent;
+}
+
+button.fa-shopping-basket {
+  position: relative;
+  span {
+    font-family: 'roboto';
+    position: absolute;
+    left: 18px;
+    text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black;
+    margin: 0 auto;
+  }
+}
+
+div#home-container {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+
+    h1 {
+      position:relative;
+      margin: 0 auto;
+      color: #58f558;
+      text-shadow: 0px 0px 20px #58f558, 0px 0px 10px black;
+      text-align: center;
+      display: table;
+      font-size: 7em;
+    }
 }
 
 @import 'directives/main';

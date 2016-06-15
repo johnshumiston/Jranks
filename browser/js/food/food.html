@@ -1,8 +1,10 @@
 <section id="food">
-  <div class="panel input-group">
-    <span class="input-group-addon">Filter</span>
-    <input type="text" class="form-control" placeholder="You batter choose one" ng-model="nameSearch">
-  </div>
+
+    <div class="panel-filter panel input-group">
+      <span class="input-group-addon"><span class="fa fa-search"></span></span>
+      <input type="text" class="form-control" placeholder="Search our massive inventory!" ng-model="nameSearch">
+    </div>
+  <hr class="enforcer">
   <div class="inventory-grid" ng-repeat="food in foods | filter: { title: nameSearch } | orderBy:'id'">
   <a ui-sref="foodItem({id: food.id})">
     <img src="{{food.image_url}}">
