@@ -161,7 +161,7 @@ app.controller('OrderController', function ($scope, AdminFactory){
     $scope.confirmDelete = AdminFactory.confirmDeleteOrder;
 })
 
-app.controller('OrderItemsController', function (InventoryFactory, AdminFactory, $scope, items){
+app.controller('OrderItemsController', function (InventoryFactory, AdminFactory, $state, $scope, items){
     $scope.items = items;
 
     InventoryFactory.fetchAll()
