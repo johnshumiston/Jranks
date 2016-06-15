@@ -2,7 +2,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state('admin', {
         url: '/admin/',
-        templateUrl: 'js/admin/admin.html',
         controller: 'AdminController'
     });
 

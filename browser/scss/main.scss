@@ -9,6 +9,7 @@ body {
   background: linear-gradient(to right,  #6b4ba3 0%,#7453b8 9%,#7453b8 92%,#6b4ba3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b4ba3', endColorstr='#6b4ba3',GradientType=1 ); /* IE6-9 */
   width: 100%;
+  padding-bottom: 50px;
 
   img {
     max-height: 400px;
