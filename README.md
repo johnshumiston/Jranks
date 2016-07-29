@@ -1,4 +1,3 @@
-# phrosty
+# Jranks
 
-We proudly present:
-http://107.170.136.62:1337/
+Live demo coming soon.  Feel free to browse source code for now.
