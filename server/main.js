@@ -9,10 +9,10 @@ var path = require('path');
 // Create a node server instance! cOoL!
 // var server = require('http').createServer();
 
-var httpsServer = https.createServer({
-  cert: fs.readFileSync(path.join(__dirname + '/cert.pem')),
-  key: fs.readFileSync(path.join(__dirname + '/key.pem'))
-}, app(db));
+// var httpsServer = https.createServer({
+//   cert: fs.readFileSync(path.join(__dirname + '/cert.pem')),
+//   key: fs.readFileSync(path.join(__dirname + '/key.pem'))
+// }, app(db));
 
 var httpServer = require('http').createServer();
 
@@ -23,8 +23,8 @@ var createApplication = function () {
     require('./io')(httpServer);   // Attach socket.io.
 
     //for https server
-    httpsServer.on('request', app); // Attach the Express application.
-    require('./io')(httpsServer);   // Attach socket.io.
+    // httpsServer.on('request', app); // Attach the Express application.
+    // require('./io')(httpsServer);   // Attach socket.io.
 };
 
 var startServer = function () {
@@ -37,9 +37,9 @@ var startServer = function () {
     });
 
     //for https server
-    httpsServer.listen(8080, function () {
-        console.log(chalk.blue('Server started on port', chalk.magenta(8080)));
-    });    
+    // httpsServer.listen(8080, function () {
+    //     console.log(chalk.blue('Server started on port', chalk.magenta(8080)));
+    // });    
 
 };
 
